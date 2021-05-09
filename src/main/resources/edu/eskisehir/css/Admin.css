@@ -1,0 +1,20 @@
+#mainPane{
+    -fx-background-color: linear-gradient(to right, #ff7f50, #6a5acd);
+    -fx-background-radius: 20px;
+}
+.label{
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+}
+.text-field{
+    -fx-background-radius: 20px;
+}
+.button{
+    -fx-background-radius: 20px;
+    -fx-background-color: #f2e2cd;
+    -fx-text-fill: black;
+    -fx-border-color: orange;
+    -fx-border-radius: 20px;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+}

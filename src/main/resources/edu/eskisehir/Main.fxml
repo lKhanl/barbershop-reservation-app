@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" stylesheets="@css/Main.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eskisehir.MainController">
+   <children>
+      <Button fx:id="btnAdmin" layoutX="366.0" layoutY="359.0" mnemonicParsing="false" onAction="#openAdminLogin" text="Admin Registration" />
+      <Pane fx:id="loginPane" layoutX="70.0" layoutY="65.0" prefHeight="270.0" prefWidth="360.0">
+         <children>
+            <Label layoutX="50.0" layoutY="104.0" styleClass="loginLabel" text="Email :" />
+            <Label layoutX="50.0" layoutY="144.0" styleClass="loginLabel" text="Password :" />
+            <TextField layoutX="169.0" layoutY="100.0" prefHeight="25.0" prefWidth="150.0" />
+            <PasswordField layoutX="169.0" layoutY="140.0" prefHeight="25.0" prefWidth="150.0" />
+            <Label layoutX="78.0" layoutY="21.0" styleClass="h1" text="Customer Login" />
+            <Button fx:id="btnLogin" layoutX="273.0" layoutY="188.0" mnemonicParsing="false" onAction="#login" text="Login" />
+            <Label layoutX="36.0" layoutY="192.0" styleClass="account" text="Don't have an account" />
+            <Label fx:id="lblRegisterNow" layoutX="165.0" layoutY="192.0" onMouseClicked="#openRegisterLogin" text="Register now" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

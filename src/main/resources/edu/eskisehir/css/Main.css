@@ -1,0 +1,70 @@
+#mainPane {
+    -fx-background-color: #CFC5F6;
+    -fx-pref-width: 500px;
+    -fx-pref-height: 400px;
+}
+
+#loginPane {
+    -fx-background-color: linear-gradient(to bottom, #B4D5F9, #E0E7B5);
+    -fx-background-radius: 20px;
+}
+
+.label {
+    -fx-font-size: 16px;
+}
+
+.h1 {
+    -fx-font-size: 26px;
+}
+
+.account {
+    -fx-font-size: medium;
+    -fx-font-style: italic;
+}
+
+#lblRegisterNow {
+    -fx-font-size: medium;
+
+}
+
+#lblRegisterNow:hover {
+    -fx-text-fill: #6f40d4;
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+
+}
+
+.button {
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+
+}
+
+#btnLogin {
+    -fx-background-color: #90CBF9;
+    -fx-border-color: #1f81db;
+}
+
+#btnAdmin {
+    -fx-background-color: #A8C898;
+    -fx-border-color: #62a78b;
+}
+
+.text-field {
+    -fx-background-radius: 20px;
+}
+
+.loginLabel {
+    -fx-font-size: 16px;
+    -fx-font-family: "Calibri Light";
+}
+
+#btnAdminLogin {
+    -fx-background-color: #A7D6AA;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-radius: 20px;
+    -fx-border-color: teal;
+}
