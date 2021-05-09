@@ -6,11 +6,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="261.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eskisehir.RegisterController">
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="261.0" prefWidth="330.0" stylesheets="@css/Register.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eskisehir.RegisterController">
    <children>
-      <Label fx:id="lblName" layoutX="42.0" layoutY="46.0" prefHeight="17.0" prefWidth="34.0" text="Name" />
-      <Label fx:id="lblSurname" layoutX="43.0" layoutY="86.0" text="Surname" />
-      <Label fx:id="lblEmail" layoutX="42.0" layoutY="126.0" text="Email" />
+      <Label fx:id="lblName" layoutX="42.0" layoutY="46.0" prefHeight="17.0" prefWidth="40.0" text="Name :" />
+      <Label fx:id="lblSurname" layoutX="43.0" layoutY="86.0" text="Surname :" />
+      <Label fx:id="lblEmail" layoutX="42.0" layoutY="126.0" text="Email :" />
       <Label fx:id="lblPassword" layoutX="42.0" layoutY="166.0" text="Password" />
       <TextField fx:id="txtName" layoutX="128.0" layoutY="42.0" />
       <TextField fx:id="txtSurname" layoutX="128.0" layoutY="82.0" />
