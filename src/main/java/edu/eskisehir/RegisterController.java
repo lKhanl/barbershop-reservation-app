@@ -19,6 +19,7 @@ public class RegisterController {
     public PasswordField txtPassword;
     public Pane mainPane;
     public Button btnRegister;
+    private DataBaseOperations dataBaseOperations=new DataBaseOperations();
 
 
     public void register(ActionEvent actionEvent) {
@@ -47,6 +48,7 @@ public class RegisterController {
                 alert.show();
             }
         }
+        dataBaseOperations.addCustomer(txtName.getText(),txtSurname.getText(),txtEmail.getText(),txtPassword.getText());
 
 
     }

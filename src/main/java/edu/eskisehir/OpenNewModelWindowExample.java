@@ -10,6 +10,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+@Deprecated
 public class OpenNewModelWindowExample extends Application {
 
     @Override

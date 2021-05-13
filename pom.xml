@@ -20,6 +20,12 @@
             <artifactId>javafx-fxml</artifactId>
             <version>16</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.11</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
