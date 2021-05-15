@@ -87,12 +87,11 @@ public class GenerateCustomer {
     }
 
     public static String passwordGenerator(String name, String surname) {
-        String[] characters = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
-                , "!", "+", "-", "*", "_"};
-        int random1 = (int) (Math.random() * 15);
-        int random2 = (int) (Math.random() * 15);
-        int random3 = (int) (Math.random() * 15);
-        int random4 = (int) (Math.random() * 15);
+        String[] characters = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+        int random1 = (int) (Math.random() * 10);
+        int random2 = (int) (Math.random() * 10);
+        int random3 = (int) (Math.random() * 10);
+        int random4 = (int) (Math.random() * 10);
 
         return name.toLowerCase() + surname.toLowerCase() + random1 + random2 + random3 + random4;
     }
