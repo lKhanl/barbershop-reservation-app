@@ -1,8 +1,8 @@
 package edu.eskisehir;
 
-import java.math.BigInteger;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -37,11 +37,11 @@ public class DataBaseOperations {
             totalPriceStatement.setInt(1, total);
             totalPriceStatement.executeUpdate();
 
-        } catch (SQLException throwables) {
-            System.out.println("Ekleme işlemi başarısız.");
-            System.out.println(throwables.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Update işlemi başarısız.");
+            System.out.println(e.getMessage());
         }
-        System.out.println("Ekleme işlemi başarılı.");
+        System.out.println("Update işlemi başarılı.");
     }
 
     public void addCustomer(String customerName, String customerSurname, String email, String password) {
@@ -57,9 +57,9 @@ public class DataBaseOperations {
             customerStatement.setString(4, password);
             customerStatement.executeUpdate();
 
-        } catch (SQLException throwables) {
+        } catch (SQLException e) {
             System.out.println("Ekleme işlemi başarısız.");
-            System.out.println(throwables.getMessage());
+            System.out.println(e.getMessage());
         }
         System.out.println("Ekleme işlemi başarılı.");
 
@@ -82,15 +82,15 @@ public class DataBaseOperations {
             reservationStatement.executeUpdate();
 
 
-        } catch (SQLException throwables) {
+        } catch (SQLException e) {
             System.out.println("Ekleme işlemi başarısız.");
-            System.out.println(throwables.getMessage());
+            System.out.println(e.getMessage());
         }
         System.out.println("Ekleme işlemi başarılı.");
 
     }
 
-    public void makeReservation(Date date, Time time, int barberId, int customerId) {
+    public long bookReservation(Date date, Time time, int barberId, int customerId) {
         long resID = makeReservationID(date.toString(), time.toString(), barberId);
 
         try (Connection connection = DBConnection.connect();
@@ -105,11 +105,12 @@ public class DataBaseOperations {
 
             reservationStatement.executeUpdate();
 
-        } catch (SQLException throwables) {
-            System.out.println("Ekleme işlemi başarısız.");
-            System.out.println(throwables.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Rezervation işlemi başarısız.");
+            System.out.println(e.getMessage());
         }
-        System.out.println("Ekleme işlemi başarılı.");
+        System.out.println("Rezervation işlemi başarılı.");
+        return resID;
     }
 
     public List<Long> getAllResIDs() {
@@ -148,6 +149,60 @@ public class DataBaseOperations {
 
     public void changeAnOperation() {
 
+    }
+
+    public void updateIsDone(long reservationID, String isDone) {
+        Date todaySql = Date.valueOf(LocalDate.now().toString());
+        Time todayTime = Time.valueOf(LocalTime.now());
+
+        String getDateSql = "SELECT ReservationDate FROM reservation WHERE ReservationID=" + reservationID;
+        String getTimeSql="SELECT ReservationTime FROM reservation WHERE ReservationID=" + reservationID;
+        String updateIsDoneSql = "UPDATE reservation SET isDone=? WHERE ReservationID=  " + reservationID;
+        Date date = null;
+        Time time = null;
+
+        try (Connection connection = DBConnection.connect();
+             PreparedStatement updateIsDoneStatement = connection.prepareStatement(updateIsDoneSql);
+        ) {
+
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(getDateSql);
+
+            Statement statement1=connection.createStatement();
+            ResultSet resultSet1=statement1.executeQuery(getTimeSql);
+
+
+            while (resultSet.next()) {
+                date = resultSet.getDate("ReservationDate");
+            }
+
+            while (resultSet1.next()){
+                time=resultSet1.getTime("ReservationTime");
+            }
+
+            if (todaySql.compareTo(date) > 0 && (isDone.equals("1") || isDone.equals("-1"))) {//geçmiş
+                updateIsDoneStatement.setString(1, isDone);
+                updateIsDoneStatement.executeUpdate();
+            } else if (todaySql.compareTo(date) < 0 && (isDone.equals("1") || isDone.equals("-1")) ) { //gelecek
+                System.out.println("Adamın tarihi gelmedi");
+            } else if (todaySql.compareTo(date) == 0) {
+                if (todayTime.compareTo(time) > 0) { //zaman geçti
+                    updateIsDoneStatement.setString(1, isDone);
+                    updateIsDoneStatement.executeUpdate();
+                } else if (todayTime.compareTo(time) < 0) { //zaman geçmedi
+                    System.out.println("Adamın tarihi gelmedi");
+                }
+            } else {
+                System.out.println("Geçersiz");
+            }
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Update işlemi başarısız.");
+        }
+        System.out.println("Update işlemi başarılı.");
     }
 
     private long makeReservationID(String date, String time, int barberID) {

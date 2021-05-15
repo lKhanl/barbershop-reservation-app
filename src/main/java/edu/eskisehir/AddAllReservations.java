@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Date;
 import java.sql.Time;
-import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -77,7 +76,7 @@ public class AddAllReservations {
 
 
         for (int i = 0; i < dates.size(); i++) {
-         dataBaseOperations.makeReservation(Date.valueOf(dates.get(i)), Time.valueOf(times.get(i)),Integer.parseInt(barbers.get(i)),Integer.parseInt(customers.get(i)));
+         dataBaseOperations.bookReservation(Date.valueOf(dates.get(i)), Time.valueOf(times.get(i)),Integer.parseInt(barbers.get(i)),Integer.parseInt(customers.get(i)));
         }
 
     }
