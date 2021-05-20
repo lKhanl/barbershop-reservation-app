@@ -19,24 +19,36 @@
                      <children>
                         <TableView fx:id="barbersTable" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="572.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
                           <columns>
-                            <TableColumn fx:id="nameCol" prefWidth="225.0" resizable="false" text="Name" />
-                            <TableColumn fx:id="surnameCol" prefWidth="225.0" resizable="false" text="Surname" />
-                              <TableColumn fx:id="salaryCol" prefWidth="102.0" resizable="false" text="Salary" />
+                            <TableColumn fx:id="barberNameCol" prefWidth="225.0" resizable="false" text="Name" />
+                            <TableColumn fx:id="barberSurnameCol" prefWidth="225.0" resizable="false" text="Surname" />
+                              <TableColumn fx:id="barberSalaryCol" prefWidth="102.0" resizable="false" text="Salary" />
                           </columns>
                         </TableView>
-                        <TextField fx:id="txtName" layoutX="14.0" layoutY="241.0" prefWidth="150.0" promptText="Barber Name" />
-                        <TextField fx:id="txtSurname" layoutX="184.0" layoutY="241.0" prefWidth="150.0" promptText="Barber Surname" />
-                        <TextField fx:id="txtSalary" layoutX="354.0" layoutY="241.0" prefHeight="25.0" prefWidth="75.0" promptText="Salary" />
-                        <Button fx:id="btnAdd" layoutX="449.0" layoutY="241.0" mnemonicParsing="false" onAction="#addBarber" text="ADD" />
+                        <TextField fx:id="txtBarberName" layoutX="14.0" layoutY="241.0" prefWidth="150.0" promptText="Barber Name" />
+                        <TextField fx:id="txtBarberSurname" layoutX="184.0" layoutY="241.0" prefWidth="150.0" promptText="Barber Surname" />
+                        <TextField fx:id="txtBarberSalary" layoutX="354.0" layoutY="241.0" prefHeight="25.0" prefWidth="75.0" promptText="Salary" />
+                        <Button fx:id="btnBarberAdd" layoutX="449.0" layoutY="241.0" mnemonicParsing="false" onAction="#addBarber" text="ADD" />
                         <Label fx:id="lblConsole" alignment="TOP_LEFT" layoutX="14.0" layoutY="277.0" prefHeight="40.0" prefWidth="415.0" />
-                        <Button fx:id="btnDelete" layoutX="507.0" layoutY="241.0" mnemonicParsing="false" onAction="#deleteBarber" text="DELETE" />
+                        <Button fx:id="btnBarberDelete" layoutX="507.0" layoutY="241.0" mnemonicParsing="false" onAction="#deleteBarber" text="DELETE" />
                      </children>
                   </AnchorPane>
               </content>
             </Tab>
           <Tab text="Operations">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="operationsTable" layoutX="14.0" layoutY="14.0" prefHeight="348.0" prefWidth="324.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+                          <columns>
+                            <TableColumn fx:id="opNameCol" prefWidth="232.0" text="Operation Name" />
+                            <TableColumn fx:id="opPriceCol" prefWidth="71.0" text="Price" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="btnOpDelete" layoutX="527.0" layoutY="96.0" mnemonicParsing="false" onAction="#deleteOp" text="DELETE" AnchorPane.bottomAnchor="250.0" />
+                        <TextField fx:id="txtOpName" layoutX="349.0" layoutY="48.0" prefHeight="25.0" prefWidth="150.0" promptText="Operation Name" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="350.0" />
+                        <TextField fx:id="txtOpPrice" layoutX="507.0" layoutY="48.0" prefHeight="25.0" prefWidth="75.0" promptText="Price" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="507.0" />
+                        <Button fx:id="btnOpAdd" layoutX="459.0" layoutY="96.0" mnemonicParsing="false" onAction="#addOp" text="ADD" AnchorPane.bottomAnchor="250.0" />
+                     </children></AnchorPane>
             </content>
           </Tab>
             <Tab text="Customers">
