@@ -37,7 +37,6 @@ public class AdminScreenController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         editableCols();
         loadData();
-
         //Accept only numbers for salary
         txtSalary.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {

@@ -40,7 +40,7 @@ public class AdminController {
             adminStg.close();
             ((Stage)adminStg.getOwner()).close();
 
-            Stage stage = Main.openNewStage("AdminScreen", AdminScreenController.class);
+            Stage stage = Main.openNewStage("AdminScreen", AdminScreenController.class,"admin.png");
             stage.setTitle("Admin Screen");
             stage.show();
 

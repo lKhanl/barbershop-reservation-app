@@ -24,7 +24,7 @@ public class MainController {
 
     //Open new frame without closing old
     public void openRegisterLogin(MouseEvent mouseEvent) throws IOException {
-        Stage stage = Main.openNewStage("Register", MainController.class);
+        Stage stage = Main.openNewStage("Register", MainController.class,"welcome.png");
         //
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(((Node)mouseEvent.getSource()).getScene().getWindow());
@@ -35,7 +35,7 @@ public class MainController {
     }
 
     public void openAdminLogin(ActionEvent event) throws IOException {
-        Stage stage = Main.openNewStage("Admin",MainController.class);
+        Stage stage = Main.openNewStage("Admin",MainController.class,"none");
         //
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(((Node)event.getSource()).getScene().getWindow());

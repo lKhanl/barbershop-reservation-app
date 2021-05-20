@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane fx:id="ap" prefHeight="284.0" prefWidth="409.0" style="-fx-background-color: CFC5F6;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eskisehir.AdminController">
+<AnchorPane fx:id="ap" prefHeight="295.0" prefWidth="459.0" style="-fx-background-color: CFC5F6;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eskisehir.AdminController">
    <children>
-      <Pane fx:id="mainPane" layoutX="35.0" layoutY="42.0" prefHeight="200.0" prefWidth="340.0" stylesheets="@css/Admin.css">
+      <Pane fx:id="mainPane" layoutX="60.0" layoutY="48.0" prefHeight="200.0" prefWidth="340.0" stylesheets="@css/Admin.css">
          <children>
-            <Label fx:id="lblUserName" layoutX="31.0" layoutY="39.0" text="User Name :" />
-            <Label fx:id="lblPassword" layoutX="31.0" layoutY="82.0" text="Password :" />
-            <TextField fx:id="txtUserName" layoutX="143.0" layoutY="39.0" />
-            <PasswordField fx:id="txtPassword" layoutX="143.0" layoutY="82.0" />
-            <Button fx:id="btnLogin" layoutX="266.0" layoutY="139.0" mnemonicParsing="false" onAction="#login" text="Login" />
+            <TextField fx:id="txtUserName" layoutX="129.0" layoutY="54.0" />
+            <PasswordField fx:id="txtPassword" layoutX="129.0" layoutY="112.0" />
+            <Button fx:id="btnLogin" layoutX="278.0" layoutY="159.0" mnemonicParsing="false" onAction="#login" text="Login" />
+            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="52.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@media/pass.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="50.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@media/admin2.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>
