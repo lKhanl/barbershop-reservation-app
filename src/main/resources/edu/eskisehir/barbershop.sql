@@ -2,10 +2,10 @@
 -- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Anamakine: 127.0.0.1
--- Üretim Zamanı: 19 May 2021, 18:21:33
--- Sunucu sürümü: 10.4.18-MariaDB
--- PHP Sürümü: 8.0.3
+-- Host: 127.0.0.1
+-- Generation Time: May 21, 2021 at 12:01 AM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Veritabanı: `barbershop`
+-- Database: `barbershop`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `admin`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -34,7 +34,7 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Tablo döküm verisi `admin`
+-- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`AdminID`, `UserName`, `Password`) VALUES
@@ -43,7 +43,7 @@ INSERT INTO `admin` (`AdminID`, `UserName`, `Password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `barber`
+-- Table structure for table `barber`
 --
 
 CREATE TABLE `barber` (
@@ -54,12 +54,12 @@ CREATE TABLE `barber` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Tablo döküm verisi `barber`
+-- Dumping data for table `barber`
 --
 
 INSERT INTO `barber` (`BarberID`, `BarberName`, `BarberSurname`, `Salary`) VALUES
 (1, 'Alberto', 'Baker', 3200),
-(2, 'Benjamin', 'Peters', 3500),
+(2, 'Benjaminn', 'Peters', 3500),
 (3, 'Horace', 'Phillips', 3500),
 (4, 'Clint', 'Campbell', 3200),
 (7, 'Fernando', 'Medina', 3500),
@@ -69,7 +69,7 @@ INSERT INTO `barber` (`BarberID`, `BarberName`, `BarberSurname`, `Salary`) VALUE
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `customer`
+-- Table structure for table `customer`
 --
 
 CREATE TABLE `customer` (
@@ -81,7 +81,7 @@ CREATE TABLE `customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Tablo döküm verisi `customer`
+-- Dumping data for table `customer`
 --
 
 INSERT INTO `customer` (`CustomerID`, `CustomerName`, `CustomerSurname`, `Email`, `Password`) VALUES
@@ -689,7 +689,7 @@ INSERT INTO `customer` (`CustomerID`, `CustomerName`, `CustomerSurname`, `Email`
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `operation`
+-- Table structure for table `operation`
 --
 
 CREATE TABLE `operation` (
@@ -699,7 +699,7 @@ CREATE TABLE `operation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Tablo döküm verisi `operation`
+-- Dumping data for table `operation`
 --
 
 INSERT INTO `operation` (`OperationID`, `OperationName`, `Price`) VALUES
@@ -714,7 +714,7 @@ INSERT INTO `operation` (`OperationID`, `OperationName`, `Price`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `operation_selection`
+-- Table structure for table `operation_selection`
 --
 
 CREATE TABLE `operation_selection` (
@@ -724,7 +724,7 @@ CREATE TABLE `operation_selection` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Tablo döküm verisi `operation_selection`
+-- Dumping data for table `operation_selection`
 --
 
 INSERT INTO `operation_selection` (`SelectionID`, `ReservationID`, `OperationID`) VALUES
@@ -1235,7 +1235,7 @@ INSERT INTO `operation_selection` (`SelectionID`, `ReservationID`, `OperationID`
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `reservation`
+-- Table structure for table `reservation`
 --
 
 CREATE TABLE `reservation` (
@@ -1249,7 +1249,7 @@ CREATE TABLE `reservation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Tablo döküm verisi `reservation`
+-- Dumping data for table `reservation`
 --
 
 INSERT INTO `reservation` (`ReservationID`, `ReservationDate`, `ReservationTime`, `isDone`, `TotalPrice`, `BarberID`, `CustomerID`) VALUES
@@ -1601,35 +1601,35 @@ INSERT INTO `reservation` (`ReservationID`, `ReservationDate`, `ReservationTime`
 (22031509307, '2022-03-15', '09:30:00', '0', 67, 7, 60);
 
 --
--- Dökümü yapılmış tablolar için indeksler
+-- Indexes for dumped tables
 --
 
 --
--- Tablo için indeksler `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`AdminID`);
 
 --
--- Tablo için indeksler `barber`
+-- Indexes for table `barber`
 --
 ALTER TABLE `barber`
   ADD PRIMARY KEY (`BarberID`);
 
 --
--- Tablo için indeksler `customer`
+-- Indexes for table `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`CustomerID`);
 
 --
--- Tablo için indeksler `operation`
+-- Indexes for table `operation`
 --
 ALTER TABLE `operation`
   ADD PRIMARY KEY (`OperationID`);
 
 --
--- Tablo için indeksler `operation_selection`
+-- Indexes for table `operation_selection`
 --
 ALTER TABLE `operation_selection`
   ADD PRIMARY KEY (`SelectionID`),
@@ -1637,7 +1637,7 @@ ALTER TABLE `operation_selection`
   ADD KEY `ReservationID` (`ReservationID`);
 
 --
--- Tablo için indeksler `reservation`
+-- Indexes for table `reservation`
 --
 ALTER TABLE `reservation`
   ADD PRIMARY KEY (`ReservationID`) USING BTREE,
@@ -1645,44 +1645,44 @@ ALTER TABLE `reservation`
   ADD KEY `CustomerID` (`CustomerID`);
 
 --
--- Dökümü yapılmış tablolar için AUTO_INCREMENT değeri
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- Tablo için AUTO_INCREMENT değeri `barber`
+-- AUTO_INCREMENT for table `barber`
 --
 ALTER TABLE `barber`
-  MODIFY `BarberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `BarberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- Tablo için AUTO_INCREMENT değeri `customer`
+-- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
   MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=603;
 
 --
--- Tablo için AUTO_INCREMENT değeri `operation`
+-- AUTO_INCREMENT for table `operation`
 --
 ALTER TABLE `operation`
-  MODIFY `OperationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `OperationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- Dökümü yapılmış tablolar için kısıtlamalar
+-- Constraints for dumped tables
 --
 
 --
--- Tablo kısıtlamaları `operation_selection`
+-- Constraints for table `operation_selection`
 --
 ALTER TABLE `operation_selection`
-  ADD CONSTRAINT `operation_selection_ibfk_4` FOREIGN KEY (`OperationID`) REFERENCES `operation` (`OperationID`),
-  ADD CONSTRAINT `operation_selection_ibfk_5` FOREIGN KEY (`ReservationID`) REFERENCES `reservation` (`ReservationID`);
+  ADD CONSTRAINT `operation_selection_ibfk_4` FOREIGN KEY (`OperationID`) REFERENCES `operation` (`OperationID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `operation_selection_ibfk_5` FOREIGN KEY (`ReservationID`) REFERENCES `reservation` (`ReservationID`) ON DELETE CASCADE;
 
 --
--- Tablo kısıtlamaları `reservation`
+-- Constraints for table `reservation`
 --
 ALTER TABLE `reservation`
-  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`BarberID`) REFERENCES `barber` (`BarberID`),
-  ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`CustomerID`) REFERENCES `customer` (`CustomerID`);
+  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`BarberID`) REFERENCES `barber` (`BarberID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`CustomerID`) REFERENCES `customer` (`CustomerID`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
