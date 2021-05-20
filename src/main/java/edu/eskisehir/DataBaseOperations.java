@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Properties;
 
 public class DataBaseOperations {
 
@@ -229,7 +230,6 @@ public class DataBaseOperations {
             while (rs.next()) {
 //                System.out.println(rs.getString("UserName"));
                 if (rs.getString("UserName").equals(userName) && rs.getString("Password").equals(pass)) {
-                    System.out.println("Başarılı");
                     return true;
                 }
             }
@@ -239,6 +239,46 @@ public class DataBaseOperations {
         }
 
         return false;
+    }
+
+    public List<Barber> getBarbers(){
+        List<Barber> list = new LinkedList<>();
+        String sql = "SELECT * FROM barber";
+
+        try (Connection connection = DBConnection.connect();
+             Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                list.add(new Barber(rs.getInt("BarberID"),rs.getString("BarberName"),rs.getString("BarberSurname"),rs.getInt("Salary")));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return list;
+    }
+
+    public void updateBarber(Attribute attName,String value,int id){
+        String sql = null;
+        switch (attName){
+            case NAME:
+                sql = "UPDATE barber SET BarberName=? WHERE BarberID=?";
+
+                break;
+            case SURNAME:
+                break;
+            case SALARY:
+                break;
+        }
+        try (Connection connection = DBConnection.connect();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1,value);
+            preparedStatement.setInt(2,id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 
 }
