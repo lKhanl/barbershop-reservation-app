@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
@@ -36,6 +37,11 @@ public class AdminScreenController implements Initializable {
     public TextField txtOpPrice;
     public TableColumn<Operation, String> opNameCol;
     public TableColumn<Operation, Integer> opPriceCol;
+    public AnchorPane barbersAP;
+    public Tab tabOp;
+    public Tab tabBarbers;
+    public Tab tabCustomers;
+    public Tab tabRes;
 
     DataBaseOperations db = new DataBaseOperations();
     ObservableList<Barber> barbersData;
