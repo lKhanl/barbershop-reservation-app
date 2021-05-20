@@ -8,6 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.converter.IntegerStringConverter;
 
 import java.net.URL;
 import java.util.List;
@@ -20,12 +21,6 @@ public class AdminScreenController implements Initializable {
     public TableColumn<Barber,String> surnameCol;
 
     DataBaseOperations db = new DataBaseOperations();
-
-    public void nameChange(TableColumn.CellEditEvent<Barber, String> barberStringCellEditEvent) {
-        Barber barber = barbersTable.getSelectionModel().getSelectedItem();
-        barber.setName(barberStringCellEditEvent.getNewValue());
-
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -45,6 +40,20 @@ public class AdminScreenController implements Initializable {
             db.updateBarber(Attribute.NAME,e.getNewValue(), barber.getId());
         });
 
+        surnameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        surnameCol.setOnEditCommit(e ->{
+            Barber barber = e.getTableView().getItems().get(e.getTablePosition().getRow());
+            barber.setSurname(e.getNewValue());
+            db.updateBarber(Attribute.NAME,e.getNewValue(), barber.getId());
+        });
+
+        salaryCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        salaryCol.setOnEditCommit(e ->{
+            Barber barber = e.getTableView().getItems().get(e.getTablePosition().getRow());
+            barber.setSalary(e.getNewValue());
+            db.updateBarber(Attribute.NAME,String.valueOf(e.getNewValue()), barber.getId());
+        });
+
         barbersTable.setEditable(true);
     }
 
@@ -56,33 +65,5 @@ public class AdminScreenController implements Initializable {
         }
         barbersTable.setItems(dataTable);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

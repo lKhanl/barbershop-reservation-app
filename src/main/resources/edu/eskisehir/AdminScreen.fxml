@@ -18,7 +18,7 @@
                           <columns>
                             <TableColumn fx:id="nameCol" prefWidth="225.0" resizable="false" text="Name" />
                             <TableColumn fx:id="surnameCol" prefWidth="225.0" resizable="false" text="Surname" />
-                              <TableColumn fx:id="salaryCol" prefWidth="108.0" resizable="false" text="Salary" />
+                              <TableColumn fx:id="salaryCol" prefWidth="102.0" resizable="false" text="Salary" />
                           </columns>
                         </TableView>
                      </children>
