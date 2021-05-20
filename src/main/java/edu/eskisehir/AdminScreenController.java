@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -42,10 +43,11 @@ public class AdminScreenController implements Initializable {
     public Tab tabCustomers;
     public Tab tabRes;
     public TableView<Customer> customersTable;
-    public TableColumn<Customer,String> customerNameCol;
-    public TableColumn<Customer,String> customerSurnameCol;
-    public TableColumn<Customer,String> customerEmailCol;
+    public TableColumn<Customer, String> customerNameCol;
+    public TableColumn<Customer, String> customerSurnameCol;
+    public TableColumn<Customer, String> customerEmailCol;
     public Button btnCustomerDelete;
+    public TextField txtCustomerSearch;
 
     DataBaseOperations db = new DataBaseOperations();
     ObservableList<Barber> barbersData;
@@ -60,7 +62,7 @@ public class AdminScreenController implements Initializable {
 
         loadDataForBarber();
         loadDataForOp();
-        loadDataForCustomer();
+        loadDataForCustomer(null);
 
         //Accept only numbers for int
         txtBarberSalary.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -125,7 +127,7 @@ public class AdminScreenController implements Initializable {
 
     }
 
-    private void editableColsForCustomer(){
+    private void editableColsForCustomer() {
         customerNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         customerSurnameCol.setCellValueFactory(new PropertyValueFactory<>("surname"));
         customerEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -134,21 +136,21 @@ public class AdminScreenController implements Initializable {
         customerNameCol.setOnEditCommit(e -> {
             Customer customer = e.getTableView().getItems().get(e.getTablePosition().getRow());
             customer.setName(e.getNewValue());
-//            db.updateOperation(Attribute.NAME, e.getNewValue(), customer.getId());
+            db.updateCustomer(Attribute.NAME, e.getNewValue(), customer.getId());
         });
 
         customerSurnameCol.setCellFactory(TextFieldTableCell.forTableColumn());
         customerSurnameCol.setOnEditCommit(e -> {
             Customer customer = e.getTableView().getItems().get(e.getTablePosition().getRow());
             customer.setSurname(e.getNewValue());
-//            db.updateOperation(Attribute.NAME, e.getNewValue(), customer.getId());
+            db.updateCustomer(Attribute.SURNAME, e.getNewValue(), customer.getId());
         });
 
         customerEmailCol.setCellFactory(TextFieldTableCell.forTableColumn());
         customerEmailCol.setOnEditCommit(e -> {
             Customer customer = e.getTableView().getItems().get(e.getTablePosition().getRow());
             customer.setEmail(e.getNewValue());
-//            db.updateOperation(Attribute.NAME, e.getNewValue(), customer.getId());
+            db.updateCustomer(Attribute.EMAIL, e.getNewValue(), customer.getId());
         });
 
         customersTable.setEditable(true);
@@ -168,11 +170,18 @@ public class AdminScreenController implements Initializable {
         operationsTable.setItems(operationsData);
     }
 
-    private void loadDataForCustomer(){
-        customersData = FXCollections.observableArrayList();
-        List<Customer> customers = db.getCustomers();
-        customersData.addAll(customers);
-        customersTable.setItems(customersData);
+    private void loadDataForCustomer(List<Customer> list) {
+        if (list == null){
+            customersData = FXCollections.observableArrayList();
+            List<Customer> customers = db.getCustomers();
+            customersData.addAll(customers);
+            customersTable.setItems(customersData);
+        }else {
+            ObservableList<Customer> temp = FXCollections.observableArrayList();
+            temp.addAll(list);
+            customersTable.setItems(temp);
+        }
+
     }
 
     public void addBarber(ActionEvent event) {
@@ -209,7 +218,7 @@ public class AdminScreenController implements Initializable {
             barbersData.remove(selectedItems.get(0));
             lblConsole.setTextFill(Color.web("#ff0033"));
             lblConsole.setText("Barber is deleted!");
-        }else {
+        } else {
             event.consume();
         }
 
@@ -239,7 +248,7 @@ public class AdminScreenController implements Initializable {
             operationsData.remove(selectedItems.get(0));
 //            lblConsole.setTextFill(Color.web("#ff0033"));
 //            lblConsole.setText("Barber is deleted!");
-        }else {
+        } else {
             event.consume();
         }
 
@@ -273,8 +282,16 @@ public class AdminScreenController implements Initializable {
             customersData.remove(selectedItems.get(0));
             lblConsole.setTextFill(Color.web("#ff0033"));
             lblConsole.setText("Barber is deleted!");
-        }else {
+        } else {
             event.consume();
+        }
+    }
+
+    public void keypress(KeyEvent keyEvent) {
+        if (txtCustomerSearch.getText().equals("")) {
+            loadDataForCustomer(null);
+        } else {
+            loadDataForCustomer(db.searchName(txtCustomerSearch.getText()));
         }
     }
 }

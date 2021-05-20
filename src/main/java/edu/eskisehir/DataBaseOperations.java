@@ -66,7 +66,7 @@ public class DataBaseOperations {
 
     }
 
-    public List<Customer> getCustomers(){
+    public List<Customer> getCustomers() {
         List<Customer> list = new LinkedList<>();
         String sql = "SELECT CustomerID,CustomerName,CustomerSurname,Email FROM customer";
 
@@ -85,7 +85,7 @@ public class DataBaseOperations {
         return list;
     }
 
-    public void updateCustomer(Attribute attName, String value, int id){
+    public void updateCustomer(Attribute attName, String value, int id) {
         String sql = null;
         switch (attName) {
             case NAME:
@@ -109,7 +109,7 @@ public class DataBaseOperations {
         }
     }
 
-    public void deleteCustomer(int customerID){
+    public void deleteCustomer(int customerID) {
         String sql = "DELETE FROM customer WHERE CustomerID=?";
         try (Connection connection = DBConnection.connect();
              PreparedStatement deleteStatement = connection.prepareStatement(sql);
@@ -210,7 +210,7 @@ public class DataBaseOperations {
     }
 
     public int addOperation(String name, int price) {
-        int operationID=0;
+        int operationID = 0;
         String sql = "INSERT INTO operation (OperationName,Price) VALUES (?,?) ";
         String getterSql = "SELECT OperationID FROM operation ORDER BY OperationID DESC LIMIT 1;";
 
@@ -441,6 +441,27 @@ public class DataBaseOperations {
         }
 
         return false;
+    }
+
+    public List<Customer> searchName(String name) {
+        List<Customer> list = new LinkedList<>();
+        String sql = "SELECT CustomerID,CustomerName,CustomerSurname,Email FROM customer WHERE CustomerName or CustomerSurname or Email LIKE " + "'%" + name + "%'";
+        try (Connection connection = DBConnection.connect();
+             Statement stmt = connection.createStatement()) {
+
+            ResultSet resultSet = stmt.executeQuery(sql);
+
+            while (resultSet.next()) {
+                list.add(new Customer(resultSet.getInt("CustomerID"), resultSet.getString("CustomerName"),
+                        resultSet.getString("CustomerSurname"), resultSet.getString("Email")));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Search işlemi başarısız.");
+            e.printStackTrace();
+        }
+        System.out.println("Search işlemi başarılı.");
+        return list;
     }
 
 
