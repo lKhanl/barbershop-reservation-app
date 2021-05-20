@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,8 +20,8 @@ public class RegisterController {
     public PasswordField txtPassword;
     public Pane mainPane;
     public Button btnRegister;
-    private DataBaseOperations dataBaseOperations=new DataBaseOperations();
 
+    private final DataBaseOperations dataBaseOperations = new DataBaseOperations();
 
     public void register(ActionEvent actionEvent) {
         Pattern p = Pattern.compile("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
@@ -48,8 +49,7 @@ public class RegisterController {
                 alert.show();
             }
         }
-        dataBaseOperations.addCustomer(txtName.getText(),txtSurname.getText(),txtEmail.getText(),txtPassword.getText());
-
+        dataBaseOperations.addCustomer(txtName.getText(), txtSurname.getText(), txtEmail.getText(), txtPassword.getText());
 
     }
 }
