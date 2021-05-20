@@ -37,23 +37,30 @@ public class AdminScreenController implements Initializable {
     public TextField txtOpPrice;
     public TableColumn<Operation, String> opNameCol;
     public TableColumn<Operation, Integer> opPriceCol;
-    public AnchorPane barbersAP;
     public Tab tabOp;
     public Tab tabBarbers;
     public Tab tabCustomers;
     public Tab tabRes;
+    public TableView<Customer> customersTable;
+    public TableColumn<Customer,String> customerNameCol;
+    public TableColumn<Customer,String> customerSurnameCol;
+    public TableColumn<Customer,String> customerEmailCol;
+    public Button btnCustomerDelete;
 
     DataBaseOperations db = new DataBaseOperations();
     ObservableList<Barber> barbersData;
     ObservableList<Operation> operationsData;
+    ObservableList<Customer> customersData;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         editableColsForBarber();
         editableColsForOp();
+        editableColsForCustomer();
 
         loadDataForBarber();
         loadDataForOp();
+        loadDataForCustomer();
 
         //Accept only numbers for int
         txtBarberSalary.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -95,8 +102,6 @@ public class AdminScreenController implements Initializable {
         });
 
         barbersTable.setEditable(true);
-
-
     }
 
     private void editableColsForOp() {
@@ -120,6 +125,35 @@ public class AdminScreenController implements Initializable {
 
     }
 
+    private void editableColsForCustomer(){
+        customerNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        customerSurnameCol.setCellValueFactory(new PropertyValueFactory<>("surname"));
+        customerEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+
+        customerNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        customerNameCol.setOnEditCommit(e -> {
+            Customer customer = e.getTableView().getItems().get(e.getTablePosition().getRow());
+            customer.setName(e.getNewValue());
+//            db.updateOperation(Attribute.NAME, e.getNewValue(), customer.getId());
+        });
+
+        customerSurnameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        customerSurnameCol.setOnEditCommit(e -> {
+            Customer customer = e.getTableView().getItems().get(e.getTablePosition().getRow());
+            customer.setSurname(e.getNewValue());
+//            db.updateOperation(Attribute.NAME, e.getNewValue(), customer.getId());
+        });
+
+        customerEmailCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        customerEmailCol.setOnEditCommit(e -> {
+            Customer customer = e.getTableView().getItems().get(e.getTablePosition().getRow());
+            customer.setEmail(e.getNewValue());
+//            db.updateOperation(Attribute.NAME, e.getNewValue(), customer.getId());
+        });
+
+        customersTable.setEditable(true);
+    }
+
     private void loadDataForBarber() {
         barbersData = FXCollections.observableArrayList();
         List<Barber> barbers = db.getBarbers();
@@ -132,6 +166,13 @@ public class AdminScreenController implements Initializable {
         List<Operation> operations = db.getOperations();
         operationsData.addAll(operations);
         operationsTable.setItems(operationsData);
+    }
+
+    private void loadDataForCustomer(){
+        customersData = FXCollections.observableArrayList();
+        List<Customer> customers = db.getCustomers();
+        customersData.addAll(customers);
+        customersTable.setItems(customersData);
     }
 
     public void addBarber(ActionEvent event) {
@@ -220,5 +261,20 @@ public class AdminScreenController implements Initializable {
         txtOpPrice.setText("");
         txtOpName.setText("");
 //        lblConsole.setText("");
+    }
+
+    public void deleteCustomer(ActionEvent event) {
+        Optional<ButtonType> result = showAlert("customer");
+        if (result.get() == ButtonType.OK) {
+            TableView.TableViewSelectionModel<Customer> selectionModel = customersTable.getSelectionModel();
+            ObservableList<Customer> selectedItems = selectionModel.getSelectedItems();
+//            System.out.println(selectedItems.get(0).getId() + " " + selectedItems.get(0).getName());
+            db.deleteCustomer(selectedItems.get(0).getId());
+            customersData.remove(selectedItems.get(0));
+            lblConsole.setTextFill(Color.web("#ff0033"));
+            lblConsole.setText("Barber is deleted!");
+        }else {
+            event.consume();
+        }
     }
 }

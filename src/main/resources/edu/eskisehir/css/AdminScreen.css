@@ -8,6 +8,7 @@
 
 .button {
     -fx-background-radius: 10px;
+    -fx-pref-width: 60px;
 }
 
 .button:hover {
@@ -54,13 +55,13 @@
     -fx-padding: 1em 0em 0em 1em; /* overridden as 5 2 0 0 */
 }
 
-#btnBarberAdd, #btnOpAdd {
+#btnBarberAdd, #btnOpAdd,#btnCustomerAdd {
     -fx-font-weight: bold;
     -fx-text-fill: white;
     -fx-background-color: #95ba6d;
 }
 
-#btnBarberDelete, #btnOpDelete{
+#btnBarberDelete, #btnOpDelete,#btnCustomerDelete{
     -fx-font-weight: bold;
     -fx-text-fill: white;
     -fx-background-color: #ff8a90;
