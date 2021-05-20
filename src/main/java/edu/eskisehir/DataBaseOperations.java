@@ -66,10 +66,14 @@ public class DataBaseOperations {
 
     }
 
-    public void addBarber(String name, String surname, int salary) {
+    public int addBarber(String name, String surname, int salary) {
         String sql = "INSERT INTO barber (BarberName,BarberSurname,Salary) VALUES (?,?,?) ";
+        int barberID = 0;
+        String getterSql="SELECT BarberID FROM barber ORDER BY id DESC LIMIT 1;";
+
         try (Connection connection = DBConnection.connect();
-             PreparedStatement barberStatement = connection.prepareStatement(sql)
+             PreparedStatement barberStatement = connection.prepareStatement(sql);
+             Statement getBarberStatement= connection.createStatement();
         ) {
 
             barberStatement.setString(1, name);
@@ -77,11 +81,18 @@ public class DataBaseOperations {
             barberStatement.setInt(3, salary);
             barberStatement.executeUpdate();
 
+           ResultSet resultSet= getBarberStatement.executeQuery(getterSql);
+
+           while (resultSet.next()){
+               barberID=resultSet.getInt("BarberID");
+           }
+
         } catch (SQLException e) {
             System.out.println("Ekleme işlemi başarısız.");
             e.printStackTrace();
         }
         System.out.println("Ekleme işlemi başarılı.");
+        return barberID;
     }
 
     public void addOperation(String name, int price) {
@@ -94,6 +105,8 @@ public class DataBaseOperations {
             operationStatement.setString(1, name);
             operationStatement.setInt(2, price);
             operationStatement.executeUpdate();
+
+
 
         } catch (SQLException e) {
             System.out.println("Ekleme işlemi başarısız.");
