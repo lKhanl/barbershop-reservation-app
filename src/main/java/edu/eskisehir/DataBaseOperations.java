@@ -66,8 +66,40 @@ public class DataBaseOperations {
 
     }
 
-    public void changeCustomerInformation() {
+    public void addBarber(String name, String surname, int salary) {
+        String sql = "INSERT INTO barber (BarberName,BarberSurname,Salary) VALUES (?,?,?) ";
+        try (Connection connection = DBConnection.connect();
+             PreparedStatement barberStatement = connection.prepareStatement(sql)
+        ) {
 
+            barberStatement.setString(1, name);
+            barberStatement.setString(2, surname);
+            barberStatement.setInt(3, salary);
+            barberStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Ekleme işlemi başarısız.");
+            e.printStackTrace();
+        }
+        System.out.println("Ekleme işlemi başarılı.");
+    }
+
+    public void addOperation(String name, int price) {
+        String sql = "INSERT INTO operation (OperationName,Price) VALUES (?,?) ";
+
+        try (Connection connection = DBConnection.connect();
+             PreparedStatement operationStatement = connection.prepareStatement(sql)
+        ) {
+
+            operationStatement.setString(1, name);
+            operationStatement.setInt(2, price);
+            operationStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Ekleme işlemi başarısız.");
+            e.printStackTrace();
+        }
+        System.out.println("Ekleme işlemi başarılı.");
 
     }
 
@@ -131,26 +163,6 @@ public class DataBaseOperations {
         return resIDs;
     }
 
-    public void changeReservation() {
-
-
-    }
-
-    public void addBarber() {
-
-    }
-
-    public void changeBarberInformation() {
-
-    }
-
-    public void addOperation() {
-
-    }
-
-    public void changeAnOperation() {
-
-    }
 
     public void updateIsDone(long reservationID, String isDone) {
         Date todaySql = Date.valueOf(LocalDate.now().toString());
@@ -241,7 +253,7 @@ public class DataBaseOperations {
         return false;
     }
 
-    public List<Barber> getBarbers(){
+    public List<Barber> getBarbers() {
         List<Barber> list = new LinkedList<>();
         String sql = "SELECT * FROM barber";
 
@@ -249,7 +261,7 @@ public class DataBaseOperations {
              Statement stmt = connection.createStatement()) {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                list.add(new Barber(rs.getInt("BarberID"),rs.getString("BarberName"),rs.getString("BarberSurname"),rs.getInt("Salary")));
+                list.add(new Barber(rs.getInt("BarberID"), rs.getString("BarberName"), rs.getString("BarberSurname"), rs.getInt("Salary")));
             }
 
         } catch (SQLException throwables) {
@@ -258,9 +270,9 @@ public class DataBaseOperations {
         return list;
     }
 
-    public void updateBarber(Attribute attName,String value,int id){
+    public void updateBarber(Attribute attName, String value, int id) {
         String sql = null;
-        switch (attName){
+        switch (attName) {
             case NAME:
                 sql = "UPDATE barber SET BarberName=? WHERE BarberID=?";
 
@@ -272,8 +284,8 @@ public class DataBaseOperations {
         }
         try (Connection connection = DBConnection.connect();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1,value);
-            preparedStatement.setInt(2,id);
+            preparedStatement.setString(1, value);
+            preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
