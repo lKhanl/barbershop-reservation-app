@@ -66,6 +66,64 @@ public class DataBaseOperations {
 
     }
 
+    public List<Customer> getCustomers(){
+        List<Customer> list = new LinkedList<>();
+        String sql = "SELECT CustomerID,CustomerName,CustomerSurname,Email FROM customer";
+
+        try (Connection connection = DBConnection.connect();
+             Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                list.add(new Customer(rs.getInt("CustomerID"), rs.getString("CustomerName"), rs.getString("CustomerSurname"), rs.getString("Email")));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Çekme işlemi başarılı.");
+            e.printStackTrace();
+        }
+        System.out.println("Çekme işlemi başarısız.");
+        return list;
+    }
+
+    public void updateCustomer(Attribute attName, String value, int id){
+        String sql = null;
+        switch (attName) {
+            case NAME:
+                sql = "UPDATE customer SET CustomerName=? WHERE CustomerID=?";
+                break;
+            case SURNAME:
+                sql = "UPDATE customer SET CustomerSurname=? WHERE CustomerID=?";
+                break;
+            case EMAIL:
+                sql = "UPDATE customer SET Email=? WHERE CustomerID=?";
+                break;
+
+        }
+        try (Connection connection = DBConnection.connect();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, value);
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void deleteCustomer(int customerID){
+        String sql = "DELETE FROM customer WHERE CustomerID=?";
+        try (Connection connection = DBConnection.connect();
+             PreparedStatement deleteStatement = connection.prepareStatement(sql);
+        ) {
+            deleteStatement.setInt(1, customerID);
+            deleteStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Silme işlemi başarısız.");
+            e.printStackTrace();
+        }
+        System.out.println("Silme işlemi başarılı." + customerID);
+
+    }
+
     public int addBarber(String name, String surname, int salary) {
         String sql = "INSERT INTO barber (BarberName,BarberSurname,Salary) VALUES (?,?,?) ";
         int barberID = 0;
