@@ -14,8 +14,6 @@ import java.io.IOException;
 
 public class AdminController {
     public Pane mainPane;
-    public Label lblUserName;
-    public Label lblPassword;
     public TextField txtUserName;
     public PasswordField txtPassword;
     public Button btnLogin;
@@ -30,8 +28,6 @@ public class AdminController {
         String adminUserName = txtUserName.getText();
         String adminPass = txtPassword.getText();
 
-
-
         System.out.println(adminUserName + " " + adminPass);
 
         if (db.checkAdmin(adminUserName, adminPass)) {
@@ -42,6 +38,7 @@ public class AdminController {
 
             Stage stage = Main.openNewStage("AdminScreen", AdminScreenController.class,"admin.png");
             stage.setTitle("Admin Screen");
+            stage.setResizable(false);
             stage.show();
 
         } else {
