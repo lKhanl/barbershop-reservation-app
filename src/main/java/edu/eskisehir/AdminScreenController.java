@@ -10,11 +10,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AdminScreenController implements Initializable {
@@ -27,6 +30,7 @@ public class AdminScreenController implements Initializable {
     public TextField txtSalary;
     public Button btnAdd;
     public Label lblConsole;
+    public Button btnDelete;
 
     DataBaseOperations db = new DataBaseOperations();
     ObservableList<Barber> dataTable;
@@ -106,4 +110,23 @@ public class AdminScreenController implements Initializable {
         lblConsole.setText("");
     }
 
+    public void deleteBarber(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(this.getClass().getResource("media/error.png").toString()));
+        alert.setTitle("Warning!");
+        alert.setHeaderText("Do you really want to delete?");
+        alert.setContentText("All reservations belongs to the barber you selected will be removed!");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            TableView.TableViewSelectionModel<Barber> selectionModel = barbersTable.getSelectionModel();
+            ObservableList<Barber> selectedItems = selectionModel.getSelectedItems();
+            dataTable.remove(selectedItems.get(0));
+            db.deleteBarber(selectedItems.get(0).getId());
+        }
+
+
+
+    }
 }
