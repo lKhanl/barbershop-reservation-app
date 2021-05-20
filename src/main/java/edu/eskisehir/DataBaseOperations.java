@@ -69,11 +69,11 @@ public class DataBaseOperations {
     public int addBarber(String name, String surname, int salary) {
         String sql = "INSERT INTO barber (BarberName,BarberSurname,Salary) VALUES (?,?,?) ";
         int barberID = 0;
-        String getterSql="SELECT BarberID FROM barber ORDER BY BarberID DESC LIMIT 1;";
+        String getterSql = "SELECT BarberID FROM barber ORDER BY BarberID DESC LIMIT 1;";
 
         try (Connection connection = DBConnection.connect();
              PreparedStatement barberStatement = connection.prepareStatement(sql);
-             Statement getBarberStatement= connection.createStatement();
+             Statement getBarberStatement = connection.createStatement();
         ) {
 
             barberStatement.setString(1, name);
@@ -81,11 +81,11 @@ public class DataBaseOperations {
             barberStatement.setInt(3, salary);
             barberStatement.executeUpdate();
 
-           ResultSet resultSet= getBarberStatement.executeQuery(getterSql);
+            ResultSet resultSet = getBarberStatement.executeQuery(getterSql);
 
-           while (resultSet.next()){
-               barberID=resultSet.getInt("BarberID");
-           }
+            while (resultSet.next()) {
+                barberID = resultSet.getInt("BarberID");
+            }
 
         } catch (SQLException e) {
             System.out.println("Ekleme işlemi başarısız.");
@@ -105,7 +105,6 @@ public class DataBaseOperations {
             operationStatement.setString(1, name);
             operationStatement.setInt(2, price);
             operationStatement.executeUpdate();
-
 
 
         } catch (SQLException e) {
@@ -175,7 +174,6 @@ public class DataBaseOperations {
         System.out.println("Çekme işlemi başarılı");
         return resIDs;
     }
-
 
     public void updateIsDone(long reservationID, String isDone) {
         Date todaySql = Date.valueOf(LocalDate.now().toString());
@@ -288,11 +286,12 @@ public class DataBaseOperations {
         switch (attName) {
             case NAME:
                 sql = "UPDATE barber SET BarberName=? WHERE BarberID=?";
-
                 break;
             case SURNAME:
+                sql = "UPDATE barber SET BarberSurname=? WHERE BarberID=?";
                 break;
             case SALARY:
+                sql = "UPDATE barber SET Salary=? WHERE BarberID=?";
                 break;
         }
         try (Connection connection = DBConnection.connect();
