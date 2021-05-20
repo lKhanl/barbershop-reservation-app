@@ -69,11 +69,11 @@ public class DataBaseOperations {
     public int addBarber(String name, String surname, int salary) {
         String sql = "INSERT INTO barber (BarberName,BarberSurname,Salary) VALUES (?,?,?) ";
         int barberID = 0;
-        String getterSql="SELECT BarberID FROM barber ORDER BY BarberID DESC LIMIT 1;";
+        String getterSql = "SELECT BarberID FROM barber ORDER BY BarberID DESC LIMIT 1;";
 
         try (Connection connection = DBConnection.connect();
              PreparedStatement barberStatement = connection.prepareStatement(sql);
-             Statement getBarberStatement= connection.createStatement();
+             Statement getBarberStatement = connection.createStatement();
         ) {
 
             barberStatement.setString(1, name);
@@ -81,11 +81,11 @@ public class DataBaseOperations {
             barberStatement.setInt(3, salary);
             barberStatement.executeUpdate();
 
-           ResultSet resultSet= getBarberStatement.executeQuery(getterSql);
+            ResultSet resultSet = getBarberStatement.executeQuery(getterSql);
 
-           while (resultSet.next()){
-               barberID=resultSet.getInt("BarberID");
-           }
+            while (resultSet.next()) {
+                barberID = resultSet.getInt("BarberID");
+            }
 
         } catch (SQLException e) {
             System.out.println("Ekleme işlemi başarısız.");
@@ -93,6 +93,20 @@ public class DataBaseOperations {
         }
         System.out.println("Ekleme işlemi başarılı.");
         return barberID;
+    }
+
+    public void deleteBarber(int barberID) {
+        String sql = "DELETE FROM barber WHERE BarberID=?";
+        try (Connection connection = DBConnection.connect();
+             PreparedStatement deleteStatement = connection.prepareStatement(sql);
+        ) {
+            deleteStatement.setInt(1, barberID);
+            deleteStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Silme işlemi başarısız.");
+            e.printStackTrace();
+        }
+        System.out.println("Silme işlemi başarılı.");
     }
 
     public void addOperation(String name, int price) {
@@ -105,7 +119,6 @@ public class DataBaseOperations {
             operationStatement.setString(1, name);
             operationStatement.setInt(2, price);
             operationStatement.executeUpdate();
-
 
 
         } catch (SQLException e) {
@@ -175,7 +188,6 @@ public class DataBaseOperations {
         System.out.println("Çekme işlemi başarılı");
         return resIDs;
     }
-
 
     public void updateIsDone(long reservationID, String isDone) {
         Date todaySql = Date.valueOf(LocalDate.now().toString());
