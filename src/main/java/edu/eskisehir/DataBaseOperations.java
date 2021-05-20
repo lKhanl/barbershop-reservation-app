@@ -106,7 +106,8 @@ public class DataBaseOperations {
             System.out.println("Silme işlemi başarısız.");
             e.printStackTrace();
         }
-        System.out.println("Silme işlemi başarılı.");
+        System.out.println("Silme işlemi başarılı."+barberID);
+
     }
 
     public void addOperation(String name, int price) {

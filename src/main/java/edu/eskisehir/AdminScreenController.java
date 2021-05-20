@@ -122,11 +122,10 @@ public class AdminScreenController implements Initializable {
         if (result.get() == ButtonType.OK){
             TableView.TableViewSelectionModel<Barber> selectionModel = barbersTable.getSelectionModel();
             ObservableList<Barber> selectedItems = selectionModel.getSelectedItems();
-            dataTable.remove(selectedItems.get(0));
+            System.out.println(selectedItems.get(0).getId()+" "+selectedItems.get(0).getName());
             db.deleteBarber(selectedItems.get(0).getId());
+            dataTable.remove(selectedItems.get(0));
         }
-
-
 
     }
 }
