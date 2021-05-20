@@ -35,6 +35,7 @@
 }
 
 .button {
+    -fx-cursor: hand;
     -fx-background-radius: 20px;
     -fx-border-radius: 20px;
     -fx-border-width: 1px;
@@ -44,12 +45,20 @@
 
 #btnLogin {
     -fx-background-color: #90CBF9;
-    -fx-border-color: #1f81db;
+    -fx-border-color: #5080d9;
+}
+
+#btnLogin:hover {
+    -fx-background-color: #5080d9;
 }
 
 #btnAdmin {
     -fx-background-color: #A8C898;
     -fx-border-color: #62a78b;
+}
+
+#btnAdmin:hover {
+    -fx-background-color: #62a78b;
 }
 
 .text-field {
@@ -61,10 +70,14 @@
     -fx-font-family: "Calibri Light";
 }
 
-#btnAdminLogin {
-    -fx-background-color: #A7D6AA;
-    -fx-border-width: 1px;
-    -fx-border-style: solid;
-    -fx-border-radius: 20px;
-    -fx-border-color: teal;
-}
+/*#btnAdminLogin {*/
+/*    -fx-background-color: #A7D6AA;*/
+/*    -fx-border-width: 1px;*/
+/*    -fx-border-style: solid;*/
+/*    -fx-border-radius: 20px;*/
+/*    -fx-border-color: teal;*/
+/*}*/
+
+/*#btnAdminLogin:hover {*/
+/*    -fx-background-color: #7adc81;*/
+/*}*/

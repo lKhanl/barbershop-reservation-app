@@ -1,11 +1,15 @@
 .button {
+    -fx-cursor: hand;
     -fx-background-radius: 20px;
     -fx-border-radius: 20px;
     -fx-border-width: 1px;
     -fx-border-style: solid;
     -fx-background-color: #A0D7D9;
-    -fx-border-color: #508080;
+    -fx-border-color: #5fa3a3;
     /*FDE6CC*/
+}
+.button:hover{
+    -fx-background-color: #5fa3a3;
 }
 #mainPane{
     -fx-background-color: radial-gradient(focus-distance 100% , center 50% 50% , radius 50% , #FFBDDE, #B6EEBD);

@@ -10,6 +10,7 @@
     -fx-background-radius: 20px;
 }
 .button{
+    -fx-cursor: hand;
     -fx-background-radius: 20px;
     -fx-background-color: #f2e2cd;
     -fx-text-fill: black;
@@ -17,4 +18,7 @@
     -fx-border-radius: 20px;
     -fx-border-style: solid;
     -fx-border-width: 1px;
+}
+.button:hover{
+    -fx-background-color: orange;
 }
