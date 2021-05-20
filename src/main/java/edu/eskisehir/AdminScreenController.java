@@ -1,11 +1,8 @@
 package edu.eskisehir;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,6 +14,7 @@ import javafx.util.converter.IntegerStringConverter;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -80,9 +78,7 @@ public class AdminScreenController implements Initializable {
     private void loadData() {
         dataTable = FXCollections.observableArrayList();
         List<Barber> barbers = db.getBarbers();
-        for (Barber barber : barbers) {
-            dataTable.add(barber);
-        }
+        dataTable.addAll(barbers);
         barbersTable.setItems(dataTable);
     }
 
@@ -113,7 +109,7 @@ public class AdminScreenController implements Initializable {
     public void deleteBarber(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image(this.getClass().getResource("media/error.png").toString()));
+        stage.getIcons().add(new Image(Objects.requireNonNull(this.getClass().getResource("media/error.png")).toString()));
         alert.setTitle("Warning!");
         alert.setHeaderText("Do you really want to delete?");
         alert.setContentText("All reservations belongs to the barber you selected will be removed!");
@@ -125,6 +121,8 @@ public class AdminScreenController implements Initializable {
             System.out.println(selectedItems.get(0).getId()+" "+selectedItems.get(0).getName());
             db.deleteBarber(selectedItems.get(0).getId());
             dataTable.remove(selectedItems.get(0));
+            lblConsole.setTextFill(Color.web("#ff0033"));
+            lblConsole.setText("Barber is deleted!");
         }
 
     }
