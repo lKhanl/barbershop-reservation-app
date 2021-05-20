@@ -300,11 +300,12 @@ public class DataBaseOperations {
         switch (attName) {
             case NAME:
                 sql = "UPDATE barber SET BarberName=? WHERE BarberID=?";
-
                 break;
             case SURNAME:
+                sql = "UPDATE barber SET BarberSurname=? WHERE BarberID=?";
                 break;
             case SALARY:
+                sql = "UPDATE barber SET Salary=? WHERE BarberID=?";
                 break;
         }
         try (Connection connection = DBConnection.connect();
