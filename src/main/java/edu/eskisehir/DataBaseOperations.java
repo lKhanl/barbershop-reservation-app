@@ -69,7 +69,7 @@ public class DataBaseOperations {
     public int addBarber(String name, String surname, int salary) {
         String sql = "INSERT INTO barber (BarberName,BarberSurname,Salary) VALUES (?,?,?) ";
         int barberID = 0;
-        String getterSql="SELECT BarberID FROM barber ORDER BY id DESC LIMIT 1;";
+        String getterSql="SELECT BarberID FROM barber ORDER BY BarberID DESC LIMIT 1;";
 
         try (Connection connection = DBConnection.connect();
              PreparedStatement barberStatement = connection.prepareStatement(sql);
