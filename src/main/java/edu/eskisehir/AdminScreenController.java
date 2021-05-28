@@ -282,6 +282,8 @@ public class AdminScreenController implements Initializable {
             customersData.remove(selectedItems.get(0));
             lblConsole.setTextFill(Color.web("#ff0033"));
             lblConsole.setText("Barber is deleted!");
+            txtCustomerSearch.setText("");
+            loadDataForCustomer(null);
         } else {
             event.consume();
         }
@@ -289,7 +291,7 @@ public class AdminScreenController implements Initializable {
 
     public void keypress(KeyEvent keyEvent) {
         if (txtCustomerSearch.getText().equals("")) {
-            loadDataForCustomer(null);
+            keyEvent.consume();
         } else {
             loadDataForCustomer(db.searchName(txtCustomerSearch.getText()));
         }
