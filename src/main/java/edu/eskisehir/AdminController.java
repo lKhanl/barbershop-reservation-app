@@ -13,11 +13,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class AdminController {
-    public Pane mainPane;
     public TextField txtUserName;
     public PasswordField txtPassword;
     public Button btnLogin;
-    public AnchorPane ap;
+    public AnchorPane mainPane;
 
     public void login(ActionEvent event) throws IOException {
         DataBaseOperations db = new DataBaseOperations();

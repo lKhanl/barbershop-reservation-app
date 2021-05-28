@@ -6,26 +6,25 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ap" prefHeight="295.0" prefWidth="459.0" style="-fx-background-color: CFC5F6;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eskisehir.AdminController">
+<AnchorPane fx:id="mainPane" prefHeight="295.0" prefWidth="459.0" stylesheets="@css/Admin.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eskisehir.AdminController">
    <children>
-      <Pane fx:id="mainPane" layoutX="60.0" layoutY="48.0" prefHeight="200.0" prefWidth="340.0" stylesheets="@css/Admin.css">
-         <children>
-            <TextField fx:id="txtUserName" layoutX="129.0" layoutY="54.0" />
-            <PasswordField fx:id="txtPassword" layoutX="129.0" layoutY="112.0" />
-            <Button fx:id="btnLogin" layoutX="278.0" layoutY="159.0" mnemonicParsing="false" onAction="#login" text="Login" />
-            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="52.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@media/pass.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="50.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@media/admin2.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
+      <TextField fx:id="txtUserName" layoutX="221.0" layoutY="88.0" prefHeight="25.0" prefWidth="191.0" />
+      <PasswordField fx:id="txtPassword" layoutX="221.0" layoutY="173.0" prefHeight="25.0" prefWidth="191.0" />
+      <Button fx:id="btnLogin" layoutX="385.0" layoutY="246.0" mnemonicParsing="false" onAction="#login" prefHeight="35.0" prefWidth="60.0" text="Login">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <ImageView fitHeight="55.0" fitWidth="55.0" layoutX="87.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@media/pass.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="84.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@media/admin2.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

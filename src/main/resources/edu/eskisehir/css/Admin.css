@@ -1,6 +1,5 @@
 #mainPane{
     -fx-background-color: linear-gradient(to right, #ff7f50, #6a5acd);
-    -fx-background-radius: 20px;
 }
 .label{
     -fx-text-fill: white;
