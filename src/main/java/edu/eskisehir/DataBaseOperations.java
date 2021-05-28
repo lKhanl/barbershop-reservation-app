@@ -8,6 +8,48 @@ import java.util.List;
 import java.util.Properties;
 
 public class DataBaseOperations {
+    public boolean logIn(String email, String password) {
+        boolean isTrue = false;
+        String emailCopy = "";
+        String passwordCopy = "";
+
+        String sqlPassword = "SELECT Password FROM customer WHERE Email=" + "'" + email + "'";
+
+        try (Connection connection = DBConnection.connect();
+             Statement stmt = connection.createStatement()) {
+
+            String sqlEmail = "SELECT Email FROM customer WHERE Email=" + "'" + email + "'";
+            ResultSet rsEmail = stmt.executeQuery(sqlEmail);
+
+            while (rsEmail.next()) {
+                emailCopy = rsEmail.getString("Email");
+            }
+            if(emailCopy.isEmpty()){
+                System.out.println("Email kayıtlı değil.");
+                return false;
+            }
+            ResultSet rsPassword = stmt.executeQuery(sqlPassword);
+
+            while (rsPassword.next()){
+                passwordCopy=rsPassword.getString("Password");
+            }
+
+            if (!passwordCopy.equals(password)) {
+                System.out.println("Şifre yanlış.");
+                return false;
+            }
+            else {
+                isTrue=true;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Giriş işlemi başarısız.");
+            e.printStackTrace();
+        }
+
+        return isTrue;
+
+    }
 
     public void updateTotalPrice(long reservationID) {
         String getOpIDsSQL = "SELECT OperationID FROM operation_selection WHERE ReservationID=" + reservationID;
