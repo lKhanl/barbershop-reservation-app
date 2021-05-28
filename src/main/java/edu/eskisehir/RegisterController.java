@@ -21,7 +21,7 @@ public class RegisterController {
     public Pane mainPane;
     public Button btnRegister;
 
-    private final DataBaseOperations dataBaseOperations = new DataBaseOperations();
+    private final DataBaseOperations db = new DataBaseOperations();
 
     public void register(ActionEvent actionEvent) {
         Pattern p = Pattern.compile("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
@@ -34,12 +34,16 @@ public class RegisterController {
             alert.show();
             txtEmail.setText("@");
         } else {
-
             if (!txtName.getText().equals("") && !txtSurname.getText().equals("") && !txtEmail.getText().equals("") && !txtPassword.getText().equals("")) {
                 System.out.println(txtName.getText());
                 System.out.println(txtSurname.getText());
                 System.out.println(txtEmail.getText());
                 System.out.println(txtPassword.getText());
+                db.addCustomer(txtName.getText(), txtSurname.getText(), txtEmail.getText(), txtPassword.getText());
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("Register is done!");
+                alert.setTitle("Done");
+                alert.show();
                 Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 stage.close();
             } else {
@@ -49,7 +53,5 @@ public class RegisterController {
                 alert.show();
             }
         }
-        dataBaseOperations.addCustomer(txtName.getText(), txtSurname.getText(), txtEmail.getText(), txtPassword.getText());
-
     }
 }
