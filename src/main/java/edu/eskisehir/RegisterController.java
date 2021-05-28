@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,11 +36,15 @@ public class RegisterController {
             txtEmail.setText("@");
         } else {
             if (!txtName.getText().equals("") && !txtSurname.getText().equals("") && !txtEmail.getText().equals("") && !txtPassword.getText().equals("")) {
-                System.out.println(txtName.getText());
-                System.out.println(txtSurname.getText());
-                System.out.println(txtEmail.getText());
-                System.out.println(txtPassword.getText());
-               // ******************************db.addCustomer(txtName.getText(), txtSurname.getText(), txtEmail.getText(), txtPassword.getText());
+                try {
+                    db.addCustomer(txtName.getText(), txtSurname.getText(), txtEmail.getText(), txtPassword.getText());
+                } catch (SQLException throwables) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText("Duplicate!");
+                    alert.setTitle("Error");
+                    alert.show();
+                    return;
+                }
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText("Register is done!");
                 alert.setTitle("Done");

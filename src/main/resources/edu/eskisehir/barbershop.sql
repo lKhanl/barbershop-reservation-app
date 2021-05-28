@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2021 at 01:09 AM
+-- Generation Time: May 28, 2021 at 06:54 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -85,7 +85,6 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`CustomerID`, `CustomerName`, `CustomerSurname`, `Email`, `Password`) VALUES
-(1, 'Ezequiel', 'Chambers', 'ezequielchambers@yahoo.com', 'ezequielchambers8969'),
 (2, 'Romeo', 'Olson', 'romeoolson@outlook.com', 'romeoolson5652'),
 (3, 'Abraham', 'Lopez', 'abrahamlopez@windowslive.com', 'abrahamlopez6604'),
 (4, 'Octavio', 'Holder', 'octavioholder@live.com', 'octavioholder5062'),
@@ -150,7 +149,7 @@ INSERT INTO `customer` (`CustomerID`, `CustomerName`, `CustomerSurname`, `Email`
 (63, 'Edgar', 'Moses', 'edgarmoses@windowslive.com', 'edgarmoses4185'),
 (64, 'Tristian', 'Barrett', 'tristianbarrett@outlook.com', 'tristianbarrett5981'),
 (65, 'Skyler', 'Choi', 'skylerchoi@outlook.com', 'skylerchoi1139'),
-(66, 'Abdullah', 'Cervantes', 'abdullahcervantes@gmail.com', 'abdullahcervantes7964'),
+(66, 'Abdullahh', 'Cervantes', 'abdullahcervante@gmail.com', 'abdullahcervantes7964'),
 (67, 'Bronson', 'Mcpherson', 'bronsonmcpherson@live.com', 'bronsonmcpherson3773'),
 (68, 'Brett', 'Rios', 'brettrios@live.com', 'brettrios2898'),
 (69, 'Elisha', 'Dodson', 'elishadodson@outlook.com', 'elishadodson1798'),
@@ -684,7 +683,9 @@ INSERT INTO `customer` (`CustomerID`, `CustomerName`, `CustomerSurname`, `Email`
 (597, 'Ulises', 'Parks', 'ulisesparks@yahoo.com', 'ulisesparks1147'),
 (598, 'Ernesto', 'Williams', 'ernestowilliams@outlook.com', 'ernestowilliams3313'),
 (599, 'Darius', 'Weiss', 'dariusweiss@msn.com', 'dariusweiss3633'),
-(600, 'Boston', 'Simmons', 'bostonsimmons@outlook.com', 'bostonsimmons6154');
+(600, 'Boston', 'Simmons', 'bostonsimmons@outlook.com', 'bostonsimmons6154'),
+(601, 'a', 'a', 'a@a.com', 'a'),
+(602, 'a', 'a', 'a@aa.com', 'a');
 
 -- --------------------------------------------------------
 
@@ -1564,7 +1565,8 @@ ALTER TABLE `barber`
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
-  ADD PRIMARY KEY (`CustomerID`);
+  ADD PRIMARY KEY (`CustomerID`),
+  ADD UNIQUE KEY `Email` (`Email`);
 
 --
 -- Indexes for table `operation`
@@ -1596,19 +1598,19 @@ ALTER TABLE `reservation`
 -- AUTO_INCREMENT for table `barber`
 --
 ALTER TABLE `barber`
-  MODIFY `BarberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `BarberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=601;
+  MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=606;
 
 --
 -- AUTO_INCREMENT for table `operation`
 --
 ALTER TABLE `operation`
-  MODIFY `OperationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `OperationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
