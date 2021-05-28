@@ -45,7 +45,7 @@ public class DataBaseOperations {
         System.out.println("Update işlemi başarılı.");
     }
 
-    public void addCustomer(String customerName, String customerSurname, String email, String password) {
+    public void addCustomer(String customerName, String customerSurname, String email, String password) throws SQLException {
 
 
         try (Connection connection = DBConnection.connect();
@@ -58,11 +58,7 @@ public class DataBaseOperations {
             customerStatement.setString(4, password);
             customerStatement.executeUpdate();
 
-        } catch (SQLException e) {
-            System.out.println("Ekleme işlemi başarısız.");
-            System.out.println(e.getMessage());
         }
-        System.out.println("Ekleme işlemi başarılı.");
 
     }
 
