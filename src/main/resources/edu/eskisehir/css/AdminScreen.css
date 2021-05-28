@@ -8,7 +8,7 @@
 
 .button {
     -fx-background-radius: 10px;
-    -fx-pref-width: 60px;
+    /*-fx-pref-width: 60px;*/
 }
 
 .button:hover {
@@ -42,7 +42,7 @@
 .tab .tab-label {
     -fx-alignment: CENTER;
     -fx-text-fill: #828282;
-    -fx-font-size: 12px;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
 }
 
@@ -55,14 +55,19 @@
     -fx-padding: 1em 0em 0em 1em; /* overridden as 5 2 0 0 */
 }
 
-#btnBarberAdd, #btnOpAdd,#btnCustomerAdd {
-    -fx-font-weight: bold;
+.btnAdd{
     -fx-text-fill: white;
     -fx-background-color: #95ba6d;
 }
-
-#btnBarberDelete, #btnOpDelete,#btnCustomerDelete{
-    -fx-font-weight: bold;
+.btnAdd:hover{
+    -fx-text-fill: white;
+    -fx-background-color: #7a9c3d;
+}
+.btnDelete{
     -fx-text-fill: white;
     -fx-background-color: #ff8a90;
+}
+.btnDelete:hover{
+    -fx-text-fill: white;
+    -fx-background-color: #fd5c62;
 }

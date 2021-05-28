@@ -3,13 +3,13 @@ package edu.eskisehir;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
@@ -29,7 +29,7 @@ public class AdminScreenController implements Initializable {
     public TextField txtBarberSurname;
     public TextField txtBarberSalary;
     public Button btnBarberAdd;
-    public Label lblConsole;
+    public Label lblConsoleBarber;
     public Button btnBarberDelete;
     public TableView<Operation> operationsTable;
     public Button btnOpDelete;
@@ -48,6 +48,8 @@ public class AdminScreenController implements Initializable {
     public TableColumn<Customer, String> customerEmailCol;
     public Button btnCustomerDelete;
     public TextField txtCustomerSearch;
+    public Label lblConsoleOp;
+    public Label lblConsoleCustomer;
 
     DataBaseOperations db = new DataBaseOperations();
     ObservableList<Barber> barbersData;
@@ -87,6 +89,8 @@ public class AdminScreenController implements Initializable {
             Barber barber = e.getTableView().getItems().get(e.getTablePosition().getRow());
             barber.setName(e.getNewValue());
             db.updateBarber(Attribute.NAME, e.getNewValue(), barber.getId());
+            lblConsoleBarber.setTextFill(Color.web("#42ba96"));
+            lblConsoleBarber.setText("Updated!");
         });
 
         barberSurnameCol.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -94,6 +98,8 @@ public class AdminScreenController implements Initializable {
             Barber barber = e.getTableView().getItems().get(e.getTablePosition().getRow());
             barber.setSurname(e.getNewValue());
             db.updateBarber(Attribute.SURNAME, e.getNewValue(), barber.getId());
+            lblConsoleBarber.setTextFill(Color.web("#42ba96"));
+            lblConsoleBarber.setText("Updated!");
         });
 
         barberSalaryCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
@@ -101,6 +107,8 @@ public class AdminScreenController implements Initializable {
             Barber barber = e.getTableView().getItems().get(e.getTablePosition().getRow());
             barber.setSalary(e.getNewValue());
             db.updateBarber(Attribute.SALARY, String.valueOf(e.getNewValue()), barber.getId());
+            lblConsoleBarber.setTextFill(Color.web("#42ba96"));
+            lblConsoleBarber.setText("Updated!");
         });
 
         barbersTable.setEditable(true);
@@ -115,6 +123,8 @@ public class AdminScreenController implements Initializable {
             Operation op = e.getTableView().getItems().get(e.getTablePosition().getRow());
             op.setName(e.getNewValue());
             db.updateOperation(Attribute.NAME, e.getNewValue(), op.getId());
+            lblConsoleOp.setTextFill(Color.web("#42ba96"));
+            lblConsoleOp.setText("Updated!");
         });
 
         opPriceCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
@@ -122,6 +132,8 @@ public class AdminScreenController implements Initializable {
             Operation op = e.getTableView().getItems().get(e.getTablePosition().getRow());
             op.setPrice(e.getNewValue());
             db.updateOperation(Attribute.PRICE, String.valueOf(e.getNewValue()), op.getId());
+            lblConsoleOp.setTextFill(Color.web("#42ba96"));
+            lblConsoleOp.setText("Updated!");
         });
         operationsTable.setEditable(true);
 
@@ -137,6 +149,8 @@ public class AdminScreenController implements Initializable {
             Customer customer = e.getTableView().getItems().get(e.getTablePosition().getRow());
             customer.setName(e.getNewValue());
             db.updateCustomer(Attribute.NAME, e.getNewValue(), customer.getId());
+            lblConsoleCustomer.setTextFill(Color.web("#42ba96"));
+            lblConsoleCustomer.setText("Updated!");
         });
 
         customerSurnameCol.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -144,6 +158,8 @@ public class AdminScreenController implements Initializable {
             Customer customer = e.getTableView().getItems().get(e.getTablePosition().getRow());
             customer.setSurname(e.getNewValue());
             db.updateCustomer(Attribute.SURNAME, e.getNewValue(), customer.getId());
+            lblConsoleCustomer.setTextFill(Color.web("#42ba96"));
+            lblConsoleCustomer.setText("Updated!");
         });
 
         customerEmailCol.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -151,6 +167,8 @@ public class AdminScreenController implements Initializable {
             Customer customer = e.getTableView().getItems().get(e.getTablePosition().getRow());
             customer.setEmail(e.getNewValue());
             db.updateCustomer(Attribute.EMAIL, e.getNewValue(), customer.getId());
+            lblConsoleCustomer.setTextFill(Color.web("#42ba96"));
+            lblConsoleCustomer.setText("Updated!");
         });
 
         customersTable.setEditable(true);
@@ -171,12 +189,12 @@ public class AdminScreenController implements Initializable {
     }
 
     private void loadDataForCustomer(List<Customer> list) {
-        if (list == null){
+        if (list == null) {
             customersData = FXCollections.observableArrayList();
             List<Customer> customers = db.getCustomers();
             customersData.addAll(customers);
             customersTable.setItems(customersData);
-        }else {
+        } else {
             ObservableList<Customer> temp = FXCollections.observableArrayList();
             temp.addAll(list);
             customersTable.setItems(temp);
@@ -185,39 +203,36 @@ public class AdminScreenController implements Initializable {
     }
 
     public void addBarber(ActionEvent event) {
-
         if (!(txtBarberName.getText().equals("") || txtBarberSurname.getText().equals("") || txtBarberSalary.getText().equals(""))) {
             int id = db.addBarber(txtBarberName.getText(), txtBarberSurname.getText(), Integer.parseInt(txtBarberSalary.getText()));
             barbersData.add(new Barber(id, txtBarberName.getText(), txtBarberSurname.getText(), Integer.parseInt(txtBarberSalary.getText())));
-            clearFieldsForBarber();
-            lblConsole.setTextFill(Color.web("#42ba96"));
-            lblConsole.setText("Added!");
+            lblConsoleBarber.setTextFill(Color.web("#42ba96"));
+            lblConsoleBarber.setText("Barber was added!");
+
+            txtBarberName.setText("");
+            txtBarberSurname.setText("");
+            txtBarberSalary.setText("");
         } else {
-            clearFieldsForBarber();
-            lblConsole.setTextFill(Color.web("#ff0033"));
-            lblConsole.setText("Some fields are empty!");
+            lblConsoleBarber.setTextFill(Color.web("#ff0033"));
+            lblConsoleBarber.setText("Some fields are empty!");
             event.consume();
         }
-
-    }
-
-    private void clearFieldsForBarber() {
-        txtBarberName.setText("");
-        txtBarberSurname.setText("");
-        txtBarberSalary.setText("");
-        lblConsole.setText("");
     }
 
     public void deleteBarber(ActionEvent event) {
+        TableView.TableViewSelectionModel<Barber> selectionModel = barbersTable.getSelectionModel();
+        ObservableList<Barber> selectedItems = selectionModel.getSelectedItems();
+        if (selectedItems.size() == 0) {
+            lblConsoleBarber.setTextFill(Color.web("#ff0033"));
+            lblConsoleBarber.setText("Select once!");
+            return;
+        }
         Optional<ButtonType> result = showAlert("barber");
         if (result.get() == ButtonType.OK) {
-            TableView.TableViewSelectionModel<Barber> selectionModel = barbersTable.getSelectionModel();
-            ObservableList<Barber> selectedItems = selectionModel.getSelectedItems();
-            System.out.println(selectedItems.get(0).getId() + " " + selectedItems.get(0).getName());
             db.deleteBarber(selectedItems.get(0).getId());
             barbersData.remove(selectedItems.get(0));
-            lblConsole.setTextFill(Color.web("#ff0033"));
-            lblConsole.setText("Barber is deleted!");
+            lblConsoleBarber.setTextFill(Color.web("#ff0033"));
+            lblConsoleBarber.setText("Barber was deleted!");
         } else {
             event.consume();
         }
@@ -228,30 +243,35 @@ public class AdminScreenController implements Initializable {
         if (!(txtOpName.getText().equals("") || txtOpPrice.getText().equals(""))) {
             int id = db.addOperation(txtOpName.getText(), Integer.parseInt(txtOpPrice.getText()));
             operationsData.add(new Operation(id, txtOpName.getText(), Integer.parseInt(txtOpPrice.getText())));
-            clearFieldsForOp();
-//            lblConsole.setTextFill(Color.web("#42ba96"));
-//            lblConsole.setText("Added!");
+            lblConsoleOp.setTextFill(Color.web("#42ba96"));
+            lblConsoleOp.setText("Operation was added!");
+
+            txtOpPrice.setText("");
+            txtOpName.setText("");
         } else {
-            clearFieldsForOp();
-//            lblConsole.setTextFill(Color.web("#ff0033"));
-//            lblConsole.setText("Some fields are empty!");
+            lblConsoleOp.setTextFill(Color.web("#ff0033"));
+            lblConsoleOp.setText("Some fields are empty!");
             event.consume();
         }
     }
 
     public void deleteOp(ActionEvent event) {
+        TableView.TableViewSelectionModel<Operation> selectionModel = operationsTable.getSelectionModel();
+        ObservableList<Operation> selectedItems = selectionModel.getSelectedItems();
+        if (selectedItems.size() == 0) {
+            lblConsoleOp.setTextFill(Color.web("#ff0033"));
+            lblConsoleOp.setText("Select once!");
+            return;
+        }
         Optional<ButtonType> result = showAlert("operation");
         if (result.get() == ButtonType.OK) {
-            TableView.TableViewSelectionModel<Operation> selectionModel = operationsTable.getSelectionModel();
-            ObservableList<Operation> selectedItems = selectionModel.getSelectedItems();
             db.deleteOperation(selectedItems.get(0).getId());
             operationsData.remove(selectedItems.get(0));
-//            lblConsole.setTextFill(Color.web("#ff0033"));
-//            lblConsole.setText("Barber is deleted!");
+            lblConsoleOp.setTextFill(Color.web("#ff0033"));
+            lblConsoleOp.setText("Operation was deleted!");
         } else {
             event.consume();
         }
-
 
     }
 
@@ -266,22 +286,20 @@ public class AdminScreenController implements Initializable {
         return result;
     }
 
-    private void clearFieldsForOp() {
-        txtOpPrice.setText("");
-        txtOpName.setText("");
-//        lblConsole.setText("");
-    }
-
     public void deleteCustomer(ActionEvent event) {
+        TableView.TableViewSelectionModel<Customer> selectionModel = customersTable.getSelectionModel();
+        ObservableList<Customer> selectedItems = selectionModel.getSelectedItems();
+        if (selectedItems.size() == 0) {
+            lblConsoleCustomer.setTextFill(Color.web("#ff0033"));
+            lblConsoleCustomer.setText("Select once!");
+            return;
+        }
         Optional<ButtonType> result = showAlert("customer");
         if (result.get() == ButtonType.OK) {
-            TableView.TableViewSelectionModel<Customer> selectionModel = customersTable.getSelectionModel();
-            ObservableList<Customer> selectedItems = selectionModel.getSelectedItems();
-//            System.out.println(selectedItems.get(0).getId() + " " + selectedItems.get(0).getName());
             db.deleteCustomer(selectedItems.get(0).getId());
             customersData.remove(selectedItems.get(0));
-            lblConsole.setTextFill(Color.web("#ff0033"));
-            lblConsole.setText("Barber is deleted!");
+            lblConsoleCustomer.setTextFill(Color.web("#ff0033"));
+            lblConsoleCustomer.setText("Customer was deleted!");
             txtCustomerSearch.setText("");
             loadDataForCustomer(null);
         } else {

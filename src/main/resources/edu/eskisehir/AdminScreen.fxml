@@ -8,28 +8,38 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@css/AdminScreen.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eskisehir.AdminScreenController">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@css/AdminScreen.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eskisehir.AdminScreenController">
    <children>
-      <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
             <Tab fx:id="tabBarbers" text="Barbers">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="407.0" prefWidth="639.0">
                      <children>
-                        <TableView fx:id="barbersTable" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="572.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                        <TableView fx:id="barbersTable" layoutX="14.0" layoutY="4.0" prefHeight="361.0" prefWidth="672.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="4.0">
                           <columns>
-                            <TableColumn fx:id="barberNameCol" prefWidth="225.0" resizable="false" text="Name" />
-                            <TableColumn fx:id="barberSurnameCol" prefWidth="225.0" resizable="false" text="Surname" />
-                              <TableColumn fx:id="barberSalaryCol" prefWidth="102.0" resizable="false" text="Salary" />
+                            <TableColumn fx:id="barberNameCol" prefWidth="250.0" resizable="false" text="Name" />
+                            <TableColumn fx:id="barberSurnameCol" prefWidth="250.0" resizable="false" text="Surname" />
+                              <TableColumn fx:id="barberSalaryCol" prefWidth="145.0" resizable="false" text="Salary" />
                           </columns>
                         </TableView>
-                        <TextField fx:id="txtBarberName" layoutX="14.0" layoutY="241.0" prefWidth="150.0" promptText="Barber Name" />
-                        <TextField fx:id="txtBarberSurname" layoutX="184.0" layoutY="241.0" prefWidth="150.0" promptText="Barber Surname" />
-                        <TextField fx:id="txtBarberSalary" layoutX="354.0" layoutY="241.0" prefHeight="25.0" prefWidth="75.0" promptText="Salary" />
-                        <Button fx:id="btnBarberAdd" layoutX="445.0" layoutY="241.0" mnemonicParsing="false" onAction="#addBarber" prefWidth="55.0" text="ADD" />
-                        <Label fx:id="lblConsole" alignment="TOP_LEFT" layoutX="14.0" layoutY="277.0" prefHeight="40.0" prefWidth="415.0" />
-                        <Button fx:id="btnBarberDelete" layoutX="526.0" layoutY="241.0" mnemonicParsing="false" onAction="#deleteBarber" text="DELETE" />
+                        <TextField fx:id="txtBarberName" layoutX="14.0" layoutY="405.0" prefHeight="30.0" prefWidth="150.0" promptText="Barber Name" />
+                        <TextField fx:id="txtBarberSurname" layoutX="200.0" layoutY="405.0" prefHeight="30.0" prefWidth="150.0" promptText="Barber Surname" />
+                        <TextField fx:id="txtBarberSalary" layoutX="383.0" layoutY="405.0" prefHeight="30.0" prefWidth="75.0" promptText="Salary" />
+                        <Button fx:id="btnBarberAdd" layoutX="533.0" layoutY="405.0" mnemonicParsing="false" onAction="#addBarber" prefHeight="30.0" prefWidth="55.0" styleClass="btnAdd" text="ADD">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
+                        <Label fx:id="lblConsoleBarber" layoutX="14.0" layoutY="365.0" prefHeight="40.0" prefWidth="415.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <Button fx:id="btnBarberDelete" layoutX="616.0" layoutY="405.0" mnemonicParsing="false" onAction="#deleteBarber" prefHeight="30.0" prefWidth="70.0" styleClass="btnDelete" text="DELETE">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
                      </children>
                   </AnchorPane>
               </content>
@@ -44,10 +54,21 @@
                             <TableColumn fx:id="opPriceCol" prefWidth="71.0" text="Price" />
                           </columns>
                         </TableView>
-                        <Button fx:id="btnOpDelete" layoutX="522.0" layoutY="89.0" mnemonicParsing="false" onAction="#deleteOp" text="DELETE" AnchorPane.bottomAnchor="250.0" />
-                        <TextField fx:id="txtOpName" layoutX="349.0" layoutY="48.0" prefHeight="25.0" prefWidth="150.0" promptText="Operation Name" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="350.0" />
-                        <TextField fx:id="txtOpPrice" layoutX="507.0" layoutY="48.0" prefHeight="25.0" prefWidth="75.0" promptText="Price" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="507.0" />
-                        <Button fx:id="btnOpAdd" layoutX="440.0" layoutY="89.0" mnemonicParsing="false" onAction="#addOp" prefWidth="55.0" text="ADD" AnchorPane.bottomAnchor="250.0" />
+                        <Button fx:id="btnOpDelete" layoutX="543.0" layoutY="184.0" mnemonicParsing="false" onAction="#deleteOp" prefHeight="30.0" prefWidth="70.0" styleClass="btnDelete" text="DELETE" AnchorPane.bottomAnchor="250.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
+                        <TextField fx:id="txtOpName" layoutX="359.0" layoutY="134.0" prefHeight="30.0" prefWidth="150.0" promptText="Operation Name" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="359.0" />
+                        <TextField fx:id="txtOpPrice" layoutX="540.0" layoutY="134.0" prefHeight="30.0" prefWidth="75.0" promptText="Price" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="540.0" />
+                        <Button fx:id="btnOpAdd" layoutX="454.0" layoutY="184.0" mnemonicParsing="false" onAction="#addOp" prefHeight="30.0" prefWidth="55.0" styleClass="btnAdd" text="ADD" AnchorPane.bottomAnchor="250.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
+                        <Label fx:id="lblConsoleOp" layoutX="359.0" layoutY="80.0" prefHeight="43.0" prefWidth="255.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -55,15 +76,23 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="customersTable" layoutX="14.0" layoutY="14.0" prefHeight="304.0" prefWidth="572.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                        <TableView fx:id="customersTable" layoutX="14.0" layoutY="14.0" prefHeight="395.0" prefWidth="672.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
                           <columns>
-                            <TableColumn fx:id="customerNameCol" prefWidth="120.0" text="Name" />
-                            <TableColumn fx:id="customerSurnameCol" prefWidth="120.0" text="Surname" />
-                              <TableColumn fx:id="customerEmailCol" prefWidth="315.0" text="Email" />
+                            <TableColumn fx:id="customerNameCol" prefWidth="170.0" text="Name" />
+                            <TableColumn fx:id="customerSurnameCol" prefWidth="170.0" text="Surname" />
+                              <TableColumn fx:id="customerEmailCol" prefWidth="300.0" text="Email" />
                           </columns>
                         </TableView>
-                        <Button fx:id="btnCustomerDelete" layoutX="526.0" layoutY="325.0" mnemonicParsing="false" onAction="#deleteCustomer" text="DELETE" />
-                        <TextField fx:id="txtCustomerSearch" layoutX="14.0" layoutY="325.0" onKeyTyped="#keypress" prefHeight="25.0" prefWidth="180.0" promptText="Search for any ..." />
+                        <Button fx:id="btnCustomerDelete" layoutX="616.0" layoutY="420.0" mnemonicParsing="false" onAction="#deleteCustomer" prefHeight="30.0" prefWidth="70.0" styleClass="btnDelete" text="DELETE">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
+                        <TextField fx:id="txtCustomerSearch" layoutX="14.0" layoutY="420.0" onKeyTyped="#keypress" prefHeight="30.0" prefWidth="200.0" promptText="Search for any ..." />
+                        <Label fx:id="lblConsoleCustomer" layoutX="235.0" layoutY="420.0" prefHeight="30.0" prefWidth="266.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
                      </children></AnchorPane>
               </content>
             </Tab>
