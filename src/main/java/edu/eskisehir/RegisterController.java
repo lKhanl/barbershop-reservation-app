@@ -39,7 +39,7 @@ public class RegisterController {
                 System.out.println(txtSurname.getText());
                 System.out.println(txtEmail.getText());
                 System.out.println(txtPassword.getText());
-               // *****************************db.addCustomer(txtName.getText(), txtSurname.getText(), txtEmail.getText(), txtPassword.getText());
+               // ******************************db.addCustomer(txtName.getText(), txtSurname.getText(), txtEmail.getText(), txtPassword.getText());
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText("Register is done!");
                 alert.setTitle("Done");

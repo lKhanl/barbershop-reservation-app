@@ -47,7 +47,6 @@ public class DataBaseOperations {
 
     public void addCustomer(String customerName, String customerSurname, String email, String password) throws SQLException {
 
-
         try (Connection connection = DBConnection.connect();
              PreparedStatement customerStatement = connection.prepareStatement("INSERT INTO `customer`(`CustomerName`, " +
                      "`CustomerSurname`, `Email`, `Password`) VALUES (?,?,?,?)")) {
@@ -57,9 +56,7 @@ public class DataBaseOperations {
             customerStatement.setString(3, email);
             customerStatement.setString(4, password);
             customerStatement.executeUpdate();
-
         }
-
     }
 
     public List<Customer> getCustomers() {
