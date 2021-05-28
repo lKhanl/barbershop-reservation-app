@@ -12,8 +12,12 @@
     -fx-background-color: #5fa3a3;
 }
 #mainPane{
-    -fx-background-color: radial-gradient(focus-distance 100% , center 50% 50% , radius 50% , #FFBDDE, #B6EEBD);
+    -fx-background-color: linear-gradient(to top right, #6996F6, #F3A5C8);
 }
 .label{
     -fx-text-fill: black;
+    -fx-font-size: 18px;
+}
+.text-field{
+    -fx-background-radius: 20px;
 }
