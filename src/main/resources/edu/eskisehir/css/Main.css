@@ -1,7 +1,7 @@
 #mainPane {
     -fx-background-color: #CFC5F6;
-    -fx-pref-width: 500px;
-    -fx-pref-height: 400px;
+    -fx-pref-width: 700px;
+    -fx-pref-height: 500px;
 }
 
 #loginPane {
@@ -9,22 +9,21 @@
     -fx-background-radius: 20px;
 }
 
-.label {
-    -fx-font-size: 16px;
-}
+/*.label {*/
+/*    -fx-font-size: 18px;*/
+/*}*/
 
 .h1 {
-    -fx-font-size: 26px;
+    -fx-font-size: 32px;
 }
 
 .account {
-    -fx-font-size: medium;
+    -fx-font-size: large;
     -fx-font-style: italic;
 }
 
 #lblRegisterNow {
-    -fx-font-size: medium;
-
+    -fx-font-size: large;
 }
 
 #lblRegisterNow:hover {
@@ -66,7 +65,7 @@
 }
 
 .loginLabel {
-    -fx-font-size: 16px;
+    -fx-font-size: 20px;
     -fx-font-family: "Calibri Light";
 }
 

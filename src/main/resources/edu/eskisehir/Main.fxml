@@ -6,20 +6,27 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" stylesheets="@css/Main.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eskisehir.MainController">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@css/Main.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eskisehir.MainController">
    <children>
-      <Button fx:id="btnAdmin" layoutX="366.0" layoutY="359.0" mnemonicParsing="false" onAction="#openAdminLogin" text="Admin Registration" />
-      <Pane fx:id="loginPane" layoutX="70.0" layoutY="65.0" prefHeight="270.0" prefWidth="360.0">
+      <Button fx:id="btnAdmin" layoutX="547.0" layoutY="454.0" mnemonicParsing="false" onAction="#openAdminLogin" text="Admin Registration">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Pane fx:id="loginPane" layoutX="120.0" layoutY="65.0" prefHeight="370.0" prefWidth="460.0">
          <children>
-            <Label layoutX="50.0" layoutY="104.0" styleClass="loginLabel" text="Email :" />
-            <Label layoutX="50.0" layoutY="144.0" styleClass="loginLabel" text="Password :" />
-            <TextField layoutX="169.0" layoutY="100.0" prefHeight="25.0" prefWidth="150.0" />
-            <PasswordField layoutX="169.0" layoutY="140.0" prefHeight="25.0" prefWidth="150.0" />
-            <Label layoutX="78.0" layoutY="21.0" styleClass="h1" text="Customer Login" />
-            <Button fx:id="btnLogin" layoutX="273.0" layoutY="188.0" mnemonicParsing="false" onAction="#login" text="Login" />
-            <Label layoutX="36.0" layoutY="192.0" styleClass="account" text="Don't have an account" />
-            <Label fx:id="lblRegisterNow" layoutX="165.0" layoutY="192.0" onMouseClicked="#openRegisterLogin" text="Register now" />
+            <Label layoutX="76.0" layoutY="145.0" styleClass="loginLabel" text="Email :" />
+            <Label layoutX="75.0" layoutY="200.0" styleClass="loginLabel" text="Password :" />
+            <TextField fx:id="txtEmail" layoutX="190.0" layoutY="142.0" prefHeight="30.0" prefWidth="225.0" />
+            <PasswordField fx:id="txtPass" layoutX="190.0" layoutY="197.0" prefHeight="30.0" prefWidth="225.0" />
+            <Label layoutX="118.0" layoutY="14.0" styleClass="h1" text="Customer Login" />
+            <Button fx:id="btnLogin" layoutX="385.0" layoutY="326.0" mnemonicParsing="false" onAction="#login" prefHeight="32.0" prefWidth="60.0" text="Login">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Label layoutX="76.0" layoutY="261.0" styleClass="account" text="Don't have an account" />
+            <Label fx:id="lblRegisterNow" layoutX="234.0" layoutY="261.0" onMouseClicked="#openRegisterLogin" text="Register now" />
          </children>
       </Pane>
    </children>
