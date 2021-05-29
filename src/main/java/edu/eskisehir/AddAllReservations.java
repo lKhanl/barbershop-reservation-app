@@ -76,7 +76,7 @@ public class AddAllReservations {
 
 
         for (int i = 0; i < dates.size(); i++) {
-         dataBaseOperations.bookReservation(Date.valueOf(dates.get(i)), Time.valueOf(times.get(i)),Integer.parseInt(barbers.get(i)),Integer.parseInt(customers.get(i)));
+        // dataBaseOperations.bookReservation(Date.valueOf(dates.get(i)), Time.valueOf(times.get(i)),Integer.parseInt(barbers.get(i)),Integer.parseInt(customers.get(i)));
         }
 
     }

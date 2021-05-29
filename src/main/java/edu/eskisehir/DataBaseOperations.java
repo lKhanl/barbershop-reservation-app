@@ -8,46 +8,27 @@ import java.util.List;
 import java.util.Properties;
 
 public class DataBaseOperations {
-    public boolean logIn(String email, String password) {
-        boolean isTrue = false;
-        String emailCopy = "";
-        String passwordCopy = "";
 
-        String sqlPassword = "SELECT Password FROM customer WHERE Email=" + "'" + email + "'";
+    public Customer logIn(String email, String password) {
+        Customer customer = null;
+        String sql = "SELECT * FROM customer WHERE Email=" + "'" + email + "'";
 
         try (Connection connection = DBConnection.connect();
              Statement stmt = connection.createStatement()) {
 
-            String sqlEmail = "SELECT Email FROM customer WHERE Email=" + "'" + email + "'";
-            ResultSet rsEmail = stmt.executeQuery(sqlEmail);
 
-            while (rsEmail.next()) {
-                emailCopy = rsEmail.getString("Email");
-            }
-            if(emailCopy.isEmpty()){
-                System.out.println("Email kayıtlı değil.");
-                return false;
-            }
-            ResultSet rsPassword = stmt.executeQuery(sqlPassword);
+            ResultSet rs = stmt.executeQuery(sql);
 
-            while (rsPassword.next()){
-                passwordCopy=rsPassword.getString("Password");
-            }
-
-            if (!passwordCopy.equals(password)) {
-                System.out.println("Şifre yanlış.");
-                return false;
-            }
-            else {
-                isTrue=true;
+            while (rs.next()) {
+                customer = new Customer(rs.getInt("CustomerID "), rs.getString("CustomerName"),
+                        rs.getString("CustomerSurname"), rs.getString("Email"), rs.getString("Password"));
             }
 
         } catch (SQLException e) {
-            System.out.println("Giriş işlemi başarısız.");
             e.printStackTrace();
         }
 
-        return isTrue;
+        return customer;
 
     }
 
@@ -205,6 +186,26 @@ public class DataBaseOperations {
         return list;
     }
 
+    public List<Time> getBusyTimes(int barberID, String date) {
+        Date dateSql = Date.valueOf(date);
+
+        List<Time> busyTimes = new LinkedList<>();
+        String sql = "SELECT ReservationTime FROM reservation WHERE ReservationDate=" + "'" + dateSql + "'" + " AND BarberID=" + "'" + barberID + "'";
+
+        try (Connection connection = DBConnection.connect();
+             Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                busyTimes.add(rs.getTime("ReservationTime"));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return busyTimes;
+    }
+
     public void deleteBarber(int barberID) {
         String sql = "DELETE FROM barber WHERE BarberID=?";
         try (Connection connection = DBConnection.connect();
@@ -349,13 +350,15 @@ public class DataBaseOperations {
 
     }
 
-    public long bookReservation(Date date, Time time, int barberId, int customerId) {
+    public long bookReservation(Date date, Time time, int barberId, int customerId, List<Integer> operationID) {
         long resID = makeReservationID(date.toString(), time.toString(), barberId);
 
         try (Connection connection = DBConnection.connect();
              PreparedStatement reservationStatement = connection.prepareStatement("INSERT INTO reservation (ReservationID , ReservationDate, ReservationTime, BarberID, " +
-                     "CustomerID) VALUES (?,?,?,?,?)")
+                     "CustomerID) VALUES (?,?,?,?,?)");
         ) {
+
+
             reservationStatement.setLong(1, resID);
             reservationStatement.setDate(2, date);
             reservationStatement.setTime(3, time);
@@ -363,6 +366,12 @@ public class DataBaseOperations {
             reservationStatement.setInt(5, customerId);
 
             reservationStatement.executeUpdate();
+            for (Integer integer : operationID) {
+                fillOperationSelection(resID, integer);
+            }
+
+
+            updateTotalPrice(resID);
 
         } catch (SQLException e) {
             System.out.println("Rezervation işlemi başarısız.");

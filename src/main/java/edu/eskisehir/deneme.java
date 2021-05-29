@@ -4,14 +4,16 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 @Deprecated
 public class deneme {
     public static void main(String[] args) {
-
-  /*  DataBaseOperations dataBaseOperations=new DataBaseOperations();
+        /** Update isDone and totalPrice*/
+        /* DataBaseOperations dataBaseOperations=new DataBaseOperations();
 
 
     List<Long> resIDs= dataBaseOperations.getAllResIDs();
@@ -20,18 +22,16 @@ public class deneme {
             Collections.shuffle(random);
             dataBaseOperations.updateIsDone(resIDs.get(i),String.valueOf(random.get(0)));
         }
-*/
 
 
-       /* java.util.Date date2= new java.util.Date("2021-05-10");
-        System.out.println(date2);*/
 
-        /*DataBaseOperations dataBaseOperations = new DataBaseOperations();
+       java.util.Date date2= new java.util.Date("2021-05-10");
+        System.out.println(date2);
 
 
-        dataBaseOperations.updateIsDone(21080909301L,LocalDate.now().toString());*/
+        dataBaseOperations.updateIsDone(21080909301L,LocalDate.now().toString());
 
-  /*    try(  Connection connection= DBConnection.connect();
+     try(  Connection connection= DBConnection.connect();
              Statement statement=connection.createStatement();
        ) {
 
@@ -84,5 +84,23 @@ public class deneme {
         }
         System.out.println("Ekleme işlemi başarılı.");
 */
+
+        /** Busy times*/
+    /*    DataBaseOperations dataBaseOperations = new DataBaseOperations();
+        List<Time> list = dataBaseOperations.getBusyTimes(7, "2021-12-31");
+        for (Time time : list) {
+            System.out.println(time);
+        }*/
+
+        /** Book reservation*/
+       /* DataBaseOperations dataBaseOperations = new DataBaseOperations();
+        Date date = Date.valueOf("2022-1-1");
+        Time time=Time.valueOf("13:00:00");
+        List<Integer> list= new LinkedList<>();
+        list.add(1);
+        list.add(2);
+
+        dataBaseOperations.bookReservation(date,time,1,601,list);*/
+
     }
 }
