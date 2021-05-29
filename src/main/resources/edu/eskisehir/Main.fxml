@@ -25,8 +25,9 @@
                <font>
                   <Font size="14.0" />
                </font></Button>
-            <Label layoutX="76.0" layoutY="261.0" styleClass="account" text="Don't have an account" />
-            <Label fx:id="lblRegisterNow" layoutX="234.0" layoutY="261.0" onMouseClicked="#openRegisterLogin" text="Register now" />
+            <Label layoutX="75.0" layoutY="272.0" styleClass="account" text="Don't have an account" />
+            <Label fx:id="lblRegisterNow" layoutX="230.0" layoutY="272.0" onMouseClicked="#openRegisterLogin" text="Register now" />
+            <Label fx:id="lblConsole" layoutX="75.0" layoutY="242.0" prefHeight="23.0" prefWidth="238.0" textFill="#ff0033" />
          </children>
       </Pane>
    </children>
