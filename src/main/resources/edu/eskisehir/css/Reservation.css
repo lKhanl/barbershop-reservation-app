@@ -1,0 +1,67 @@
+#card {
+    -fx-background-radius: 20px;
+    -fx-background-color: #9EA9CD;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 2, 2, 2, 2);
+}
+
+.label {
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+}
+
+.button {
+    -fx-cursor: hand;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-background-color: #A0D7D9;
+    -fx-border-color: #5fa3a3;
+}
+
+.button:hover {
+    -fx-background-color: #5fa3a3;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+
+.tab-pane {
+    -fx-tab-min-width: 132px;
+}
+
+.tab {
+    -fx-background-insets: 0 1 0 1, 0, 0;
+}
+
+.tab:hover {
+    -fx-cursor: hand;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #e6e6e6;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #6ba834;
+}
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #828282;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+}
+
+.tab-pane:top *.tab-header-area {
+    -fx-padding: 1em 0em 0em 1em; /* overridden as 5 2 0 0 */
+}
+.tab-pane {
+    -fx-background-color: linear-gradient(to right, #B4D5F9, #E0E7B5);
+}

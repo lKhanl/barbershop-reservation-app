@@ -47,7 +47,11 @@ public class MainController {
             newStage.setScene(newScene);
 
             ReservationController ctrl = fxmlLoader.getController();
-            ctrl.lbl.setText(customer.toString()); /////////////////////////////////////////
+            ctrl.txtName.setText(customer.getName());
+            ctrl.txtSurname.setText(customer.getSurname());
+            ctrl.txtEmail.setText(customer.getEmail());
+            ctrl.cid = customer.getId();
+
             newStage.show();
         }
 
