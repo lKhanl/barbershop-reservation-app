@@ -282,8 +282,7 @@ public class AdminScreenController implements Initializable {
         alert.setTitle("Warning!");
         alert.setHeaderText("Do you really want to delete?");
         alert.setContentText("All reservations belongs to the " + obj + " you selected will be removed!");
-        Optional<ButtonType> result = alert.showAndWait();
-        return result;
+        return alert.showAndWait();
     }
 
     public void deleteCustomer(ActionEvent event) {
