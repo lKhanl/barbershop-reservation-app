@@ -113,6 +113,8 @@ public class DataBaseOperations {
             case EMAIL:
                 sql = "UPDATE customer SET Email=? WHERE CustomerID=?";
                 break;
+            case PASSWORD:
+                sql = "UPDATE customer SET Password=? WHERE CustomerID=?";
 
         }
         try (Connection connection = DBConnection.connect();
