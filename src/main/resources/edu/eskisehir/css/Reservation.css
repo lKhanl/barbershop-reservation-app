@@ -62,6 +62,29 @@
 .tab-pane:top *.tab-header-area {
     -fx-padding: 1em 0em 0em 1em; /* overridden as 5 2 0 0 */
 }
+
 .tab-pane {
     -fx-background-color: linear-gradient(to right, #B4D5F9, #E0E7B5);
+}
+
+#resultCard {
+    -fx-background-radius: 25px;
+    -fx-background-color: orange;
+    -fx-border-radius: 20px;
+    -fx-border-color: black;
+    -fx-border-width: 5px;
+
+}
+
+.selectedLabel {
+    -fx-pref-height: 30px;
+    -fx-pref-width: 170px;
+    -fx-font-size: 17;
+}
+
+.selectedLabel2 {
+    -fx-font-size: 17;
+    -fx-font-weight: bold;
+    -fx-pref-height: 30px;
+    -fx-pref-width: 180px;
 }

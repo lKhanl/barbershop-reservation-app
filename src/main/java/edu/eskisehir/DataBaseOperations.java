@@ -192,7 +192,7 @@ public class DataBaseOperations {
         Date dateSql = Date.valueOf(date);
 
         List<Time> busyTimes = new LinkedList<>();
-        String sql = "SELECT ReservationTime FROM reservation WHERE ReservationDate=" + "'" + dateSql + "'" + " AND BarberID=" + "'" + barberID + "'";
+        String sql = "SELECT ReservationTime FROM reservation WHERE ReservationDate=" + "'" + dateSql + "'" + " AND BarberID=" + "'" + barberID + "'"+"AND isDone='0'";
 
         try (Connection connection = DBConnection.connect();
              Statement stmt = connection.createStatement()) {
@@ -352,8 +352,9 @@ public class DataBaseOperations {
 
     }
 
-    public long bookReservation(Date date, Time time, int barberId, int customerId, List<Integer> operationID) {
-        long resID = makeReservationID(date.toString(), time.toString(), barberId);
+    public long bookReservation(String date, Time time, int barberId, int customerId, List<Integer> operationID) {
+        long resID = makeReservationID(date, time.toString(), barberId);
+        Date dateSQL = Date.valueOf(date);
 
         try (Connection connection = DBConnection.connect();
              PreparedStatement reservationStatement = connection.prepareStatement("INSERT INTO reservation (ReservationID , ReservationDate, ReservationTime, BarberID, " +
@@ -362,7 +363,7 @@ public class DataBaseOperations {
 
 
             reservationStatement.setLong(1, resID);
-            reservationStatement.setDate(2, date);
+            reservationStatement.setDate(2, dateSQL);
             reservationStatement.setTime(3, time);
             reservationStatement.setInt(4, barberId);
             reservationStatement.setInt(5, customerId);
