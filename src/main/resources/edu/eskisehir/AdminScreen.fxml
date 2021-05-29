@@ -48,7 +48,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="operationsTable" layoutX="14.0" layoutY="14.0" prefHeight="348.0" prefWidth="324.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+                        <TableView fx:id="operationsTable" layoutX="14.0" layoutY="14.0" prefHeight="348.0" prefWidth="324.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="4.0">
                           <columns>
                             <TableColumn fx:id="opNameCol" prefWidth="232.0" text="Operation Name" />
                             <TableColumn fx:id="opPriceCol" prefWidth="71.0" text="Price" />
@@ -76,7 +76,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="customersTable" layoutX="14.0" layoutY="14.0" prefHeight="395.0" prefWidth="672.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                        <TableView fx:id="customersTable" layoutX="14.0" layoutY="14.0" prefHeight="395.0" prefWidth="672.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="4.0">
                           <columns>
                             <TableColumn fx:id="customerNameCol" prefWidth="170.0" text="Name" />
                             <TableColumn fx:id="customerSurnameCol" prefWidth="170.0" text="Surname" />

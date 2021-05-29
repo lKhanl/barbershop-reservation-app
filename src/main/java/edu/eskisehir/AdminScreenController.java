@@ -102,7 +102,7 @@ public class AdminScreenController implements Initializable {
             lblConsoleBarber.setText("Updated!");
         });
 
-        barberSalaryCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        barberSalaryCol.setCellFactory(TextFieldTableCell.forTableColumn(new CustomIntegerStringConverter()));
         barberSalaryCol.setOnEditCommit(e -> {
             Barber barber = e.getTableView().getItems().get(e.getTablePosition().getRow());
             barber.setSalary(e.getNewValue());
@@ -314,4 +314,5 @@ public class AdminScreenController implements Initializable {
             loadDataForCustomer(db.searchName(txtCustomerSearch.getText()));
         }
     }
+
 }
