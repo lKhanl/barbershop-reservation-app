@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eskisehir.ReservationController">
+   <children>
+      <Label fx:id="lbl" layoutX="140.0" layoutY="144.0" prefHeight="212.0" prefWidth="378.0" text="Label" />
+      <DatePicker fx:id="date" layoutX="400.0" layoutY="132.0" onAction="#get" />
+      <ComboBox fx:id="combo" layoutX="443.0" layoutY="367.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>

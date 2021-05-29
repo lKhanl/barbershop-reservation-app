@@ -1,15 +1,20 @@
 package edu.eskisehir;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import java.io.*;
+import java.util.Objects;
 
 public class MainController {
     public AnchorPane mainPane;
@@ -17,17 +22,44 @@ public class MainController {
     public Label lblRegisterNow;
     public Button btnLogin;
     public Button btnAdmin;
+    public TextField txtEmail;
+    public PasswordField txtPass;
+    public Label lblConsole;
 
-    public void login(ActionEvent event) {
-        System.out.println("login");
+    DataBaseOperations db = new DataBaseOperations();
+
+    public void login(ActionEvent event) throws IOException {
+        Customer customer = db.logIn(txtEmail.getText(), txtPass.getText());
+
+        if (customer == null) {
+            lblConsole.setText("Email is not registered");
+        } else if (!customer.getPassword().equals(txtPass.getText())) {
+            lblConsole.setText("Password is not matched");
+        } else {
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            stage.close();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(ReservationController.class.getResource("Reservation.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage newStage = new Stage();
+            Scene newScene = new Scene(root);
+            newStage.setScene(newScene);
+
+            ReservationController ctrl = fxmlLoader.getController();
+            ctrl.lbl.setText(customer.toString()); /////////////////////////////////////////
+            newStage.show();
+        }
+
+
     }
 
     //Open new frame without closing old
     public void openRegisterLogin(MouseEvent mouseEvent) throws IOException {
-        Stage stage = Main.openNewStage("Register", MainController.class,"welcome.png");
+        Stage stage = Main.openNewStage("Register", MainController.class, "welcome.png");
         //
         stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner(((Node)mouseEvent.getSource()).getScene().getWindow());
+        stage.initOwner(((Node) mouseEvent.getSource()).getScene().getWindow());
         //
         stage.setTitle("New Customer Screen!");
         stage.setResizable(false);
@@ -35,10 +67,10 @@ public class MainController {
     }
 
     public void openAdminLogin(ActionEvent event) throws IOException {
-        Stage stage = Main.openNewStage("Admin",MainController.class,"none");
+        Stage stage = Main.openNewStage("Admin", MainController.class, "admin.png");
         //
         stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner(((Node)event.getSource()).getScene().getWindow());
+        stage.initOwner(((Node) event.getSource()).getScene().getWindow());
         //
         stage.setTitle("Hello Admin!");
         stage.setResizable(false);

@@ -20,7 +20,7 @@ public class DataBaseOperations {
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                customer = new Customer(rs.getInt("CustomerID "), rs.getString("CustomerName"),
+                customer = new Customer(rs.getInt("CustomerID"), rs.getString("CustomerName"),
                         rs.getString("CustomerSurname"), rs.getString("Email"), rs.getString("Password"));
             }
 
