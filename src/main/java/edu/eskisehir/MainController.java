@@ -48,6 +48,9 @@ public class MainController {
             Stage newStage = new Stage();
             Scene newScene = new Scene(root);
             newStage.setScene(newScene);
+            newStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("media/res.jpg")).toString()));
+            newStage.setTitle("Welcome " + customer.getName() + " " + customer.getSurname());
+            newStage.setResizable(false);
 
             ReservationController ctrl = fxmlLoader.getController();
             ctrl.txtName.setText(customer.getName());
