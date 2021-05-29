@@ -29,6 +29,9 @@ public class MainController {
     DataBaseOperations db = new DataBaseOperations();
 
     public void login(ActionEvent event) throws IOException {
+        txtEmail.setText("a@a.com");
+        txtPass.setText("a");
+
         Customer customer = db.logIn(txtEmail.getText(), txtPass.getText());
 
         if (customer == null) {
