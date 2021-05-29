@@ -204,7 +204,7 @@ public class ReservationController implements Initializable {
             clearFields();
 
             lblConsoleRes.setTextFill(Color.web("#42ba96"));
-            lblConsoleRes.setText("Some fields are empty!");
+            lblConsoleRes.setText("Successful!");
         } else {
             lblConsoleRes.setTextFill(Color.web("#f84040"));
             lblConsoleRes.setText("Some fields are empty!");
