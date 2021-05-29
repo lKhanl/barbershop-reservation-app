@@ -1,8 +1,11 @@
 package edu.eskisehir;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
@@ -18,7 +21,12 @@ import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.IndexedCheckModel;
 
+import javax.imageio.ImageIO;
+
+
+import java.awt.image.RenderedImage;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
 import java.time.DayOfWeek;
@@ -46,6 +54,9 @@ public class ReservationController implements Initializable {
     public Label lblSelectedDate;
     public Label lblSelectedTime;
     public Label lblSelectedOp;
+    public Label lblConsoleRes;
+    public Label lblResID;
+    public TableView tableResHistory;
 
     int cid;
     DataBaseOperations db = new DataBaseOperations();
@@ -113,11 +124,13 @@ public class ReservationController implements Initializable {
             public DateCell call(final DatePicker datePicker) {
                 return new DateCell() {
                     @Override
-                    public void updateItem(LocalDate item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item.getDayOfWeek() == DayOfWeek.SATURDAY
-                                || item.getDayOfWeek() == DayOfWeek.SUNDAY
-                        ) {
+                    public void updateItem(LocalDate date, boolean empty) {
+                        super.updateItem(date, empty);
+                        LocalDate today = LocalDate.now();
+                        setDisable(empty || date.compareTo(today) < 0);
+
+                        if (date.getDayOfWeek() == DayOfWeek.SATURDAY
+                                || date.getDayOfWeek() == DayOfWeek.SUNDAY) {
                             setDisable(true);
                             setStyle("-fx-background-color: #ffc0cb;");
                         }
@@ -178,19 +191,41 @@ public class ReservationController implements Initializable {
     }
 
     public void book(ActionEvent event) {
-        List<Integer> opIDs = new LinkedList<>();
-        for (int i = 0; i < comboOp.getCheckModel().getCheckedItems().size(); i++) {
-            opIDs.add(comboOp.getCheckModel().getCheckedItems().get(i).getId());
+        if (resDate.getValue() != null && comboTime.getValue() != null && comboBarbers.getValue() != null && comboOp.getCheckModel().getCheckedItems().size() != 0) {
+            List<Integer> opIDs = new LinkedList<>();
+            for (int i = 0; i < comboOp.getCheckModel().getCheckedItems().size(); i++) {
+                opIDs.add(comboOp.getCheckModel().getCheckedItems().get(i).getId());
+            }
+
+            long resID = db.bookReservation(resDate.getValue().toString(), comboTime.getValue(), comboBarbers.getValue().getId(), cid, opIDs);
+
+            lblResID.setText("ResID : " + resID);
+            saveAsPng(event);
+            clearFields();
+
+            lblConsoleRes.setTextFill(Color.web("#42ba96"));
+            lblConsoleRes.setText("Some fields are empty!");
+        } else {
+            lblConsoleRes.setTextFill(Color.web("#f84040"));
+            lblConsoleRes.setText("Some fields are empty!");
         }
-        db.bookReservation(resDate.getValue().toString(), comboTime.getValue(), comboBarbers.getValue().getId(), cid, opIDs);
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Done!");
-        alert.setHeaderText("Well done, reservation is successful!");
-        alert.showAndWait();
 
+    }
 
+    public void saveAsPng(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("png files (*.png)", "*.png"));
+        File file = fileChooser.showSaveDialog(((Node)event.getSource()).getScene().getWindow());
 
-
+        if (file != null) {
+            try {
+                WritableImage image = resultCard.snapshot(new SnapshotParameters(), null);
+                RenderedImage renderedImage = SwingFXUtils.fromFXImage(image, null);
+                ImageIO.write(renderedImage, "png", file);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     public void loadTime(ActionEvent event) {
@@ -231,6 +266,16 @@ public class ReservationController implements Initializable {
             }
             lblSelectedOp.setText(s);
         }
+    }
+
+    private void clearFields() {
+        lblResID.setText("");
+        lblConsoleRes.setText("");
+        lblSelectedOp.setText("");
+        lblSelectedTime.setText("");
+        lblSelectedDate.setText("");
+        lblSelectedBarber.setText("");
+
     }
 
 }
