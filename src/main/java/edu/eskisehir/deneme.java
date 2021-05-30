@@ -101,7 +101,17 @@ public class deneme {
         list.add(2);
 
         dataBaseOperations.bookReservation(date,time,1,601,list);*/
+        DataBaseOperations dataBaseOperations = new DataBaseOperations();
 
+        List<Long> resIDs = dataBaseOperations.getAllResIDs();
+
+
+      /*  for (int i = 0; i < resIDs.size(); i++) {
+            long resID = resIDs.get(i);
+            dataBaseOperations.isDoneTemp(resID);
+
+
+        }*/
 
 
     }

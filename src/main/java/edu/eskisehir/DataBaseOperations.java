@@ -188,6 +188,44 @@ public class DataBaseOperations {
         return list;
     }
 
+    @Deprecated
+    public void isDoneTemp(long resID){
+
+        String sql = "SELECT isDone FROM reservation WHERE ReservationID=" + "'" + resID + "'";
+        String sql2 = "UPDATE reservation SET isDone=? WHERE ReservationID=" + "'" + resID + "'";
+
+        try (Connection con = DBConnection.connect();
+             Statement st = con.createStatement();
+             PreparedStatement st2 = con.prepareStatement(sql2)
+        ) {
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                String strIsDone = rs.getString("isDone");
+                switch (strIsDone) {
+                    case "1": {
+                        st2.setString(1, "Done");
+                        st2.executeUpdate();
+                        break;
+                    }
+                    case "0": {
+                        st2.setString(1, "Waiting");
+                        st2.executeUpdate();
+                        break;
+                    }
+                    case "-1": {
+                        st2.setString(1, "Canceled");
+                        st2.executeUpdate();
+                        break;
+                    }
+
+                }
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     public List<Time> getBusyTimes(int barberID, String date) {
         Date dateSql = Date.valueOf(date);
 
@@ -430,10 +468,10 @@ public class DataBaseOperations {
                 time = resultSet1.getTime("ReservationTime");
             }
 
-            if (todaySql.compareTo(date) > 0 && (isDone.equals("1") || isDone.equals("-1"))) {//geçmiş
+            if (todaySql.compareTo(date) > 0 && (isDone.equals("Done") || isDone.equals("Canceled"))) {//geçmiş
                 updateIsDoneStatement.setString(1, isDone);
                 updateIsDoneStatement.executeUpdate();
-            } else if (todaySql.compareTo(date) < 0 && (isDone.equals("1") || isDone.equals("-1"))) { //gelecek
+            } else if (todaySql.compareTo(date) < 0 && (isDone.equals("Done") || isDone.equals("Canceled"))) { //gelecek
                 System.out.println("Adamın tarihi gelmedi");
             } else if (todaySql.compareTo(date) == 0) {
                 if (todayTime.compareTo(time) > 0) { //zaman geçti
@@ -537,7 +575,6 @@ public class DataBaseOperations {
         }
         return history;
     }
-
 
     private long makeReservationID(String date, String time, int barberID) {
         String[] splittedDate = date.split("-");
