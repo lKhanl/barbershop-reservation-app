@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -260,6 +261,8 @@ public class ReservationController implements Initializable {
             saveAsPng(event);
             clearFields();
 
+            loadDataForProfile();
+
             lblConsoleRes.setTextFill(Color.web("#42ba96"));
             lblConsoleRes.setText("Successful!");
         } else {
@@ -378,6 +381,5 @@ public class ReservationController implements Initializable {
         }
         lblServicesPrice.setText(String.valueOf(totalPrice));
     }
-
 
 }

@@ -28,7 +28,6 @@ public class RegisterController {
         Pattern p = Pattern.compile("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
         Matcher m = p.matcher(txtEmail.getText());
         if (!m.find()) {
-            //Warning w = new Warning("Geçersiz email", actionEvent);
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Invalid email address!");
