@@ -1,5 +1,7 @@
 package edu.eskisehir;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -7,7 +9,9 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TouchEvent;
@@ -56,22 +60,58 @@ public class ReservationController implements Initializable {
     public Label lblSelectedOp;
     public Label lblConsoleRes;
     public Label lblResID;
-    public TableView tableResHistory;
+    public TableView<Reservation> tableResHistory;
+    public TableColumn<Reservation, String> colStatus;
+    public TableColumn<Reservation, Long> colResID;
+    public TableColumn<Reservation, Date> colDate;
+    public TableColumn<Reservation, Time> colTime;
+    public TableColumn<Reservation, Integer> colCost;
+    public TableColumn<Reservation, Barber> colBarber;
+    public TableColumn<Reservation, List<Operation>> colOps;
+    public Label lblSelectedPrice;
+    public TableView<Operation> tableOps;
+    public TableColumn<Operation, String> colOpName;
+    public TableColumn<Operation, Integer> colOpPrice;
+    public CheckComboBox<Operation> comboServices;
+    public Label lblSelectedServices;
+    public Label lblServicesPrice;
+    public ImageView logo;
 
-    int cid;
+    int cid = MainController.cid;
     DataBaseOperations db = new DataBaseOperations();
     List<Time> allTimes;
+    ObservableList<Reservation> resData;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        combo.setCellFactory();
-//        comboBarbers.se
+        setCols();
 
         setComboBoxesStyle();
-        loadData();
+        loadDataForProfile();
+        loadDataForRes();
+        loadDataForServices();
     }
 
-    private void loadData() {
+    private void loadDataForProfile() {
+        List<Reservation> reservations = db.fillResHistory(cid);
+        for (Reservation reservation : reservations) {
+            if (reservation.getIsDone().equals("-1")) {
+                reservation.setIsDone("Cancel");
+            } else if (reservation.getIsDone().equals("0")) {
+                reservation.setIsDone("Waiting");
+            } else {
+                reservation.setIsDone("Done");
+            }
+        }
+        resData = FXCollections.observableArrayList(reservations);
+        tableResHistory.setItems(resData);
+
+        colDate.setSortType(TableColumn.SortType.ASCENDING);
+        tableResHistory.getSortOrder().add(colDate);
+        tableResHistory.sort();
+    }
+
+    private void loadDataForRes() {
         List<Barber> barbers = db.getBarbers();
         comboBarbers.getItems().addAll(barbers);
 
@@ -84,7 +124,19 @@ public class ReservationController implements Initializable {
         }
         List<Operation> ops = db.getOperations();
         comboOp.getItems().addAll(ops);
+    }
 
+    private void loadDataForServices() {
+        List<Operation> ops = db.getOperations();
+        tableOps.getItems().setAll(ops);
+
+        colOpPrice.setSortType(TableColumn.SortType.ASCENDING);
+        tableOps.getSortOrder().add(colOpPrice);
+        tableOps.sort();
+
+        comboServices.getItems().addAll(ops);
+
+        logo.setImage(new Image(Objects.requireNonNull(getClass().getResource("media/logo.jpg")).toExternalForm()));
     }
 
     private void setComboBoxesStyle() {
@@ -138,7 +190,13 @@ public class ReservationController implements Initializable {
                 };
             }
         });
-        comboOp.setConverter(new StringConverter<>() {
+        stringConverterForCheckComboBox(comboOp);
+        stringConverterForCheckComboBox(comboServices);
+
+    }
+
+    private void stringConverterForCheckComboBox(CheckComboBox<Operation> comboServices) {
+        comboServices.setConverter(new StringConverter<>() {
             @Override
             public String toString(Operation op) {
                 if (op == null) {
@@ -153,7 +211,6 @@ public class ReservationController implements Initializable {
                 return null;
             }
         });
-
     }
 
     public void save(ActionEvent event) {
@@ -215,7 +272,7 @@ public class ReservationController implements Initializable {
     public void saveAsPng(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("png files (*.png)", "*.png"));
-        File file = fileChooser.showSaveDialog(((Node)event.getSource()).getScene().getWindow());
+        File file = fileChooser.showSaveDialog(((Node) event.getSource()).getScene().getWindow());
 
         if (file != null) {
             try {
@@ -264,7 +321,10 @@ public class ReservationController implements Initializable {
                 else
                     s += comboOp.getCheckModel().getCheckedItems().get(i - 1).getName() + ", ";
             }
-            lblSelectedOp.setText(s);
+            calculatePrice(s, lblSelectedOp, comboOp, lblSelectedPrice);
+        } else {
+            lblSelectedOp.setText("");
+            lblSelectedPrice.setText("");
         }
     }
 
@@ -277,5 +337,47 @@ public class ReservationController implements Initializable {
         lblSelectedBarber.setText("");
 
     }
+
+    public void setCols() {
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("isDone"));
+        colResID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colTime.setCellValueFactory(new PropertyValueFactory<>("time"));
+        colCost.setCellValueFactory(new PropertyValueFactory<>("cost"));
+        colBarber.setCellValueFactory(new PropertyValueFactory<>("barber"));
+        colOps.setCellValueFactory(new PropertyValueFactory<>("ops"));
+
+        colOpName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colOpPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+    }
+
+    public void showServices(ActionEvent event) {
+        if (!comboServices.getCheckModel().getCheckedItems().isEmpty()) {
+            String s = "";
+            for (int i = 1; i <= comboServices.getCheckModel().getCheckedItems().size(); i++) {
+                if (i % 4 == 0)
+                    s += comboServices.getCheckModel().getCheckedItems().get(i - 1).getName() + ", \n";
+                else if (i == comboServices.getCheckModel().getCheckedItems().size())
+                    s += comboServices.getCheckModel().getCheckedItems().get(i - 1).getName();
+                else
+                    s += comboServices.getCheckModel().getCheckedItems().get(i - 1).getName() + ", ";
+            }
+            calculatePrice(s, lblSelectedServices, comboServices, lblServicesPrice);
+        } else {
+            lblSelectedServices.setText("");
+            lblServicesPrice.setText("");
+        }
+    }
+
+    private void calculatePrice(String s, Label lblSelectedServices, CheckComboBox<Operation> comboServices, Label lblServicesPrice) {
+        lblSelectedServices.setText(s);
+        int totalPrice = 0;
+        for (int i = 0; i < comboServices.getCheckModel().getCheckedItems().size(); i++) {
+            totalPrice += comboServices.getCheckModel().getCheckedItems().get(i).getPrice();
+        }
+        lblServicesPrice.setText(String.valueOf(totalPrice));
+    }
+
 
 }

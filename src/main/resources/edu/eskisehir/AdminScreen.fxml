@@ -50,8 +50,8 @@
                      <children>
                         <TableView fx:id="operationsTable" layoutX="14.0" layoutY="14.0" prefHeight="348.0" prefWidth="324.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="4.0">
                           <columns>
-                            <TableColumn fx:id="opNameCol" prefWidth="232.0" text="Operation Name" />
-                            <TableColumn fx:id="opPriceCol" prefWidth="71.0" text="Price" />
+                            <TableColumn fx:id="opNameCol" prefWidth="232.0" resizable="false" text="Operation Name" />
+                            <TableColumn fx:id="opPriceCol" prefWidth="71.0" resizable="false" text="Price" />
                           </columns>
                         </TableView>
                         <Button fx:id="btnOpDelete" layoutX="543.0" layoutY="184.0" mnemonicParsing="false" onAction="#deleteOp" prefHeight="30.0" prefWidth="70.0" styleClass="btnDelete" text="DELETE" AnchorPane.bottomAnchor="250.0">
@@ -78,9 +78,9 @@
                      <children>
                         <TableView fx:id="customersTable" layoutX="14.0" layoutY="14.0" prefHeight="395.0" prefWidth="672.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="4.0">
                           <columns>
-                            <TableColumn fx:id="customerNameCol" prefWidth="170.0" text="Name" />
-                            <TableColumn fx:id="customerSurnameCol" prefWidth="170.0" text="Surname" />
-                              <TableColumn fx:id="customerEmailCol" prefWidth="300.0" text="Email" />
+                            <TableColumn fx:id="customerNameCol" prefWidth="170.0" resizable="false" text="Name" />
+                            <TableColumn fx:id="customerSurnameCol" prefWidth="170.0" resizable="false" text="Surname" />
+                              <TableColumn fx:id="customerEmailCol" prefWidth="300.0" resizable="false" text="Email" />
                           </columns>
                         </TableView>
                         <Button fx:id="btnCustomerDelete" layoutX="616.0" layoutY="420.0" mnemonicParsing="false" onAction="#deleteCustomer" prefHeight="30.0" prefWidth="70.0" styleClass="btnDelete" text="DELETE">
@@ -98,7 +98,15 @@
             </Tab>
             <Tab fx:id="tabRes" text="All Reservations">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="14.0" layoutY="14.0" prefHeight="256.0" prefWidth="671.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
               </content>
             </Tab>
         </tabs>
