@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 29 May 2021, 12:39:56
+-- Üretim Zamanı: 30 May 2021, 18:43:08
 -- Sunucu sürümü: 10.4.19-MariaDB
 -- PHP Sürümü: 8.0.6
 
@@ -31,7 +31,7 @@ CREATE TABLE `admin` (
   `AdminID` int(11) NOT NULL,
   `UserName` varchar(20) NOT NULL DEFAULT 'admin',
   `Password` varchar(20) NOT NULL DEFAULT 'admin'
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tablo döküm verisi `admin`
@@ -51,7 +51,7 @@ CREATE TABLE `barber` (
   `BarberName` varchar(20) NOT NULL,
   `BarberSurname` varchar(20) NOT NULL,
   `Salary` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tablo döküm verisi `barber`
@@ -78,7 +78,7 @@ CREATE TABLE `customer` (
   `CustomerSurname` varchar(20) NOT NULL,
   `Email` varchar(50) NOT NULL,
   `Password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tablo döküm verisi `customer`
@@ -696,7 +696,7 @@ CREATE TABLE `operation` (
   `OperationID` int(11) NOT NULL,
   `OperationName` varchar(20) NOT NULL,
   `Price` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tablo döküm verisi `operation`
@@ -721,7 +721,7 @@ CREATE TABLE `operation_selection` (
   `SelectionID` bigint(11) NOT NULL,
   `ReservationID` bigint(20) NOT NULL,
   `OperationID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tablo döküm verisi `operation_selection`
@@ -1224,7 +1224,7 @@ CREATE TABLE `reservation` (
   `TotalPrice` int(11) NOT NULL DEFAULT 0,
   `BarberID` int(11) NOT NULL,
   `CustomerID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tablo döküm verisi `reservation`
@@ -1604,7 +1604,7 @@ ALTER TABLE `barber`
 -- Tablo için AUTO_INCREMENT değeri `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=606;
+  MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=609;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `operation`
