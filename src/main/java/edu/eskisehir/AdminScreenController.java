@@ -1,5 +1,6 @@
 package edu.eskisehir;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,13 +9,18 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
+import org.controlsfx.control.CheckComboBox;
+import org.controlsfx.control.IndexedCheckModel;
 
 import java.net.URL;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.*;
 
 public class AdminScreenController implements Initializable {
@@ -47,7 +53,7 @@ public class AdminScreenController implements Initializable {
     public TextField txtCustomerSearch;
     public Label lblConsoleOp;
     public Label lblConsoleCustomer;
-    public TableColumn<Reservation, String> resStatusCol;
+    public TableColumn<Reservation, ComboBox<String>> resStatusCol;
     public TableColumn<Reservation, Long> resIDCol;
     public TableColumn<Reservation, Barber> resBarberCol;
     public TableColumn<Reservation, Customer> resCustomerCol;
@@ -56,6 +62,9 @@ public class AdminScreenController implements Initializable {
     public TableColumn<Reservation, Integer> resCostCol;
     public TableColumn<Reservation, List<Operation>> resOpsCol;
     public TableView<Reservation> resTable;
+    public ComboBox<String> comboStatus;
+    public Label lblConsoleRes;
+    public CheckComboBox<Operation> comboOps;
 
     DataBaseOperations db = new DataBaseOperations();
     ObservableList<Barber> barbersData;
@@ -192,37 +201,39 @@ public class AdminScreenController implements Initializable {
         resStatusCol.setCellValueFactory(new PropertyValueFactory<>("isDone"));
         resTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
 
-        resStatusCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        resStatusCol.setOnEditCommit(e -> {
-            Reservation res = e.getTableView().getItems().get(e.getTablePosition().getRow());
-            switch (res.getIsDone()) {
-                case "Done":
-                    db.updateIsDone(res.getId(), "1");
-                    res.setIsDone("1");
-                    break;
-                case "Waiting":
-                    db.updateIsDone(res.getId(), "0");
-                    res.setIsDone("0");
-                    break;
-                case "Cancel":
-                    db.updateIsDone(res.getId(), "-1");
-                    res.setIsDone("-1");
-                    break;
-                default:
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("Didn't update reopen your app!");
-                    alert.show();
-                    break;
-            }
-            lblConsoleCustomer.setTextFill(Color.web("#42ba96"));
-            lblConsoleCustomer.setText("Updated!");
-        });
-        resTable.setEditable(true);
+        resTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
 
-        resDateCol.setSortType(TableColumn.SortType.ASCENDING);
+                comboOps.getItems().clear();
+                comboOps.setTitle("Operations");
+                List<Operation> selectedOps = newSelection.getOps();
+                List<Operation> ops = db.getOperations();
+                comboOps.getItems().addAll(ops);
+                for (int i = 0; i < selectedOps.size(); i++) {
+                    for (int j = 0; j < ops.size(); j++) {
+                        if (selectedOps.get(i).getId() == ops.get(j).getId()) {
+                            comboOps.getCheckModel().check(j);
+                        }
+                    }
+                }
+
+                if (LocalDate.now().compareTo(newSelection.getDate().toLocalDate()) > 0) {
+                    comboStatus.getItems().clear();
+                    comboStatus.getItems().addAll("Done", "Canceled");
+                } else {
+                    comboStatus.getItems().clear();
+                    comboStatus.getItems().addAll("Done", "Waiting", "Canceled");
+                }
+                /*comboOps.getCheckModel().getCheckedItems().forEach(e -> {
+                    System.out.println(e.getId());
+                });*/
+            }
+        });
+
+        // TODO: sort is running wrongly
+        /*resDateCol.setSortType(TableColumn.SortType.ASCENDING);
         resTable.getSortOrder().add(resDateCol);
-        resTable.sort();
+        resTable.sort();*/
     }
 
     private void loadDataForBarber() {
@@ -255,17 +266,6 @@ public class AdminScreenController implements Initializable {
 
     private void loadDataForRes() {
         List<Reservation> reservations = db.adminResList();
-
-        for (Reservation reservation : reservations) {
-            if (reservation.getIsDone().equals("-1")) {
-                reservation.setIsDone("Cancel");
-            } else if (reservation.getIsDone().equals("0")) {
-                reservation.setIsDone("Waiting");
-            } else {
-                reservation.setIsDone("Done");
-            }
-        }
-
         resTable.getItems().addAll(reservations);
     }
 
@@ -381,4 +381,40 @@ public class AdminScreenController implements Initializable {
         }
     }
 
+    public void changeStatus(ActionEvent event) {
+        if (comboStatus.getSelectionModel().getSelectedItem() != null) {
+            Reservation reservation = resTable.getSelectionModel().getSelectedItem();
+            reservation.setIsDone(comboStatus.getValue());
+
+            db.updateIsDone(reservation.getId(), comboStatus.getValue());
+            resTable.getSelectionModel().getSelectedItem().setIsDone(comboStatus.getValue());
+            resTable.refresh();
+
+            lblConsoleRes.setTextFill(Color.web("#42ba96"));
+            lblConsoleRes.setText("Successful");
+        }
+    }
+
+    public void updateOp(ActionEvent event) {
+        ObservableList<Operation> selectedOps = comboOps.getCheckModel().getCheckedItems();
+        List<Operation> updated = new LinkedList<>();
+        updated.addAll(selectedOps);
+        resTable.getSelectionModel().getSelectedItem().setOps(updated);
+
+        resTable.refresh();
+
+    }
+
+    /*public void getOps(MouseEvent mouseEvent) {
+        if (resTable.getSelectionModel().getSelectedItem() != null) {
+            List<Operation> selectedOps = resTable.getSelectionModel().getSelectedItem().getOps();
+            List<Operation> ops = db.getOperations();
+            comboOps.getItems().addAll(ops);
+
+        } *//*else {
+            lblConsoleRes.setTextFill(Color.web("#f84040"));
+            lblConsoleRes.setText("Row didn't select!");
+        }*//*
+
+    }*/
 }

@@ -95,4 +95,8 @@ public class Reservation {
         this.customer = customer;
     }
 
+    public void setOps(List<Operation> ops) {
+        this.ops = ops;
+    }
+
 }

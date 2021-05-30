@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -9,113 +10,150 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.CheckComboBox?>
 
 <AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@css/AdminScreen.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eskisehir.AdminScreenController">
-   <children>
-      <TabPane prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-            <Tab fx:id="tabBarbers" text="Barbers">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="407.0" prefWidth="639.0">
-                     <children>
-                        <TableView fx:id="barbersTable" layoutX="14.0" layoutY="4.0" prefHeight="361.0" prefWidth="672.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="4.0">
-                          <columns>
-                            <TableColumn fx:id="barberNameCol" prefWidth="250.0" resizable="false" text="Name" />
-                            <TableColumn fx:id="barberSurnameCol" prefWidth="250.0" resizable="false" text="Surname" />
-                              <TableColumn fx:id="barberSalaryCol" prefWidth="145.0" resizable="false" text="Salary" />
-                          </columns>
-                        </TableView>
-                        <TextField fx:id="txtBarberName" layoutX="14.0" layoutY="405.0" prefHeight="30.0" prefWidth="150.0" promptText="Barber Name" />
-                        <TextField fx:id="txtBarberSurname" layoutX="200.0" layoutY="405.0" prefHeight="30.0" prefWidth="150.0" promptText="Barber Surname" />
-                        <TextField fx:id="txtBarberSalary" layoutX="383.0" layoutY="405.0" prefHeight="30.0" prefWidth="75.0" promptText="Salary" />
-                        <Button fx:id="btnBarberAdd" layoutX="533.0" layoutY="405.0" mnemonicParsing="false" onAction="#addBarber" prefHeight="30.0" prefWidth="55.0" styleClass="btnAdd" text="ADD">
+    <children>
+        <TabPane prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab fx:id="tabBarbers" text="Barbers">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="407.0" prefWidth="639.0">
+                            <children>
+                                <TableView fx:id="barbersTable" layoutX="14.0" layoutY="4.0" prefHeight="361.0" prefWidth="672.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="4.0">
+                                    <columns>
+                                        <TableColumn fx:id="barberNameCol" prefWidth="250.0" resizable="false" text="Name" />
+                                        <TableColumn fx:id="barberSurnameCol" prefWidth="250.0" resizable="false" text="Surname" />
+                                        <TableColumn fx:id="barberSalaryCol" prefWidth="145.0" resizable="false" text="Salary" />
+                                    </columns>
+                                </TableView>
+                                <TextField fx:id="txtBarberName" layoutX="14.0" layoutY="405.0" prefHeight="30.0" prefWidth="150.0" promptText="Barber Name" />
+                                <TextField fx:id="txtBarberSurname" layoutX="200.0" layoutY="405.0" prefHeight="30.0" prefWidth="150.0" promptText="Barber Surname" />
+                                <TextField fx:id="txtBarberSalary" layoutX="383.0" layoutY="405.0" prefHeight="30.0" prefWidth="75.0" promptText="Salary" />
+                                <Button fx:id="btnBarberAdd" layoutX="533.0" layoutY="405.0" mnemonicParsing="false" onAction="#addBarber" prefHeight="30.0" prefWidth="55.0" styleClass="btnAdd" text="ADD">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Button>
+                                <Label fx:id="lblConsoleBarber" layoutX="14.0" layoutY="365.0" prefHeight="40.0" prefWidth="415.0">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                                <Button fx:id="btnBarberDelete" layoutX="616.0" layoutY="405.0" mnemonicParsing="false" onAction="#deleteBarber" prefHeight="30.0" prefWidth="70.0" styleClass="btnDelete" text="DELETE">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="tabOp" text="Operations">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="operationsTable" layoutX="14.0" layoutY="14.0" prefHeight="348.0" prefWidth="324.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="4.0">
+                                    <columns>
+                                        <TableColumn fx:id="opNameCol" prefWidth="232.0" resizable="false" text="Operation Name" />
+                                        <TableColumn fx:id="opPriceCol" prefWidth="71.0" resizable="false" text="Price" />
+                                    </columns>
+                                </TableView>
+                                <Button fx:id="btnOpDelete" layoutX="543.0" layoutY="184.0" mnemonicParsing="false" onAction="#deleteOp" prefHeight="30.0" prefWidth="70.0" styleClass="btnDelete" text="DELETE" AnchorPane.bottomAnchor="250.0">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Button>
+                                <TextField fx:id="txtOpName" layoutX="359.0" layoutY="134.0" prefHeight="30.0" prefWidth="150.0" promptText="Operation Name" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="359.0" />
+                                <TextField fx:id="txtOpPrice" layoutX="540.0" layoutY="134.0" prefHeight="30.0" prefWidth="75.0" promptText="Price" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="540.0" />
+                                <Button fx:id="btnOpAdd" layoutX="454.0" layoutY="184.0" mnemonicParsing="false" onAction="#addOp" prefHeight="30.0" prefWidth="55.0" styleClass="btnAdd" text="ADD" AnchorPane.bottomAnchor="250.0">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Button>
+                                <Label fx:id="lblConsoleOp" layoutX="359.0" layoutY="80.0" prefHeight="43.0" prefWidth="255.0">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="tabCustomers" text="Customers">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="customersTable" layoutX="14.0" layoutY="14.0" prefHeight="395.0" prefWidth="672.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="4.0">
+                                    <columns>
+                                        <TableColumn fx:id="customerNameCol" prefWidth="170.0" resizable="false" text="Name" />
+                                        <TableColumn fx:id="customerSurnameCol" prefWidth="170.0" resizable="false" text="Surname" />
+                                        <TableColumn fx:id="customerEmailCol" prefWidth="300.0" resizable="false" text="Email" />
+                                    </columns>
+                                </TableView>
+                                <Button fx:id="btnCustomerDelete" layoutX="616.0" layoutY="420.0" mnemonicParsing="false" onAction="#deleteCustomer" prefHeight="30.0" prefWidth="70.0" styleClass="btnDelete" text="DELETE">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Button>
+                                <TextField fx:id="txtCustomerSearch" layoutX="14.0" layoutY="420.0" onKeyTyped="#keypress" prefHeight="30.0" prefWidth="200.0" promptText="Search for any ..." />
+                                <Label fx:id="lblConsoleCustomer" layoutX="235.0" layoutY="420.0" prefHeight="30.0" prefWidth="266.0">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="tabRes" text="All Reservations">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="resTable" layoutX="14.0" layoutY="14.0" prefHeight="322.0" prefWidth="671.0">
+                                    <columns>
+                                        <TableColumn fx:id="resStatusCol" prefWidth="77.0" resizable="false" text="Status" />
+                                        <TableColumn fx:id="resIDCol" prefWidth="82.0" resizable="false" text="ResID" />
+                                        <TableColumn fx:id="resBarberCol" prefWidth="119.0" resizable="false" text="Barber" />
+                                        <TableColumn fx:id="resCustomerCol" prefWidth="119.0" resizable="false" text="Customer" />
+                                        <TableColumn fx:id="resDateCol" prefWidth="75.0" resizable="false" text="Date" />
+                                        <TableColumn fx:id="resTimeCol" prefWidth="54.0" resizable="false" text="Time" />
+                                        <TableColumn fx:id="resCostCol" prefWidth="32.0" resizable="false" text="Cost" />
+                                        <TableColumn fx:id="resOpsCol" prefWidth="480.0" resizable="false" text="Operations" />
+                                    </columns>
+                                </TableView>
+                        <ComboBox fx:id="comboStatus" layoutX="14.0" layoutY="381.0" prefHeight="30.0" prefWidth="150.0" promptText="Change status" />
+                        <Button layoutX="205.0" layoutY="381.0" mnemonicParsing="false" onAction="#changeStatus" text="Update Status">
                            <font>
                               <Font size="14.0" />
-                           </font></Button>
-                        <Label fx:id="lblConsoleBarber" layoutX="14.0" layoutY="365.0" prefHeight="40.0" prefWidth="415.0">
+                           </font>
+                        </Button>
+                        <Label layoutX="16.0" layoutY="351.0" prefHeight="30.0" prefWidth="296.0" text="Select a row which want to change status!">
                            <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Button fx:id="btnBarberDelete" layoutX="616.0" layoutY="405.0" mnemonicParsing="false" onAction="#deleteBarber" prefHeight="30.0" prefWidth="70.0" styleClass="btnDelete" text="DELETE">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Button>
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-          <Tab fx:id="tabOp" text="Operations">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="operationsTable" layoutX="14.0" layoutY="14.0" prefHeight="348.0" prefWidth="324.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="4.0">
-                          <columns>
-                            <TableColumn fx:id="opNameCol" prefWidth="232.0" resizable="false" text="Operation Name" />
-                            <TableColumn fx:id="opPriceCol" prefWidth="71.0" resizable="false" text="Price" />
-                          </columns>
-                        </TableView>
-                        <Button fx:id="btnOpDelete" layoutX="543.0" layoutY="184.0" mnemonicParsing="false" onAction="#deleteOp" prefHeight="30.0" prefWidth="70.0" styleClass="btnDelete" text="DELETE" AnchorPane.bottomAnchor="250.0">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Button>
-                        <TextField fx:id="txtOpName" layoutX="359.0" layoutY="134.0" prefHeight="30.0" prefWidth="150.0" promptText="Operation Name" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="359.0" />
-                        <TextField fx:id="txtOpPrice" layoutX="540.0" layoutY="134.0" prefHeight="30.0" prefWidth="75.0" promptText="Price" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="540.0" />
-                        <Button fx:id="btnOpAdd" layoutX="454.0" layoutY="184.0" mnemonicParsing="false" onAction="#addOp" prefHeight="30.0" prefWidth="55.0" styleClass="btnAdd" text="ADD" AnchorPane.bottomAnchor="250.0">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Button>
-                        <Label fx:id="lblConsoleOp" layoutX="359.0" layoutY="80.0" prefHeight="43.0" prefWidth="255.0">
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblConsoleRes" layoutX="14.0" layoutY="425.0" prefHeight="30.0" prefWidth="295.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                     </children></AnchorPane>
-            </content>
-          </Tab>
-            <Tab fx:id="tabCustomers" text="Customers">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="customersTable" layoutX="14.0" layoutY="14.0" prefHeight="395.0" prefWidth="672.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="4.0">
-                          <columns>
-                            <TableColumn fx:id="customerNameCol" prefWidth="170.0" resizable="false" text="Name" />
-                            <TableColumn fx:id="customerSurnameCol" prefWidth="170.0" resizable="false" text="Surname" />
-                              <TableColumn fx:id="customerEmailCol" prefWidth="300.0" resizable="false" text="Email" />
-                          </columns>
-                        </TableView>
-                        <Button fx:id="btnCustomerDelete" layoutX="616.0" layoutY="420.0" mnemonicParsing="false" onAction="#deleteCustomer" prefHeight="30.0" prefWidth="70.0" styleClass="btnDelete" text="DELETE">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Button>
-                        <TextField fx:id="txtCustomerSearch" layoutX="14.0" layoutY="420.0" onKeyTyped="#keypress" prefHeight="30.0" prefWidth="200.0" promptText="Search for any ..." />
-                        <Label fx:id="lblConsoleCustomer" layoutX="235.0" layoutY="420.0" prefHeight="30.0" prefWidth="266.0">
+                        <CheckComboBox fx:id="comboOps" layoutX="366.0" layoutY="381.0" prefHeight="30.0" prefWidth="143.0" title="Operations" />
+                        <Button layoutX="549.0" layoutY="381.0" mnemonicParsing="false" onAction="#updateOp" text="Update Operatoins">
                            <font>
                               <Font size="14.0" />
                            </font>
+                        </Button>
+                        <Label layoutX="373.0" layoutY="351.0" prefHeight="30.0" prefWidth="309.0" text="Select a row which want to update Operations!">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font>
                         </Label>
-                     </children></AnchorPane>
-              </content>
-            </Tab>
-            <Tab fx:id="tabRes" text="All Reservations">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="resTable" layoutX="14.0" layoutY="14.0" prefHeight="322.0" prefWidth="671.0">
-                          <columns>
-                            <TableColumn fx:id="resStatusCol" prefWidth="53.0" resizable="false" text="Status" />
-                            <TableColumn fx:id="resIDCol" prefWidth="82.0" resizable="false" text="ResID" />
-                              <TableColumn fx:id="resBarberCol" prefWidth="119.0" resizable="false" text="Barber" />
-                              <TableColumn fx:id="resCustomerCol" prefWidth="119.0" resizable="false" text="Customer" />
-                              <TableColumn fx:id="resDateCol" prefWidth="75.0" resizable="false" text="Date" />
-                              <TableColumn fx:id="resTimeCol" prefWidth="54.0" resizable="false" text="Time" />
-                              <TableColumn fx:id="resCostCol" prefWidth="32.0" resizable="false" text="Cost" />
-                              <TableColumn fx:id="resOpsCol" prefWidth="480.0" resizable="false" text="Operations" />
-                          </columns>
-                        </TableView>
-                     </children></AnchorPane>
-              </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-   </children>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
 </AnchorPane>
