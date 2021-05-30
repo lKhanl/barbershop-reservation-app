@@ -495,7 +495,7 @@ public class DataBaseOperations {
     public List<Reservation> adminResList() {
         String sql = "SELECT * FROM reservation INNER JOIN barber ON " +
                 "reservation.BarberID=barber.BarberID";
-        List<Operation> ops = new LinkedList<>();
+
         List<Reservation> res = new LinkedList<>();
         try (Connection connection = DBConnection.connect();
              Statement statement = connection.createStatement();
@@ -514,6 +514,7 @@ public class DataBaseOperations {
                 Barber barber = new Barber(rs.getInt("BarberID"), rs.getString("BarberName"), rs.getString("BarberSurname"), rs.getInt("Salary"));
                 String sql2 = "SELECT operation.Price,operation.OperationID,operation.OperationName FROM `operation_selection` " +
                         "INNER JOIN operation ON operation_selection.OperationID=operation.OperationID WHERE ReservationID=" + "'" + rid + "'";
+                List<Operation> ops = new LinkedList<>();
                 ResultSet rs2 = statement2.executeQuery(sql2);
                 while (rs2.next()) {
                     Operation operation = new Operation(rs2.getInt("OperationID"), rs2.getString("OperationName"), rs2.getInt("Price"));
