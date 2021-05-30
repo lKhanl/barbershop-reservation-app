@@ -1,6 +1,5 @@
 package edu.eskisehir;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,14 +8,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import org.controlsfx.control.CheckComboBox;
-import org.controlsfx.control.IndexedCheckModel;
 
 import java.net.URL;
 import java.sql.Time;
@@ -378,7 +374,7 @@ public class AdminScreenController implements Initializable {
         if (txtCustomerSearch.getText().equals("")) {
             keyEvent.consume();
         } else {
-            loadDataForCustomer(db.searchName(txtCustomerSearch.getText()));
+            loadDataForCustomer(db.searchCustomer(txtCustomerSearch.getText()));
         }
     }
 

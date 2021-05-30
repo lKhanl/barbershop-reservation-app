@@ -668,9 +668,10 @@ public class DataBaseOperations {
         return false;
     }
 
-    public List<Customer> searchName(String name) {
+    public List<Customer> searchCustomer(String name) {
         List<Customer> list = new LinkedList<>();
-        String sql = "SELECT CustomerID,CustomerName,CustomerSurname,Email FROM customer WHERE CustomerName or CustomerSurname or Email LIKE " + "'%" + name + "%'";
+        String sql = "SELECT CustomerID,CustomerName,CustomerSurname,Email FROM customer WHERE CustomerName LIKE  "+"'%" + name + "%'"+
+                " OR CustomerSurname LIKE"+"'%" + name + "%'"+"OR Email LIKE"+"'%" + name + "%'";
         try (Connection connection = DBConnection.connect();
              Statement stmt = connection.createStatement()) {
 
