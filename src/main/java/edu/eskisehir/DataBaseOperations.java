@@ -455,7 +455,7 @@ public class DataBaseOperations {
     }
 
     public List<Reservation> fillResHistory(int customerID) {
-        List<Reservation> history=new LinkedList<>();
+        List<Reservation> history = new LinkedList<>();
         String sql = "SELECT * FROM reservation INNER JOIN barber ON " +
                 "reservation.BarberID=barber.BarberID WHERE CustomerID=" + "'" + customerID + "'";
 
@@ -471,7 +471,7 @@ public class DataBaseOperations {
                 Date date = rs.getDate("ReservationDate");
                 Time time = rs.getTime("ReservationTime");
                 int cost = rs.getInt("TotalPrice");
-                Barber barber = new Barber(rs.getInt("BarberID"),rs.getString("BarberName"), rs.getString("BarberSurname"),rs.getInt("Salary"));
+                Barber barber = new Barber(rs.getInt("BarberID"), rs.getString("BarberName"), rs.getString("BarberSurname"), rs.getInt("Salary"));
                 List<Operation> ops = new LinkedList<>();
 
                 String sql2 = "SELECT operation.Price,operation.OperationID,operation.OperationName FROM `operation_selection` " +
@@ -484,7 +484,7 @@ public class DataBaseOperations {
 
                 String isDone = rs.getString("isDone");
 
-                Reservation reservation=new Reservation(id,date,time,cost,barber,ops,isDone);
+                Reservation reservation = new Reservation(id, date, time, cost, barber, ops, isDone);
                 history.add(reservation);
             }
         } catch (SQLException throwables) {

@@ -27,10 +27,11 @@ public class MainController {
     public Label lblConsole;
 
     DataBaseOperations db = new DataBaseOperations();
+    static int cid;
 
     public void login(ActionEvent event) throws IOException {
-        txtEmail.setText("a@a.com");
-        txtPass.setText("a");
+        txtEmail.setText("drakedavenport@live.com");
+        txtPass.setText("drakedavenport0004");
 
         Customer customer = db.logIn(txtEmail.getText(), txtPass.getText());
 
@@ -42,6 +43,8 @@ public class MainController {
             Node node = (Node) event.getSource();
             Stage stage = (Stage) node.getScene().getWindow();
             stage.close();
+
+            cid = customer.getId();
 
             FXMLLoader fxmlLoader = new FXMLLoader(ReservationController.class.getResource("Reservation.fxml"));
             Parent root = fxmlLoader.load();
@@ -56,7 +59,6 @@ public class MainController {
             ctrl.txtName.setText(customer.getName());
             ctrl.txtSurname.setText(customer.getSurname());
             ctrl.txtEmail.setText(customer.getEmail());
-            ctrl.cid = customer.getId();
 
             newStage.show();
         }

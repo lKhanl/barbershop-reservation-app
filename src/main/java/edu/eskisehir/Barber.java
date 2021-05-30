@@ -13,13 +13,17 @@ public class Barber {
         this.salary = salary;
     }
 
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return name + " " + surname;
     }
 
     public String getName() {
