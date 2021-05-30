@@ -220,7 +220,8 @@ public class ReservationController implements Initializable {
         stage.getIcons().add(new Image(Objects.requireNonNull(this.getClass().getResource("media/error.png")).toString()));
         alert.setTitle("Warning!");
         alert.setHeaderText("Do you really want to save?");
-        if (txtName.getText().equals("") || txtSurname.getText().equals("") || txtEmail.getText().equals("") || txtPass.getText().equals("")) {
+
+        if (txtName.getText().equals("") || txtSurname.getText().equals("") || txtEmail.getText().equals("")) {
             lblConsoleProfile.setTextFill(Color.RED);
             lblConsoleProfile.setText("Some fields are empty!");
             return;
@@ -237,7 +238,8 @@ public class ReservationController implements Initializable {
                 db.updateCustomer(Attribute.NAME, txtName.getText(), cid);
                 db.updateCustomer(Attribute.SURNAME, txtSurname.getText(), cid);
                 db.updateCustomer(Attribute.EMAIL, txtEmail.getText(), cid);
-                db.updateCustomer(Attribute.PASSWORD, txtPass.getText(), cid);
+                if (!txtPass.getText().equals(""))
+                    db.updateCustomer(Attribute.PASSWORD, txtPass.getText(), cid);
                 lblConsoleProfile.setTextFill(Color.GREEN);
                 lblConsoleProfile.setText("Saved!");
                 txtPass.setText("");

@@ -22,7 +22,7 @@
             <tabs>
                 <Tab text="Our Services">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="460.0" prefWidth="710.0">
                      <children>
                         <TableView fx:id="tableOps" layoutX="14.0" layoutY="14.0" prefHeight="400.0" prefWidth="324.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="4.0">
                           <columns>
