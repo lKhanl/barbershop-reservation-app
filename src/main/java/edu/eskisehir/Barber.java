@@ -12,6 +12,10 @@ public class Barber {
         this.surname = surname;
         this.salary = salary;
     }
+    public Barber(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
 
     public int getId() {
         return id;

@@ -11,7 +11,17 @@ public class Reservation {
     private int cost;
     private Barber barber;
     private List<Operation> ops;
-    private int isDone;
+    private String isDone;
+
+    public Reservation(long id, Date date, Time time, int cost, Barber barber, List<Operation> ops, String isDone) {
+        this.id = id;
+        this.date = date;
+        this.time = time;
+        this.cost = cost;
+        this.barber = barber;
+        this.ops = ops;
+        this.isDone = isDone;
+    }
 
     public long getId() {
         return id;
@@ -57,11 +67,11 @@ public class Reservation {
         return ops;
     }
 
-    public int getIsDone() {
+    public String getIsDone() {
         return isDone;
     }
 
-    public void setIsDone(int isDone) {
+    public void setIsDone(String isDone) {
         this.isDone = isDone;
     }
 

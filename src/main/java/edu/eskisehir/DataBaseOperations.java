@@ -192,7 +192,7 @@ public class DataBaseOperations {
         Date dateSql = Date.valueOf(date);
 
         List<Time> busyTimes = new LinkedList<>();
-        String sql = "SELECT ReservationTime FROM reservation WHERE ReservationDate=" + "'" + dateSql + "'" + " AND BarberID=" + "'" + barberID + "'"+"AND isDone='0'";
+        String sql = "SELECT ReservationTime FROM reservation WHERE ReservationDate=" + "'" + dateSql + "'" + " AND BarberID=" + "'" + barberID + "'" + "AND isDone='0'";
 
         try (Connection connection = DBConnection.connect();
              Statement stmt = connection.createStatement()) {
@@ -453,6 +453,47 @@ public class DataBaseOperations {
         }
         System.out.println("Update işlemi başarılı.");
     }
+
+    public List<Reservation> fillResHistory(int customerID) {
+        List<Reservation> history=new LinkedList<>();
+        String sql = "SELECT reservation.ReservationID, reservation.ReservationDate,reservation.ReservationTime, reservartion.TotalPrice, " +
+                "barber.BarberName, barber.BarberSurname, reservation.CustomerID FROM reservation INNER JOIN barber ON " +
+                "reservation.BarberID=barber.BarberID WHERE CustomerID=" + "'" + customerID + "'";
+
+
+        try (Connection connection = DBConnection.connect();
+             Statement statement = connection.createStatement();
+             Statement statement2 = connection.createStatement()
+        ) {
+            ResultSet rs = statement.executeQuery(sql);
+            //
+            while (rs.next()) {
+                long id = rs.getLong("ReservationID");
+                Date date = rs.getDate("ReservationDate");
+                Time time = rs.getTime("ReservationTime");
+                int cost = rs.getInt("TotalPrice");
+                Barber barber = new Barber(rs.getString("BarberName"), rs.getString("BarberSurname"));
+                List<Operation> ops = new LinkedList<>();
+
+                String sql2 = "SELECT operation.Price,operation.OperationID,operation.OperationName FROM `operation_selection` " +
+                        "INNER JOIN operation ON operation_selection.OperationID=operation.OperationID WHERE ReservationID=" + "'" + id + "'";
+                ResultSet rs2 = statement2.executeQuery(sql2);
+                while (rs2.next()) {
+                    Operation operation = new Operation(rs2.getInt("OperationID"), rs2.getString("OperationName"), rs2.getInt("Price"));
+                    ops.add(operation);
+                }
+
+                String isDone = rs.getString("isDone");
+
+                Reservation reservation=new Reservation(id,date,time,cost,barber,ops,isDone);
+                history.add(reservation);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return history;
+    }
+
 
     private long makeReservationID(String date, String time, int barberID) {
         String[] splittedDate = date.split("-");

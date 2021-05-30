@@ -102,5 +102,38 @@ public class deneme {
 
         dataBaseOperations.bookReservation(date,time,1,601,list);*/
 
+        /** Create View*/
+
+        String sql = "SELECT reservation.isDone,reservation.ReservationID, reservation.ReservationDate," +
+                "reservation.ReservationTime ,barber.BarberName,barber.BarberSurname, reservation.CustomerID " +
+                "FROM reservation INNER JOIN barber ON reservation.BarberID=barber.BarberID WHERE CustomerID='9'";
+
+        String sql2 = "SELECT operation_selection.ReservationID, operation.OperationName FROM `operation_selection` " +
+                "INNER JOIN operation ON operation_selection.OperationID=operation.OperationID WHERE ReservationID='21123116307' ;";
+        try (Connection connection = DBConnection.connect();
+             Statement statement = connection.createStatement();
+             Statement statement2 = connection.createStatement()) {
+            ResultSet rs = statement.executeQuery(sql);
+            ResultSet rs2 = statement2.executeQuery(sql2);
+            while (rs.next()) {
+                System.out.println(rs.getLong("ReservationID"));
+                System.out.println(rs.getDate("ReservationDate"));
+                System.out.println(rs.getTime("ReservationTime"));
+                System.out.println(rs.getString("BarberName"));
+                System.out.println(rs.getString("BarberSurname"));
+                System.out.println(rs.getInt("CustomerID"));
+                System.out.println("*********************");
+            }
+            System.out.println("---------------------------");
+            while (rs2.next()) {
+                System.out.println(rs2.getLong("ReservationID"));
+                System.out.println(rs2.getString("OperationName"));
+                System.out.println("*********************");
+
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }
