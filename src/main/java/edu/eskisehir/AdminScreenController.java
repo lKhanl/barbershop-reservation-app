@@ -390,31 +390,29 @@ public class AdminScreenController implements Initializable {
             resTable.getSelectionModel().getSelectedItem().setIsDone(comboStatus.getValue());
             resTable.refresh();
 
-            lblConsoleRes.setTextFill(Color.web("#42ba96"));
-            lblConsoleRes.setText("Successful");
+            lblConsoleRes.setTextFill(Color.GREEN);
+            lblConsoleRes.setText("Successfully, changed status!");
+        } else if (comboStatus.getSelectionModel().getSelectedItem() == null) {
+            lblConsoleRes.setTextFill(Color.RED);
+            lblConsoleRes.setText("First, select a row!");
         }
     }
 
     public void updateOp(ActionEvent event) {
-        ObservableList<Operation> selectedOps = comboOps.getCheckModel().getCheckedItems();
-        List<Operation> updated = new LinkedList<>();
-        updated.addAll(selectedOps);
-        resTable.getSelectionModel().getSelectedItem().setOps(updated);
-
-        resTable.refresh();
+        if (comboStatus.getSelectionModel().getSelectedItem() != null) {
+            ObservableList<Operation> selectedOps = comboOps.getCheckModel().getCheckedItems();
+            List<Operation> updated = new LinkedList<>();
+            updated.addAll(selectedOps);
+            resTable.getSelectionModel().getSelectedItem().setOps(updated);
+////////////////////////////////////////////////////////////updated
+            lblConsoleRes.setTextFill(Color.GREEN);
+            lblConsoleRes.setText("Successfully, updated operations!");
+            resTable.refresh();
+        } else if (comboStatus.getSelectionModel().getSelectedItem() == null) {
+            lblConsoleRes.setTextFill(Color.RED);
+            lblConsoleRes.setText("First, select a row!");
+        }
 
     }
 
-    /*public void getOps(MouseEvent mouseEvent) {
-        if (resTable.getSelectionModel().getSelectedItem() != null) {
-            List<Operation> selectedOps = resTable.getSelectionModel().getSelectedItem().getOps();
-            List<Operation> ops = db.getOperations();
-            comboOps.getItems().addAll(ops);
-
-        } *//*else {
-            lblConsoleRes.setTextFill(Color.web("#f84040"));
-            lblConsoleRes.setText("Row didn't select!");
-        }*//*
-
-    }*/
 }

@@ -123,7 +123,7 @@
                                     </columns>
                                 </TableView>
                         <ComboBox fx:id="comboStatus" layoutX="14.0" layoutY="381.0" prefHeight="30.0" prefWidth="150.0" promptText="Change status" />
-                        <Button layoutX="205.0" layoutY="381.0" mnemonicParsing="false" onAction="#changeStatus" text="Update Status">
+                        <Button layoutX="205.0" layoutY="381.0" mnemonicParsing="false" onAction="#changeStatus" styleClass="btnAdd" text="Update Status">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -139,7 +139,7 @@
                            </font>
                         </Label>
                         <CheckComboBox fx:id="comboOps" layoutX="366.0" layoutY="381.0" prefHeight="30.0" prefWidth="143.0" title="Operations" />
-                        <Button layoutX="549.0" layoutY="381.0" mnemonicParsing="false" onAction="#updateOp" text="Update Operatoins">
+                        <Button layoutX="549.0" layoutY="381.0" mnemonicParsing="false" onAction="#updateOp" styleClass="btnAdd" text="Update Operatoins">
                            <font>
                               <Font size="14.0" />
                            </font>
