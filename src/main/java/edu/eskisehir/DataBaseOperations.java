@@ -403,6 +403,8 @@ public class DataBaseOperations {
                 }
             }
 
+            updateTotalPrice(resID);
+
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
