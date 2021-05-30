@@ -9,10 +9,22 @@
 
 <Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" stylesheets="@css/Register.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eskisehir.RegisterController">
    <children>
-      <Label fx:id="lblName" layoutX="100.0" layoutY="47.0" prefHeight="27.0" prefWidth="60.0" text="Name :" />
-      <Label fx:id="lblSurname" layoutX="100.0" layoutY="97.0" text="Surname :" />
-      <Label fx:id="lblEmail" layoutX="100.0" layoutY="147.0" text="Email :" />
-      <Label fx:id="lblPassword" layoutX="100.0" layoutY="197.0" prefHeight="27.0" prefWidth="93.0" text="Password :" />
+      <Label fx:id="lblName" layoutX="100.0" layoutY="47.0" prefHeight="27.0" prefWidth="60.0" text="Name :">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblSurname" layoutX="100.0" layoutY="97.0" text="Surname :">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblEmail" layoutX="100.0" layoutY="147.0" text="Email :">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblPassword" layoutX="100.0" layoutY="197.0" prefHeight="27.0" prefWidth="93.0" text="Password :">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <TextField fx:id="txtName" layoutX="250.0" layoutY="46.0" prefHeight="30.0" prefWidth="175.0" styleClass="text-field" />
       <TextField fx:id="txtSurname" layoutX="250.0" layoutY="96.0" prefHeight="30.0" prefWidth="175.0" />
       <TextField fx:id="txtEmail" layoutX="250.0" layoutY="146.0" prefHeight="30.0" prefWidth="175.0" text="\@" />

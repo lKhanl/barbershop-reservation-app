@@ -3,7 +3,6 @@ package edu.eskisehir;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -15,10 +14,8 @@ import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.net.URL;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.sql.Time;
+import java.util.*;
 
 public class AdminScreenController implements Initializable {
     public TableView<Barber> barbersTable;
@@ -50,6 +47,15 @@ public class AdminScreenController implements Initializable {
     public TextField txtCustomerSearch;
     public Label lblConsoleOp;
     public Label lblConsoleCustomer;
+    public TableColumn<Reservation, String> resStatusCol;
+    public TableColumn<Reservation, Long> resIDCol;
+    public TableColumn<Reservation, Barber> resBarberCol;
+    public TableColumn<Reservation, Customer> resCustomerCol;
+    public TableColumn<Reservation, Date> resDateCol;
+    public TableColumn<Reservation, Time> resTimeCol;
+    public TableColumn<Reservation, Integer> resCostCol;
+    public TableColumn<Reservation, List<Operation>> resOpsCol;
+    public TableView<Reservation> resTable;
 
     DataBaseOperations db = new DataBaseOperations();
     ObservableList<Barber> barbersData;
@@ -61,10 +67,12 @@ public class AdminScreenController implements Initializable {
         editableColsForBarber();
         editableColsForOp();
         editableColsForCustomer();
+        editableColsForAllRes();
 
         loadDataForBarber();
         loadDataForOp();
         loadDataForCustomer(null);
+        loadDataForRes();
 
         //Accept only numbers for int
         txtBarberSalary.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -174,6 +182,31 @@ public class AdminScreenController implements Initializable {
         customersTable.setEditable(true);
     }
 
+    private void editableColsForAllRes() {
+        resBarberCol.setCellValueFactory(new PropertyValueFactory<>("barber"));
+        resCostCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
+        resDateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        resIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        resCustomerCol.setCellValueFactory(new PropertyValueFactory<>("customer"));
+        resOpsCol.setCellValueFactory(new PropertyValueFactory<>("ops"));
+        resStatusCol.setCellValueFactory(new PropertyValueFactory<>("isDone"));
+        resTimeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
+
+        resStatusCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        resStatusCol.setOnEditCommit(e -> {
+            Reservation res = e.getTableView().getItems().get(e.getTablePosition().getRow());
+            res.setIsDone(e.getNewValue());
+            db.updateIsDone(res.getId(), res.getIsDone());
+            lblConsoleCustomer.setTextFill(Color.web("#42ba96"));
+            lblConsoleCustomer.setText("Updated!");
+        });
+        resTable.setEditable(true);
+
+        resDateCol.setSortType(TableColumn.SortType.ASCENDING);
+        resTable.getSortOrder().add(resDateCol);
+        resTable.sort();
+    }
+
     private void loadDataForBarber() {
         barbersData = FXCollections.observableArrayList();
         List<Barber> barbers = db.getBarbers();
@@ -200,6 +233,22 @@ public class AdminScreenController implements Initializable {
             customersTable.setItems(temp);
         }
 
+    }
+
+    private void loadDataForRes() {
+        List<Reservation> reservations = db.adminResList();
+
+        for (Reservation reservation : reservations) {
+            if (reservation.getIsDone().equals("-1")) {
+                reservation.setIsDone("Cancel");
+            } else if (reservation.getIsDone().equals("0")) {
+                reservation.setIsDone("Waiting");
+            } else {
+                reservation.setIsDone("Done");
+            }
+        }
+
+        resTable.getItems().addAll(reservations);
     }
 
     public void addBarber(ActionEvent event) {

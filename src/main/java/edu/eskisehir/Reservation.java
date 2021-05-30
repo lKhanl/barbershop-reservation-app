@@ -6,18 +6,16 @@ import java.util.List;
 
 public class Reservation {
     private Customer customer;
-    private long rid;
+    private long id;
     private Date date;
     private Time time;
     private int cost;
     private Barber barber;
     private List<Operation> ops;
-
-
     private String isDone;
 
-    public Reservation(long rid, Date date, Time time, int cost, Barber barber, List<Operation> ops, String isDone) {
-        this.rid = rid;
+    public Reservation(long id, Date date, Time time, int cost, Barber barber, List<Operation> ops, String isDone) {
+        this.id = id;
         this.date = date;
         this.time = time;
         this.cost = cost;
@@ -28,7 +26,7 @@ public class Reservation {
 
     public Reservation(Customer customer, long id, Date date, Time time, int cost, Barber barber, List<Operation> ops, String isDone) {
         this.customer = customer;
-        this.rid = id;
+        this.id = id;
         this.date = date;
         this.time = time;
         this.cost = cost;
@@ -37,12 +35,12 @@ public class Reservation {
         this.isDone = isDone;
     }
 
-    public long getRid() {
-        return rid;
+    public long getId() {
+        return id;
     }
 
-    public void setRid(long rid) {
-        this.rid = rid;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Date getDate() {

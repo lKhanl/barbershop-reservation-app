@@ -100,10 +100,16 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="14.0" layoutY="14.0" prefHeight="256.0" prefWidth="671.0">
+                        <TableView fx:id="resTable" layoutX="14.0" layoutY="14.0" prefHeight="322.0" prefWidth="671.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
+                            <TableColumn fx:id="resStatusCol" prefWidth="53.0" resizable="false" text="Status" />
+                            <TableColumn fx:id="resIDCol" prefWidth="82.0" resizable="false" text="ResID" />
+                              <TableColumn fx:id="resBarberCol" prefWidth="119.0" resizable="false" text="Barber" />
+                              <TableColumn fx:id="resCustomerCol" prefWidth="119.0" resizable="false" text="Customer" />
+                              <TableColumn fx:id="resDateCol" prefWidth="75.0" resizable="false" text="Date" />
+                              <TableColumn fx:id="resTimeCol" prefWidth="54.0" resizable="false" text="Time" />
+                              <TableColumn fx:id="resCostCol" prefWidth="32.0" resizable="false" text="Cost" />
+                              <TableColumn fx:id="resOpsCol" prefWidth="480.0" resizable="false" text="Operations" />
                           </columns>
                         </TableView>
                      </children></AnchorPane>

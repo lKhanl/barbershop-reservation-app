@@ -15,6 +15,11 @@ public class Customer {
         this.password = password;
     }
 
+    @Override
+    public String toString() {
+        return name + " " + surname;
+    }
+
     public Customer(int id, String name, String surname, String email) {
         this.id = id;
         this.name = name;

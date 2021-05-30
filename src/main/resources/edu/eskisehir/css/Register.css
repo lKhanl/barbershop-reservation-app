@@ -17,6 +17,7 @@
 .label{
     -fx-text-fill: black;
     -fx-font-size: 18px;
+    -fx-font-weight: bold;
 }
 .text-field{
     -fx-background-radius: 20px;
