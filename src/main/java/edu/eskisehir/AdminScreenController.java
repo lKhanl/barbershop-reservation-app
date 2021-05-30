@@ -405,13 +405,13 @@ public class AdminScreenController implements Initializable {
             List<Operation> updated = new LinkedList<>();
             updated.addAll(selectedOps);
             resTable.getSelectionModel().getSelectedItem().setOps(updated);
-////////////////////////////////////////////////////////////updated
+            db.updateCustomersOperations(resTable.getSelectionModel().getSelectedItem().getId(), updated);
             lblConsoleRes.setTextFill(Color.GREEN);
             lblConsoleRes.setText("Successfully, updated operations!");
             resTable.refresh();
         } else if (comboStatus.getSelectionModel().getSelectedItem() == null) {
             lblConsoleRes.setTextFill(Color.RED);
-            lblConsoleRes.setText("First, select a row!");
+            lblConsoleRes.setText("First, select a row or empty operations!");
         }
 
     }

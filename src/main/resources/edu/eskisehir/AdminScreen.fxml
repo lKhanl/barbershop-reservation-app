@@ -135,7 +135,7 @@
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Label fx:id="lblConsoleRes" layoutX="36.0" layoutY="405.0" prefHeight="30.0" prefWidth="180.0">
+                        <Label fx:id="lblConsoleRes" layoutX="36.0" layoutY="405.0" prefHeight="30.0" prefWidth="324.0">
                            <font>
                               <Font size="16.0" />
                            </font>
