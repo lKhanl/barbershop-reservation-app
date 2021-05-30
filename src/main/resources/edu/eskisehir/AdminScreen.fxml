@@ -8,6 +8,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckComboBox?>
@@ -59,14 +61,14 @@
                                         <TableColumn fx:id="opPriceCol" prefWidth="71.0" resizable="false" text="Price" />
                                     </columns>
                                 </TableView>
-                                <Button fx:id="btnOpDelete" layoutX="543.0" layoutY="184.0" mnemonicParsing="false" onAction="#deleteOp" prefHeight="30.0" prefWidth="70.0" styleClass="btnDelete" text="DELETE" AnchorPane.bottomAnchor="250.0">
+                                <Button fx:id="btnOpDelete" layoutX="574.0" layoutY="392.0" mnemonicParsing="false" onAction="#deleteOp" prefHeight="30.0" prefWidth="70.0" styleClass="btnDelete" text="DELETE" AnchorPane.bottomAnchor="42.0">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Button>
-                                <TextField fx:id="txtOpName" layoutX="359.0" layoutY="134.0" prefHeight="30.0" prefWidth="150.0" promptText="Operation Name" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="359.0" />
-                                <TextField fx:id="txtOpPrice" layoutX="540.0" layoutY="134.0" prefHeight="30.0" prefWidth="75.0" promptText="Price" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="540.0" />
-                                <Button fx:id="btnOpAdd" layoutX="454.0" layoutY="184.0" mnemonicParsing="false" onAction="#addOp" prefHeight="30.0" prefWidth="55.0" styleClass="btnAdd" text="ADD" AnchorPane.bottomAnchor="250.0">
+                                <TextField fx:id="txtOpName" layoutX="390.0" layoutY="342.0" prefHeight="30.0" prefWidth="150.0" promptText="Operation Name" AnchorPane.bottomAnchor="92.0" AnchorPane.leftAnchor="390.0" />
+                                <TextField fx:id="txtOpPrice" layoutX="571.0" layoutY="342.0" prefHeight="30.0" prefWidth="75.0" promptText="Price" AnchorPane.bottomAnchor="92.0" AnchorPane.leftAnchor="571.0" />
+                                <Button fx:id="btnOpAdd" layoutX="485.0" layoutY="392.0" mnemonicParsing="false" onAction="#addOp" prefHeight="30.0" prefWidth="55.0" styleClass="btnAdd" text="ADD" AnchorPane.bottomAnchor="42.0">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
@@ -76,6 +78,11 @@
                                         <Font size="14.0" />
                                     </font>
                                 </Label>
+                        <ImageView fitHeight="294.0" fitWidth="323.0" layoutX="433.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@media/op.png" />
+                           </image>
+                        </ImageView>
                             </children>
                         </AnchorPane>
                     </content>
@@ -96,7 +103,7 @@
                                         <Font size="14.0" />
                                     </font>
                                 </Button>
-                                <TextField fx:id="txtCustomerSearch" layoutX="14.0" layoutY="420.0" onKeyTyped="#keypress" prefHeight="30.0" prefWidth="200.0" promptText="Search for any ..." />
+                                <TextField fx:id="txtCustomerSearch" layoutX="23.0" layoutY="420.0" onKeyTyped="#searchAnyForCustomers" prefHeight="30.0" prefWidth="200.0" promptText="Search for any ..." />
                                 <Label fx:id="lblConsoleCustomer" layoutX="235.0" layoutY="420.0" prefHeight="30.0" prefWidth="266.0">
                                     <font>
                                         <Font size="14.0" />
@@ -110,7 +117,7 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <TableView fx:id="resTable" layoutX="14.0" layoutY="14.0" prefHeight="322.0" prefWidth="671.0">
+                                <TableView fx:id="resTable" layoutX="14.0" layoutY="14.0" prefHeight="303.0" prefWidth="671.0">
                                     <columns>
                                         <TableColumn fx:id="resStatusCol" prefWidth="77.0" resizable="false" text="Status" />
                                         <TableColumn fx:id="resIDCol" prefWidth="82.0" resizable="false" text="ResID" />
@@ -122,33 +129,24 @@
                                         <TableColumn fx:id="resOpsCol" prefWidth="480.0" resizable="false" text="Operations" />
                                     </columns>
                                 </TableView>
-                        <ComboBox fx:id="comboStatus" layoutX="14.0" layoutY="381.0" prefHeight="30.0" prefWidth="150.0" promptText="Change status" />
-                        <Button layoutX="205.0" layoutY="381.0" mnemonicParsing="false" onAction="#changeStatus" styleClass="btnAdd" text="Update Status">
+                        <ComboBox fx:id="comboStatus" layoutX="375.0" layoutY="345.0" prefHeight="30.0" prefWidth="150.0" promptText="Change status" />
+                        <Button layoutX="561.0" layoutY="345.0" mnemonicParsing="false" onAction="#changeStatus" styleClass="btnAdd" text="Update Status">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Label layoutX="16.0" layoutY="351.0" prefHeight="30.0" prefWidth="296.0" text="Select a row which want to change status!">
+                        <Label fx:id="lblConsoleRes" layoutX="36.0" layoutY="405.0" prefHeight="30.0" prefWidth="180.0">
                            <font>
-                              <Font name="System Bold Italic" size="14.0" />
+                              <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblConsoleRes" layoutX="14.0" layoutY="425.0" prefHeight="30.0" prefWidth="295.0">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <CheckComboBox fx:id="comboOps" layoutX="366.0" layoutY="381.0" prefHeight="30.0" prefWidth="143.0" title="Operations" />
-                        <Button layoutX="549.0" layoutY="381.0" mnemonicParsing="false" onAction="#updateOp" styleClass="btnAdd" text="Update Operatoins">
+                        <CheckComboBox fx:id="comboOps" layoutX="375.0" layoutY="405.0" prefHeight="30.0" prefWidth="150.0" title="Operations" />
+                        <Button layoutX="546.0" layoutY="405.0" mnemonicParsing="false" onAction="#updateOp" styleClass="btnAdd" text="Update Operatoins">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Label layoutX="373.0" layoutY="351.0" prefHeight="30.0" prefWidth="309.0" text="Select a row which want to update Operations!">
-                           <font>
-                              <Font name="System Bold Italic" size="14.0" />
-                           </font>
-                        </Label>
+                        <TextField fx:id="txtResSearch" layoutX="26.0" layoutY="330.0" onKeyPressed="#searchAnyForRes" prefHeight="30.0" prefWidth="200.0" promptText="Search for any..." />
                             </children>
                         </AnchorPane>
                     </content>

@@ -65,6 +65,7 @@ public class AdminScreenController implements Initializable {
     public ComboBox<String> comboStatus;
     public Label lblConsoleRes;
     public CheckComboBox<Operation> comboOps;
+    public TextField txtResSearch;
 
     DataBaseOperations db = new DataBaseOperations();
     ObservableList<Barber> barbersData;
@@ -373,7 +374,7 @@ public class AdminScreenController implements Initializable {
         }
     }
 
-    public void keypress(KeyEvent keyEvent) {
+    public void searchAnyForCustomers(KeyEvent keyEvent) {
         if (txtCustomerSearch.getText().equals("")) {
             keyEvent.consume();
         } else {
@@ -415,4 +416,11 @@ public class AdminScreenController implements Initializable {
 
     }
 
+    public void searchAnyForRes(KeyEvent keyEvent) {
+        if (txtCustomerSearch.getText().equals("")) {
+            keyEvent.consume();
+        } else {
+            // TODO: sevda's search db method is here
+        }
+    }
 }
