@@ -195,8 +195,26 @@ public class AdminScreenController implements Initializable {
         resStatusCol.setCellFactory(TextFieldTableCell.forTableColumn());
         resStatusCol.setOnEditCommit(e -> {
             Reservation res = e.getTableView().getItems().get(e.getTablePosition().getRow());
-            res.setIsDone(e.getNewValue());
-            db.updateIsDone(res.getId(), res.getIsDone());
+            switch (res.getIsDone()) {
+                case "Done":
+                    db.updateIsDone(res.getId(), "1");
+                    res.setIsDone("1");
+                    break;
+                case "Waiting":
+                    db.updateIsDone(res.getId(), "0");
+                    res.setIsDone("0");
+                    break;
+                case "Cancel":
+                    db.updateIsDone(res.getId(), "-1");
+                    res.setIsDone("-1");
+                    break;
+                default:
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Didn't update reopen your app!");
+                    alert.show();
+                    break;
+            }
             lblConsoleCustomer.setTextFill(Color.web("#42ba96"));
             lblConsoleCustomer.setText("Updated!");
         });

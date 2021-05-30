@@ -39,7 +39,7 @@ public class RegisterController {
                     db.addCustomer(txtName.getText(), txtSurname.getText(), txtEmail.getText(), txtPassword.getText());
                 } catch (SQLException throwables) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setHeaderText("Duplicate!");
+                    alert.setHeaderText("This e-mail address is already taken!");
                     alert.setTitle("Error");
                     alert.show();
                     return;
