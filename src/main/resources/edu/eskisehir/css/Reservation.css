@@ -88,3 +88,11 @@
     -fx-pref-height: 30px;
     -fx-pref-width: 180px;
 }
+
+.table-row-cell:odd {
+    -fx-background-color: "#E3DFD5";
+}
+
+.table-row-cell:even {
+    -fx-background-color: "#CCC9C0";
+}

@@ -55,19 +55,30 @@
     -fx-padding: 1em 0em 0em 1em; /* overridden as 5 2 0 0 */
 }
 
-.btnAdd{
+.btnAdd {
     -fx-text-fill: white;
     -fx-background-color: #95ba6d;
 }
-.btnAdd:hover{
+
+.btnAdd:hover {
     -fx-text-fill: white;
     -fx-background-color: #7a9c3d;
 }
-.btnDelete{
+
+.btnDelete {
     -fx-text-fill: white;
     -fx-background-color: #ff8a90;
 }
-.btnDelete:hover{
+
+.btnDelete:hover {
     -fx-text-fill: white;
     -fx-background-color: #fd5c62;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: "#DEEAE3";
+}
+
+.table-row-cell:even {
+    -fx-background-color: "#C8D3CC";
 }
