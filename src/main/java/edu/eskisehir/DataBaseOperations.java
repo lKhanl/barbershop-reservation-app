@@ -189,7 +189,7 @@ public class DataBaseOperations {
     }
 
     @Deprecated
-    public void isDoneTemp(long resID){
+    public void isDoneTemp(long resID) {
 
         String sql = "SELECT isDone FROM reservation WHERE ReservationID=" + "'" + resID + "'";
         String sql2 = "UPDATE reservation SET isDone=? WHERE ReservationID=" + "'" + resID + "'";
@@ -370,6 +370,46 @@ public class DataBaseOperations {
         System.out.println("Update işlemi başarılı.");
     }
 
+    public void updateCustomersOperations(long resID, List<Operation> newOperations) {
+        List<Integer> IDs = new LinkedList();
+        for (Operation newOperation : newOperations) {
+            IDs.add(newOperation.getId());
+        }
+
+        try (Connection connection = DBConnection.connect();
+             Statement statement = connection.createStatement()) {
+            String sql = "SELECT OperationID from operation_selection WHERE ReservationID=  " + resID;
+            ResultSet rs = statement.executeQuery(sql);
+            List<Integer> operations = new LinkedList<>();
+            while (rs.next()) {
+                operations.add(rs.getInt("OperationID"));
+            }
+
+            if (IDs.size() - operations.size() > 0) {
+                IDs.removeAll(operations);
+                for (int i = 0; i < IDs.size(); i++) {
+                    fillOperationSelection(resID, IDs.get(i));
+                }
+            } else {
+                operations.removeAll(IDs);
+
+                for (int i = 0; i < operations.size(); i++) {
+                    String sql2 = "SELECT SelectionID FROM operation_selection WHERE ReservationID=" + "'" + resID +
+                            "'" + " AND OperationID=" + "'" + operations.get(i) + "'";
+                    ResultSet rs2 = statement.executeQuery(sql2);
+                    while (rs2.next()) {
+                        deleteOperationSelection(rs2.getLong("SelectionID"));
+                    }
+                }
+            }
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
+
     public void fillOperationSelection(long resID, int operationID) {
         long selectionID = makeSelectionID(resID, operationID);
         try (Connection connection = DBConnection.connect();
@@ -387,6 +427,19 @@ public class DataBaseOperations {
             System.out.println(e.getMessage());
         }
         System.out.println("Ekleme işlemi başarılı.");
+
+    }
+
+    public void deleteOperationSelection(long selectionID) {
+        String sql = "DELETE FROM operation_selection WHERE SelectionID=?";
+
+        try (Connection connection = DBConnection.connect();
+             PreparedStatement statement = connection.prepareStatement(sql);) {
+            statement.setLong(1, selectionID);
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
     }
 
@@ -523,10 +576,10 @@ public class DataBaseOperations {
                 String sql3 = "SELECT CustomerName, CustomerSurname, Email FROM customer WHERE CustomerID=" + "'" + cid + "'";
                 ResultSet rs3 = statement3.executeQuery(sql3);
                 Customer customer = null;
-                while (rs3.next()){
-                    customer=new Customer(cid,rs3.getString("CustomerName"),rs3.getString("CustomerSurname"),rs3.getString("Email"));
+                while (rs3.next()) {
+                    customer = new Customer(cid, rs3.getString("CustomerName"), rs3.getString("CustomerSurname"), rs3.getString("Email"));
                 }
-               Reservation reservation = new Reservation(customer, rid, date, time, cost, barber, ops, isDone);
+                Reservation reservation = new Reservation(customer, rid, date, time, cost, barber, ops, isDone);
                 res.add(reservation);
 
             }
