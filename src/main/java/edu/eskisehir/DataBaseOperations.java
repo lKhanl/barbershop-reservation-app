@@ -454,8 +454,53 @@ public class DataBaseOperations {
         System.out.println("Update işlemi başarılı.");
     }
 
+    public List<Reservation> adminResList() {
+        String sql = "SELECT * FROM reservation INNER JOIN barber ON " +
+                "reservation.BarberID=barber.BarberID";
+        List<Operation> ops = new LinkedList<>();
+        List<Reservation> res = new LinkedList<>();
+        try (Connection connection = DBConnection.connect();
+             Statement statement = connection.createStatement();
+             Statement statement2 = connection.createStatement();
+             Statement statement3 = connection.createStatement();
+        ) {
+            ResultSet rs = statement.executeQuery(sql);
+
+            while (rs.next()) {
+                int cid = rs.getInt("CustomerID");
+                long rid = rs.getLong("ReservationID");
+                Date date = rs.getDate("ReservationDate");
+                Time time = rs.getTime("ReservationTime");
+                int cost = rs.getInt("TotalPrice");
+                String isDone = rs.getString("isDone");
+                Barber barber = new Barber(rs.getInt("BarberID"), rs.getString("BarberName"), rs.getString("BarberSurname"), rs.getInt("Salary"));
+                String sql2 = "SELECT operation.Price,operation.OperationID,operation.OperationName FROM `operation_selection` " +
+                        "INNER JOIN operation ON operation_selection.OperationID=operation.OperationID WHERE ReservationID=" + "'" + rid + "'";
+                ResultSet rs2 = statement2.executeQuery(sql2);
+                while (rs2.next()) {
+                    Operation operation = new Operation(rs2.getInt("OperationID"), rs2.getString("OperationName"), rs2.getInt("Price"));
+                    ops.add(operation);
+                }
+                String sql3 = "SELECT CustomerName, CustomerSurname, Email FROM customer WHERE CustomerID=" + "'" + cid + "'";
+                ResultSet rs3 = statement3.executeQuery(sql3);
+                Customer customer = null;
+                while (rs3.next()){
+                    customer=new Customer(cid,rs3.getString("CustomerName"),rs3.getString("CustomerSurname"),rs3.getString("Email"));
+                }
+               Reservation reservation = new Reservation(customer, rid, date, time, cost, barber, ops, isDone);
+                res.add(reservation);
+
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return res;
+    }
+
     public List<Reservation> fillResHistory(int customerID) {
-        List<Reservation> history=new LinkedList<>();
+        List<Reservation> history = new LinkedList<>();
         String sql = "SELECT * FROM reservation INNER JOIN barber ON " +
                 "reservation.BarberID=barber.BarberID WHERE CustomerID=" + "'" + customerID + "'";
 
@@ -471,7 +516,7 @@ public class DataBaseOperations {
                 Date date = rs.getDate("ReservationDate");
                 Time time = rs.getTime("ReservationTime");
                 int cost = rs.getInt("TotalPrice");
-                Barber barber = new Barber(rs.getInt("BarberID"),rs.getString("BarberName"), rs.getString("BarberSurname"),rs.getInt("Salary"));
+                Barber barber = new Barber(rs.getInt("BarberID"), rs.getString("BarberName"), rs.getString("BarberSurname"), rs.getInt("Salary"));
                 List<Operation> ops = new LinkedList<>();
 
                 String sql2 = "SELECT operation.Price,operation.OperationID,operation.OperationName FROM `operation_selection` " +
@@ -484,7 +529,7 @@ public class DataBaseOperations {
 
                 String isDone = rs.getString("isDone");
 
-                Reservation reservation=new Reservation(id,date,time,cost,barber,ops,isDone);
+                Reservation reservation = new Reservation(id, date, time, cost, barber, ops, isDone);
                 history.add(reservation);
             }
         } catch (SQLException throwables) {

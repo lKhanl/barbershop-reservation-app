@@ -5,16 +5,19 @@ import java.sql.Time;
 import java.util.List;
 
 public class Reservation {
-    private long id;
+    private Customer customer;
+    private long rid;
     private Date date;
     private Time time;
     private int cost;
     private Barber barber;
     private List<Operation> ops;
+
+
     private String isDone;
 
-    public Reservation(long id, Date date, Time time, int cost, Barber barber, List<Operation> ops, String isDone) {
-        this.id = id;
+    public Reservation(long rid, Date date, Time time, int cost, Barber barber, List<Operation> ops, String isDone) {
+        this.rid = rid;
         this.date = date;
         this.time = time;
         this.cost = cost;
@@ -23,12 +26,23 @@ public class Reservation {
         this.isDone = isDone;
     }
 
-    public long getId() {
-        return id;
+    public Reservation(Customer customer, long id, Date date, Time time, int cost, Barber barber, List<Operation> ops, String isDone) {
+        this.customer = customer;
+        this.rid = id;
+        this.date = date;
+        this.time = time;
+        this.cost = cost;
+        this.barber = barber;
+        this.ops = ops;
+        this.isDone = isDone;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public long getRid() {
+        return rid;
+    }
+
+    public void setRid(long rid) {
+        this.rid = rid;
     }
 
     public Date getDate() {
@@ -73,6 +87,14 @@ public class Reservation {
 
     public void setIsDone(String isDone) {
         this.isDone = isDone;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
 }
