@@ -221,7 +221,7 @@ public class ReservationController implements Initializable {
         alert.setTitle("Warning!");
         alert.setHeaderText("Do you really want to save?");
         if (txtName.getText().equals("") || txtSurname.getText().equals("") || txtEmail.getText().equals("") || txtPass.getText().equals("")) {
-            lblConsoleProfile.setTextFill(Color.web("#f84040"));
+            lblConsoleProfile.setTextFill(Color.RED);
             lblConsoleProfile.setText("Some fields are empty!");
             return;
         }
@@ -229,7 +229,7 @@ public class ReservationController implements Initializable {
         Pattern p = Pattern.compile("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
         Matcher m = p.matcher(txtEmail.getText());
         if (!m.find()) {
-            lblConsoleProfile.setTextFill(Color.web("#f84040"));
+            lblConsoleProfile.setTextFill(Color.RED);
             lblConsoleProfile.setText("Invalid email!");
         } else {
             Optional<ButtonType> result = alert.showAndWait();
@@ -238,7 +238,7 @@ public class ReservationController implements Initializable {
                 db.updateCustomer(Attribute.SURNAME, txtSurname.getText(), cid);
                 db.updateCustomer(Attribute.EMAIL, txtEmail.getText(), cid);
                 db.updateCustomer(Attribute.PASSWORD, txtPass.getText(), cid);
-                lblConsoleProfile.setTextFill(Color.web("#42ba96"));
+                lblConsoleProfile.setTextFill(Color.GREEN);
                 lblConsoleProfile.setText("Saved!");
                 txtPass.setText("");
             } else {
@@ -263,10 +263,10 @@ public class ReservationController implements Initializable {
 
             loadDataForProfile();
 
-            lblConsoleRes.setTextFill(Color.web("#42ba96"));
+            lblConsoleRes.setTextFill(Color.GREEN);
             lblConsoleRes.setText("Successful!");
         } else {
-            lblConsoleRes.setTextFill(Color.web("#f84040"));
+            lblConsoleRes.setTextFill(Color.RED);
             lblConsoleRes.setText("Some fields are empty!");
         }
 

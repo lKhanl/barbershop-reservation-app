@@ -107,7 +107,7 @@ public class AdminScreenController implements Initializable {
             Barber barber = e.getTableView().getItems().get(e.getTablePosition().getRow());
             barber.setName(e.getNewValue());
             db.updateBarber(Attribute.NAME, e.getNewValue(), barber.getId());
-            lblConsoleBarber.setTextFill(Color.web("#42ba96"));
+            lblConsoleBarber.setTextFill(Color.GREEN);
             lblConsoleBarber.setText("Updated!");
         });
 
@@ -116,7 +116,7 @@ public class AdminScreenController implements Initializable {
             Barber barber = e.getTableView().getItems().get(e.getTablePosition().getRow());
             barber.setSurname(e.getNewValue());
             db.updateBarber(Attribute.SURNAME, e.getNewValue(), barber.getId());
-            lblConsoleBarber.setTextFill(Color.web("#42ba96"));
+            lblConsoleBarber.setTextFill(Color.GREEN);
             lblConsoleBarber.setText("Updated!");
         });
 
@@ -125,7 +125,7 @@ public class AdminScreenController implements Initializable {
             Barber barber = e.getTableView().getItems().get(e.getTablePosition().getRow());
             barber.setSalary(e.getNewValue());
             db.updateBarber(Attribute.SALARY, String.valueOf(e.getNewValue()), barber.getId());
-            lblConsoleBarber.setTextFill(Color.web("#42ba96"));
+            lblConsoleBarber.setTextFill(Color.GREEN);
             lblConsoleBarber.setText("Updated!");
         });
 
@@ -141,7 +141,7 @@ public class AdminScreenController implements Initializable {
             Operation op = e.getTableView().getItems().get(e.getTablePosition().getRow());
             op.setName(e.getNewValue());
             db.updateOperation(Attribute.NAME, e.getNewValue(), op.getId());
-            lblConsoleOp.setTextFill(Color.web("#42ba96"));
+            lblConsoleOp.setTextFill(Color.GREEN);
             lblConsoleOp.setText("Updated!");
         });
 
@@ -150,7 +150,7 @@ public class AdminScreenController implements Initializable {
             Operation op = e.getTableView().getItems().get(e.getTablePosition().getRow());
             op.setPrice(e.getNewValue());
             db.updateOperation(Attribute.PRICE, String.valueOf(e.getNewValue()), op.getId());
-            lblConsoleOp.setTextFill(Color.web("#42ba96"));
+            lblConsoleOp.setTextFill(Color.GREEN);
             lblConsoleOp.setText("Updated!");
         });
         operationsTable.setEditable(true);
@@ -167,7 +167,7 @@ public class AdminScreenController implements Initializable {
             Customer customer = e.getTableView().getItems().get(e.getTablePosition().getRow());
             customer.setName(e.getNewValue());
             db.updateCustomer(Attribute.NAME, e.getNewValue(), customer.getId());
-            lblConsoleCustomer.setTextFill(Color.web("#42ba96"));
+            lblConsoleCustomer.setTextFill(Color.GREEN);
             lblConsoleCustomer.setText("Updated!");
         });
 
@@ -176,7 +176,7 @@ public class AdminScreenController implements Initializable {
             Customer customer = e.getTableView().getItems().get(e.getTablePosition().getRow());
             customer.setSurname(e.getNewValue());
             db.updateCustomer(Attribute.SURNAME, e.getNewValue(), customer.getId());
-            lblConsoleCustomer.setTextFill(Color.web("#42ba96"));
+            lblConsoleCustomer.setTextFill(Color.GREEN);
             lblConsoleCustomer.setText("Updated!");
         });
 
@@ -185,7 +185,7 @@ public class AdminScreenController implements Initializable {
             Customer customer = e.getTableView().getItems().get(e.getTablePosition().getRow());
             customer.setEmail(e.getNewValue());
             db.updateCustomer(Attribute.EMAIL, e.getNewValue(), customer.getId());
-            lblConsoleCustomer.setTextFill(Color.web("#42ba96"));
+            lblConsoleCustomer.setTextFill(Color.GREEN);
             lblConsoleCustomer.setText("Updated!");
         });
 
@@ -274,14 +274,14 @@ public class AdminScreenController implements Initializable {
         if (!(txtBarberName.getText().equals("") || txtBarberSurname.getText().equals("") || txtBarberSalary.getText().equals(""))) {
             int id = db.addBarber(txtBarberName.getText(), txtBarberSurname.getText(), Integer.parseInt(txtBarberSalary.getText()));
             barbersData.add(new Barber(id, txtBarberName.getText(), txtBarberSurname.getText(), Integer.parseInt(txtBarberSalary.getText())));
-            lblConsoleBarber.setTextFill(Color.web("#42ba96"));
+            lblConsoleBarber.setTextFill(Color.GREEN);
             lblConsoleBarber.setText("Barber was added!");
 
             txtBarberName.setText("");
             txtBarberSurname.setText("");
             txtBarberSalary.setText("");
         } else {
-            lblConsoleBarber.setTextFill(Color.web("#ff0033"));
+            lblConsoleBarber.setTextFill(Color.RED);
             lblConsoleBarber.setText("Some fields are empty!");
             event.consume();
         }
@@ -291,7 +291,7 @@ public class AdminScreenController implements Initializable {
         TableView.TableViewSelectionModel<Barber> selectionModel = barbersTable.getSelectionModel();
         ObservableList<Barber> selectedItems = selectionModel.getSelectedItems();
         if (selectedItems.size() == 0) {
-            lblConsoleBarber.setTextFill(Color.web("#ff0033"));
+            lblConsoleBarber.setTextFill(Color.RED);
             lblConsoleBarber.setText("Select once!");
             return;
         }
@@ -299,7 +299,7 @@ public class AdminScreenController implements Initializable {
         if (result.get() == ButtonType.OK) {
             db.deleteBarber(selectedItems.get(0).getId());
             barbersData.remove(selectedItems.get(0));
-            lblConsoleBarber.setTextFill(Color.web("#ff0033"));
+            lblConsoleBarber.setTextFill(Color.RED);
             lblConsoleBarber.setText("Barber was deleted!");
         } else {
             event.consume();
@@ -311,13 +311,13 @@ public class AdminScreenController implements Initializable {
         if (!(txtOpName.getText().equals("") || txtOpPrice.getText().equals(""))) {
             int id = db.addOperation(txtOpName.getText(), Integer.parseInt(txtOpPrice.getText()));
             operationsData.add(new Operation(id, txtOpName.getText(), Integer.parseInt(txtOpPrice.getText())));
-            lblConsoleOp.setTextFill(Color.web("#42ba96"));
+            lblConsoleOp.setTextFill(Color.GREEN);
             lblConsoleOp.setText("Operation was added!");
 
             txtOpPrice.setText("");
             txtOpName.setText("");
         } else {
-            lblConsoleOp.setTextFill(Color.web("#ff0033"));
+            lblConsoleOp.setTextFill(Color.RED);
             lblConsoleOp.setText("Some fields are empty!");
             event.consume();
         }
@@ -327,7 +327,7 @@ public class AdminScreenController implements Initializable {
         TableView.TableViewSelectionModel<Operation> selectionModel = operationsTable.getSelectionModel();
         ObservableList<Operation> selectedItems = selectionModel.getSelectedItems();
         if (selectedItems.size() == 0) {
-            lblConsoleOp.setTextFill(Color.web("#ff0033"));
+            lblConsoleOp.setTextFill(Color.RED);
             lblConsoleOp.setText("Select once!");
             return;
         }
@@ -335,7 +335,7 @@ public class AdminScreenController implements Initializable {
         if (result.get() == ButtonType.OK) {
             db.deleteOperation(selectedItems.get(0).getId());
             operationsData.remove(selectedItems.get(0));
-            lblConsoleOp.setTextFill(Color.web("#ff0033"));
+            lblConsoleOp.setTextFill(Color.RED);
             lblConsoleOp.setText("Operation was deleted!");
         } else {
             event.consume();
@@ -357,7 +357,7 @@ public class AdminScreenController implements Initializable {
         TableView.TableViewSelectionModel<Customer> selectionModel = customersTable.getSelectionModel();
         ObservableList<Customer> selectedItems = selectionModel.getSelectedItems();
         if (selectedItems.size() == 0) {
-            lblConsoleCustomer.setTextFill(Color.web("#ff0033"));
+            lblConsoleCustomer.setTextFill(Color.RED);
             lblConsoleCustomer.setText("Select once!");
             return;
         }
@@ -365,7 +365,7 @@ public class AdminScreenController implements Initializable {
         if (result.get() == ButtonType.OK) {
             db.deleteCustomer(selectedItems.get(0).getId());
             customersData.remove(selectedItems.get(0));
-            lblConsoleCustomer.setTextFill(Color.web("#ff0033"));
+            lblConsoleCustomer.setTextFill(Color.RED);
             lblConsoleCustomer.setText("Customer was deleted!");
             txtCustomerSearch.setText("");
             loadDataForCustomer(null);
