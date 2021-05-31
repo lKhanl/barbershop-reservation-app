@@ -227,11 +227,6 @@ public class AdminScreenController implements Initializable {
                 });*/
             }
         });
-
-        // TODO: sort is running wrongly
-        /*resDateCol.setSortType(TableColumn.SortType.ASCENDING);
-        resTable.getSortOrder().add(resDateCol);
-        resTable.sort();*/
     }
 
     private void loadDataForBarber() {
@@ -239,6 +234,10 @@ public class AdminScreenController implements Initializable {
         List<Barber> barbers = db.getBarbers();
         barbersData.addAll(barbers);
         barbersTable.setItems(barbersData);
+
+        barberNameCol.setSortType(TableColumn.SortType.ASCENDING);
+        barbersTable.getSortOrder().add(barberNameCol);
+        barbersTable.sort();
     }
 
     private void loadDataForOp() {
@@ -246,6 +245,10 @@ public class AdminScreenController implements Initializable {
         List<Operation> operations = db.getOperations();
         operationsData.addAll(operations);
         operationsTable.setItems(operationsData);
+
+        opPriceCol.setSortType(TableColumn.SortType.ASCENDING);
+        operationsTable.getSortOrder().add(opPriceCol);
+        operationsTable.sort();
     }
 
     private void loadDataForCustomer(List<Customer> list) {
@@ -259,7 +262,9 @@ public class AdminScreenController implements Initializable {
             temp.addAll(list);
             customersTable.setItems(temp);
         }
-
+        customerNameCol.setSortType(TableColumn.SortType.ASCENDING);
+        customersTable.getSortOrder().add(customerNameCol);
+        customersTable.sort();
     }
 
     private void loadDataForRes(List<Reservation> list) {
@@ -273,6 +278,9 @@ public class AdminScreenController implements Initializable {
             temp.addAll(list);
             resTable.setItems(temp);
         }
+        resDateCol.setSortType(TableColumn.SortType.ASCENDING);
+        resTable.getSortOrder().add(resDateCol);
+        resTable.sort();
 
     }
 
