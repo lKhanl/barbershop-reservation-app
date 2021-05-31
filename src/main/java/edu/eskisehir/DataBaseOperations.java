@@ -104,6 +104,27 @@ public class DataBaseOperations {
         return list;
     }
 
+    public Customer getCustomerByID(int customerID) {
+        String sql = "SELECT CustomerID,CustomerName,CustomerSurname,Email FROM customer WHERE  CustomerID=" + "'" + customerID + "'";
+        Customer customer = null;
+        try (Connection connection = DBConnection.connect();
+             Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sql);
+
+
+            while (rs.next()) {
+                customer = new Customer(rs.getInt("CustomerID"), rs.getString("CustomerName"),
+                        rs.getString("CustomerSurname"), rs.getString("Email"));
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+
+        return customer;
+    }
+
     public void updateCustomer(Attribute attName, String value, int id) {
         String sql = null;
         switch (attName) {
@@ -852,7 +873,7 @@ public class DataBaseOperations {
     }
 
     public double averageMonthlyIncome(String year) {
-        int currentMonth=LocalDate.now().getMonth().getValue();
+        int currentMonth = LocalDate.now().getMonth().getValue();
         double income = 0;
         String sql = "SELECT SUM(TotalPrice) AS 'income' FROM `reservation` WHERE isDone='Done' AND YEAR(ReservationDate)=" + "'" + year + "'";
 
@@ -865,6 +886,29 @@ public class DataBaseOperations {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return income/currentMonth;
+        return income / currentMonth;
+    }
+
+    public Customer mostVisitedCustomer() {
+        int most = -1;
+        String sql = "SELECT CustomerID, operation.OperationID, COUNT(adminres.CustomerID) AS 'freq' " +
+                "FROM adminres " +
+                "INNER JOIN operation_selection ON operation_selection.ReservationID=adminres.ReservationID " +
+                "INNER JOIN operation ON operation_selection.OperationID=operation.OperationID " +
+                "WHERE adminres.isDone='Done' " +
+                "GROUP BY adminres.CustomerID ORDER BY freq DESC " +
+                "LIMIT 1";
+
+        try (Connection connection = DBConnection.connect();
+             Statement statement = connection.createStatement();) {
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                most = rs.getInt("CustomerID");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return getCustomerByID(most);
     }
 }
