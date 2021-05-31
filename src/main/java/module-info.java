@@ -6,6 +6,8 @@ module edu.eskisehir {
     requires org.controlsfx.controls;
     requires java.desktop;
     requires javafx.swing;
+    requires javafx.graphics;
+    requires javafx.media;
 
     opens edu.eskisehir to javafx.fxml;
     exports edu.eskisehir;
