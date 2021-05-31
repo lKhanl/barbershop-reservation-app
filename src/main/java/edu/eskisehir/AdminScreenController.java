@@ -472,7 +472,14 @@ public class AdminScreenController implements Initializable {
             System.out.println(comboStatsYear1.getSelectionModel().getSelectedItem());
             System.out.println(index);
             Operation op = db.mostSelectedOperation(comboStatsYear1.getSelectionModel().getSelectedItem(), index);
-            lblStats1.setText(op.getName());
+            if (op == null) {
+                lblStats1.setTextFill(Color.RED);
+                lblStats1.setText("There is no operation for this month!");
+            } else{
+                lblStats1.setTextFill(Color.BLACK);
+                lblStats1.setText(op.getName());
+            }
+
         }
     }
 
