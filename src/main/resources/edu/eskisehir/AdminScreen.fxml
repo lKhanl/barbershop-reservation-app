@@ -163,7 +163,7 @@
                         </Label>
                         <ComboBox fx:id="comboStatsYear1" layoutX="25.0" layoutY="55.0" onAction="#getMostSelectedOp" prefHeight="25.0" prefWidth="110.0" promptText="Select a year" />
                         <ComboBox fx:id="comboStatsMonth1" layoutX="164.0" layoutY="55.0" onAction="#getMostSelectedOp" prefHeight="25.0" prefWidth="130.0" promptText="Select a month" />
-                        <Label fx:id="lblStats1" layoutX="432.0" layoutY="52.0" prefHeight="30.0" prefWidth="180.0" text="Label">
+                        <Label fx:id="lblStats1" layoutX="432.0" layoutY="52.0" prefHeight="30.0" prefWidth="180.0">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -180,18 +180,18 @@
                               <Font name="System Bold Italic" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblStats3" layoutX="432.0" layoutY="214.0" prefHeight="30.0" prefWidth="180.0" text="Label">
+                        <Label fx:id="lblStats3" layoutX="432.0" layoutY="214.0" prefHeight="30.0" prefWidth="180.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="comboStatsYear3" layoutX="22.0" layoutY="316.0" onAction="#getAverageMonthlyIncome" prefHeight="25.0" prefWidth="110.0" promptText="Select a year" />
-                        <Label layoutX="14.0" layoutY="285.0" prefHeight="30.0" prefWidth="340.0" text="What is the average monthly income in a year?">
+                        <ComboBox fx:id="comboStatsYear3" layoutX="25.0" layoutY="316.0" onAction="#getAverageMonthlyIncome" prefHeight="25.0" prefWidth="110.0" promptText="Select a year" />
+                        <Label layoutX="17.0" layoutY="285.0" prefHeight="30.0" prefWidth="340.0" text="What is the average monthly income in a year?">
                            <font>
                               <Font name="System Bold Italic" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblStats4" layoutX="432.0" layoutY="313.0" prefHeight="30.0" prefWidth="180.0" text="Label">
+                        <Label fx:id="lblStats4" layoutX="432.0" layoutY="313.0" prefHeight="30.0" prefWidth="180.0">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -205,12 +205,12 @@
                               <Font name="System Bold Italic" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblStats5" layoutX="432.0" layoutY="388.0" prefHeight="30.0" prefWidth="180.0" text="Label">
+                        <Label fx:id="lblStats5" layoutX="432.0" layoutY="388.0" prefHeight="30.0" prefWidth="180.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblStats2" layoutX="432.0" layoutY="148.0" prefHeight="30.0" prefWidth="180.0" text="Label">
+                        <Label fx:id="lblStats2" layoutX="432.0" layoutY="148.0" prefHeight="30.0" prefWidth="180.0">
                            <font>
                               <Font size="14.0" />
                            </font>

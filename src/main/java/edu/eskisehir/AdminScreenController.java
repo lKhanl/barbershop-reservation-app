@@ -469,7 +469,10 @@ public class AdminScreenController implements Initializable {
     public void getMostSelectedOp(ActionEvent event) {
         if (comboStatsMonth1.getSelectionModel().getSelectedItem() != null && comboStatsYear1.getSelectionModel().getSelectedItem() != null) {
             int index = comboStatsMonth1.getSelectionModel().getSelectedIndex() + 1;
-            System.out.println(comboStatsMonth1.getSelectionModel().getSelectedItem() + " " + comboStatsYear1.getSelectionModel().getSelectedItem() + " " + index);
+            System.out.println(comboStatsYear1.getSelectionModel().getSelectedItem());
+            System.out.println(index);
+            Operation op = db.mostSelectedOperation(comboStatsYear1.getSelectionModel().getSelectedItem(), String.valueOf(index));
+            lblStats1.setText(op.getName());
         }
     }
 
