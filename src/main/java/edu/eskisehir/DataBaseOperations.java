@@ -1,5 +1,6 @@
 package edu.eskisehir;
 
+import javax.swing.plaf.synth.SynthRadioButtonMenuItemUI;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -246,7 +247,7 @@ public class DataBaseOperations {
         return busyTimes;
     }
 
-    public Barber getBarberByID(int barberID){
+    public Barber getBarberByID(int barberID) {
         String sql = "SELECT * FROM barber WHERE BarberId=" + "'" + barberID + "'";
         Barber barber = null;
 
@@ -254,8 +255,8 @@ public class DataBaseOperations {
              Statement statement = connection.createStatement();) {
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
-                barber = new Barber(rs.getInt("BarberID"),rs.getString("BarberName"),
-                        rs.getString("BarberSurname"),rs.getInt("Salary"));
+                barber = new Barber(rs.getInt("BarberID"), rs.getString("BarberName"),
+                        rs.getString("BarberSurname"), rs.getInt("Salary"));
             }
 
         } catch (SQLException throwables) {
@@ -828,9 +829,9 @@ public class DataBaseOperations {
         return getBarberByID(most);
     }
 
-    public Time busiestTime(){
-        Time time=null;
-        String sql="SELECT reservation.ReservationTime, " +
+    public Time busiestTime() {
+        Time time = null;
+        String sql = "SELECT reservation.ReservationTime, " +
                 "COUNT(reservation.ReservationTime) AS freq FROM reservation " +
                 "WHERE reservation.isDone='Done' " +
                 "GROUP BY reservation.ReservationTime ORDER BY freq DESC " +
@@ -839,12 +840,28 @@ public class DataBaseOperations {
              Statement statement = connection.createStatement();) {
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
-              time= rs.getTime("ReservationTime");
+                time = rs.getTime("ReservationTime");
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return time;
 
+    }
+
+    public int yearIncome(String year) {
+        int income = 0;
+        String sql = "SELECT SUM(TotalPrice) AS 'income' FROM `reservation` WHERE isDone='Done' AND YEAR(ReservationDate)=" + "'" + year + "'";
+
+        try (Connection connection = DBConnection.connect();
+             Statement statement = connection.createStatement();) {
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                income = rs.getInt("income");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return income;
     }
 }
