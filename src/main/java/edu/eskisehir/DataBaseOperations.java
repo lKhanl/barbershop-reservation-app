@@ -828,4 +828,23 @@ public class DataBaseOperations {
         return getBarberByID(most);
     }
 
+    public Time busiestTime(){
+        Time time=null;
+        String sql="SELECT reservation.ReservationTime, " +
+                "COUNT(reservation.ReservationTime) AS freq FROM reservation " +
+                "WHERE reservation.isDone='Done' " +
+                "GROUP BY reservation.ReservationTime ORDER BY freq DESC " +
+                "LIMIT 1";
+        try (Connection connection = DBConnection.connect();
+             Statement statement = connection.createStatement();) {
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+              time= rs.getTime("ReservationTime");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return time;
+
+    }
 }
