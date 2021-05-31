@@ -146,7 +146,7 @@
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <TextField fx:id="txtResSearch" layoutX="26.0" layoutY="330.0" onKeyPressed="#searchAnyForRes" prefHeight="30.0" prefWidth="200.0" promptText="Search for any..." />
+                        <TextField fx:id="txtResSearch" layoutX="26.0" layoutY="330.0" onKeyTyped="#searchAnyForRes" prefHeight="30.0" prefWidth="200.0" promptText="Search for any..." />
                             </children>
                         </AnchorPane>
                     </content>

@@ -67,6 +67,7 @@ public class AdminScreenController implements Initializable {
     ObservableList<Barber> barbersData;
     ObservableList<Operation> operationsData;
     ObservableList<Customer> customersData;
+    ObservableList<Reservation> resData;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -78,7 +79,7 @@ public class AdminScreenController implements Initializable {
         loadDataForBarber();
         loadDataForOp();
         loadDataForCustomer(null);
-        loadDataForRes();
+        loadDataForRes(null);
 
         //Accept only numbers for int
         txtBarberSalary.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -261,9 +262,18 @@ public class AdminScreenController implements Initializable {
 
     }
 
-    private void loadDataForRes() {
-        List<Reservation> reservations = db.adminResList();
-        resTable.getItems().addAll(reservations);
+    private void loadDataForRes(List<Reservation> list) {
+        if (list == null) {
+            resData = FXCollections.observableArrayList();
+            List<Reservation> reservations = db.adminResList();
+            resData.addAll(reservations);
+            resTable.setItems(resData);
+        } else {
+            ObservableList<Reservation> temp = FXCollections.observableArrayList();
+            temp.addAll(list);
+            resTable.setItems(temp);
+        }
+
     }
 
     public void addBarber(ActionEvent event) {
@@ -413,11 +423,15 @@ public class AdminScreenController implements Initializable {
 
     }
 
+    //TODO: time cost ve ops gelmiyor
     public void searchAnyForRes(KeyEvent keyEvent) {
-        if (txtCustomerSearch.getText().equals("")) {
+        if (txtResSearch.getText().equals("")) {
             keyEvent.consume();
         } else {
-            // TODO: sevda's search db method is here
+            List<Reservation> reservations = db.searchReservation(txtResSearch.getText());
+            reservations.forEach(reservation -> System.out.println(reservation.getId()));
+            loadDataForRes(reservations);
+
         }
     }
 }
