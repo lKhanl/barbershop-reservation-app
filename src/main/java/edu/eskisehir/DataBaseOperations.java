@@ -701,14 +701,28 @@ public class DataBaseOperations {
              Statement statement = connection.createStatement()) {
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
+                int cid=rs.getInt("CustomerID");
                 String customerName = rs.getString("CustomerName");
                 String customerSurname = rs.getString("CustomerSurname");
+                String email=rs.getString("Email");
                 long rid = rs.getLong("ReservationID");
                 Date date = rs.getDate("ReservationDate");
+                Time time=rs.getTime("ReservationTime");
+                int cost=rs.getInt("TotalPrice");
                 String isDone = rs.getString("isDone");
+                int bid=rs.getInt("BarberID");
                 String barberName = rs.getString("BarberName");
                 String barberSurname = rs.getString("BarberSurname");
-                Reservation reservation = new Reservation(new Customer(-1, customerName, customerSurname, null), rid, date, null, -1, new Barber(-1, barberName, barberSurname, -1), null, isDone);
+                int salary=rs.getInt("Salary");
+                String sql2 = "SELECT operation.Price,operation.OperationID,operation.OperationName FROM `operation_selection` " +
+                        "INNER JOIN operation ON operation_selection.OperationID=operation.OperationID WHERE ReservationID=" + "'" + rid + "'";
+                List<Operation> ops=new LinkedList<>();
+                ResultSet rs2=statement.executeQuery(sql2);
+                while (rs2.next()){
+                    Operation operation=new Operation(rs2.getInt("OperationID"),rs2.getString("OperationName"),rs2.getInt("Price"));
+                    ops.add(operation);
+                }
+                Reservation reservation = new Reservation(new Customer(cid, customerName, customerSurname, email), rid, date, time, cost, new Barber(bid, barberName, barberSurname, salary), ops, isDone);
                 list.add(reservation);
             }
         } catch (SQLException throwables) {

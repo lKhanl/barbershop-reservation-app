@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 31 May 2021, 11:04:11
+-- Üretim Zamanı: 31 May 2021, 14:20:07
 -- Sunucu sürümü: 10.4.19-MariaDB
 -- PHP Sürümü: 8.0.6
 
@@ -49,9 +49,14 @@ INSERT INTO `admin` (`AdminID`, `UserName`, `Password`) VALUES
 CREATE TABLE `adminres` (
 `ReservationID` bigint(20)
 ,`ReservationDate` date
+,`ReservationTime` time
+,`TotalPrice` int(11)
 ,`isDone` enum('Waiting','Done','Canceled')
+,`BarberID` int(11)
 ,`BarberName` varchar(20)
 ,`BarberSurname` varchar(20)
+,`Salary` int(11)
+,`CustomerID` int(11)
 ,`CustomerName` varchar(20)
 ,`CustomerSurname` varchar(20)
 );
@@ -1567,7 +1572,7 @@ INSERT INTO `reservation` (`ReservationID`, `ReservationDate`, `ReservationTime`
 --
 DROP TABLE IF EXISTS `adminres`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `adminres`  AS SELECT `reservation`.`ReservationID` AS `ReservationID`, `reservation`.`ReservationDate` AS `ReservationDate`, `reservation`.`isDone` AS `isDone`, `barber`.`BarberName` AS `BarberName`, `barber`.`BarberSurname` AS `BarberSurname`, `customer`.`CustomerName` AS `CustomerName`, `customer`.`CustomerSurname` AS `CustomerSurname` FROM ((`reservation` join `barber` on(`barber`.`BarberID` = `reservation`.`BarberID`)) join `customer` on(`customer`.`CustomerID` = `reservation`.`CustomerID`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `adminres`  AS SELECT `reservation`.`ReservationID` AS `ReservationID`, `reservation`.`ReservationDate` AS `ReservationDate`, `reservation`.`ReservationTime` AS `ReservationTime`, `reservation`.`TotalPrice` AS `TotalPrice`, `reservation`.`isDone` AS `isDone`, `barber`.`BarberID` AS `BarberID`, `barber`.`BarberName` AS `BarberName`, `barber`.`BarberSurname` AS `BarberSurname`, `barber`.`Salary` AS `Salary`, `customer`.`CustomerID` AS `CustomerID`, `customer`.`CustomerName` AS `CustomerName`, `customer`.`CustomerSurname` AS `CustomerSurname` FROM ((`reservation` join `barber` on(`barber`.`BarberID` = `reservation`.`BarberID`)) join `customer` on(`customer`.`CustomerID` = `reservation`.`CustomerID`)) ;
 
 --
 -- Dökümü yapılmış tablolar için indeksler
