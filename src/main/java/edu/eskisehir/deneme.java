@@ -113,23 +113,8 @@ public class deneme {
 
         }*/
 
-        List<String> oldlist = new LinkedList<>();
-        oldlist.add("a");
-        oldlist.add("b");
-        oldlist.add("c");
-        oldlist.add("d");
-
-
-        List<String> newlist = new LinkedList<>();
-        newlist.add("a");
-        newlist.add("c");
-        newlist.add("d");
-
-
-        oldlist.removeAll(newlist);
-        for (int i = 0; i < oldlist.size(); i++) {
-            System.out.println(oldlist);
-        }
-
+      DataBaseOperations dataBaseOperations1=new DataBaseOperations();
+     List<Reservation> list= dataBaseOperations1.searchReservation("21010610001");
+        System.out.println(list.get(0).getCustomer().getName());
     }
 }

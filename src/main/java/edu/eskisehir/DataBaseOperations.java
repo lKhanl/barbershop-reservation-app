@@ -670,8 +670,8 @@ public class DataBaseOperations {
 
     public List<Customer> searchCustomer(String name) {
         List<Customer> list = new LinkedList<>();
-        String sql = "SELECT CustomerID,CustomerName,CustomerSurname,Email FROM customer WHERE CustomerName LIKE  "+"'%" + name + "%'"+
-                " OR CustomerSurname LIKE"+"'%" + name + "%'"+"OR Email LIKE"+"'%" + name + "%'";
+        String sql = "SELECT CustomerID,CustomerName,CustomerSurname,Email FROM customer WHERE CustomerName LIKE '%" + name + "%'" +
+                " OR CustomerSurname LIKE '%" + name + "%' OR Email LIKE '%" + name + "%'";
         try (Connection connection = DBConnection.connect();
              Statement stmt = connection.createStatement()) {
 
@@ -687,6 +687,33 @@ public class DataBaseOperations {
             e.printStackTrace();
         }
         System.out.println("Search işlemi başarılı.");
+        return list;
+    }
+
+    public List<Reservation> searchReservation(String name) {
+        List<Reservation> list = new LinkedList<>();
+        String sql = "SELECT * FROM adminres WHERE ReservationID LIKE '%" + name + "%'" +
+                " OR BarberName LIKE '%" + name + "%' OR BarberSurname LIKE '%" + name + "%' OR CustomerName LIKE '%" +
+                name +"%' OR CustomerSurname LIKE '%"+ name +"%' OR isDone LIKE '%"+name+"%'";
+
+
+        try (Connection connection = DBConnection.connect();
+             Statement statement = connection.createStatement()) {
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                String customerName = rs.getString("CustomerName");
+                String customerSurname = rs.getString("CustomerSurname");
+                long rid = rs.getLong("ReservationID");
+                Date date = rs.getDate("ReservationDate");
+                String isDone = rs.getString("isDone");
+                String barberName = rs.getString("BarberName");
+                String barberSurname = rs.getString("BarberSurname");
+                Reservation reservation = new Reservation(new Customer(-1, customerName, customerSurname, null), rid, date, null, -1, new Barber(-1, barberName, barberSurname, -1), null, isDone);
+                list.add(reservation);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return list;
     }
 

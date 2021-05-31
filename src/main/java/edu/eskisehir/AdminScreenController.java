@@ -395,6 +395,7 @@ public class AdminScreenController implements Initializable {
         }
     }
 
+    //TODO:Sadece operation değiştirmek istediğimde de boş diyor.
     public void updateOp(ActionEvent event) {
         if (comboStatus.getSelectionModel().getSelectedItem() != null) {
             ObservableList<Operation> selectedOps = comboOps.getCheckModel().getCheckedItems();
