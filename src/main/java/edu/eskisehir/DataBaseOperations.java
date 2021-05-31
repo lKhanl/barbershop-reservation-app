@@ -694,7 +694,7 @@ public class DataBaseOperations {
         List<Reservation> list = new LinkedList<>();
         String sql = "SELECT * FROM adminres WHERE ReservationID LIKE '%" + name + "%'" +
                 " OR BarberName LIKE '%" + name + "%' OR BarberSurname LIKE '%" + name + "%' OR CustomerName LIKE '%" +
-                name +"%' OR CustomerSurname LIKE '%"+ name +"%' OR isDone LIKE '%"+name+"%'";
+                name + "%' OR CustomerSurname LIKE '%" + name + "%' OR isDone LIKE '%" + name + "%'";
 
 
         try (Connection connection = DBConnection.connect();
@@ -702,25 +702,25 @@ public class DataBaseOperations {
              Statement statement2 = connection.createStatement()) {
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
-                int cid=rs.getInt("CustomerID");
+                int cid = rs.getInt("CustomerID");
                 String customerName = rs.getString("CustomerName");
                 String customerSurname = rs.getString("CustomerSurname");
-                String email=rs.getString("Email");
+                String email = rs.getString("Email");
                 long rid = rs.getLong("ReservationID");
                 Date date = rs.getDate("ReservationDate");
-                Time time=rs.getTime("ReservationTime");
-                int cost=rs.getInt("TotalPrice");
+                Time time = rs.getTime("ReservationTime");
+                int cost = rs.getInt("TotalPrice");
                 String isDone = rs.getString("isDone");
-                int bid=rs.getInt("BarberID");
+                int bid = rs.getInt("BarberID");
                 String barberName = rs.getString("BarberName");
                 String barberSurname = rs.getString("BarberSurname");
-                int salary=rs.getInt("Salary");
+                int salary = rs.getInt("Salary");
                 String sql2 = "SELECT operation.Price,operation.OperationID,operation.OperationName FROM `operation_selection` " +
                         "INNER JOIN operation ON operation_selection.OperationID=operation.OperationID WHERE ReservationID=" + "'" + rid + "'";
-                List<Operation> ops=new LinkedList<>();
-                ResultSet rs2=statement2.executeQuery(sql2);
-                while (rs2.next()){
-                    Operation operation=new Operation(rs2.getInt("OperationID"),rs2.getString("OperationName"),rs2.getInt("Price"));
+                List<Operation> ops = new LinkedList<>();
+                ResultSet rs2 = statement2.executeQuery(sql2);
+                while (rs2.next()) {
+                    Operation operation = new Operation(rs2.getInt("OperationID"), rs2.getString("OperationName"), rs2.getInt("Price"));
                     ops.add(operation);
                 }
                 Reservation reservation = new Reservation(new Customer(cid, customerName, customerSurname, email), rid, date, time, cost, new Barber(bid, barberName, barberSurname, salary), ops, isDone);
@@ -730,6 +730,23 @@ public class DataBaseOperations {
             throwables.printStackTrace();
         }
         return list;
+    }
+
+    public List<String> getExistingYear() {
+        List<String> years = new LinkedList<>();
+        String sql = "SELECT DISTINCT YEAR(ReservationDate) AS 'year' FROM `reservation` ORDER BY `year` ASC";
+        try (Connection connection = DBConnection.connect();
+             Statement statement = connection.createStatement();
+        ) {
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                years.add(resultSet.getString("year"));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return years;
     }
 
 

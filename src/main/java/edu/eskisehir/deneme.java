@@ -101,20 +101,26 @@ public class deneme {
         list.add(2);
 
         dataBaseOperations.bookReservation(date,time,1,601,list);*/
-        DataBaseOperations dataBaseOperations = new DataBaseOperations();
+       /* DataBaseOperations dataBaseOperations = new DataBaseOperations();
 
         List<Long> resIDs = dataBaseOperations.getAllResIDs();
 
 
-      /*  for (int i = 0; i < resIDs.size(); i++) {
+        for (int i = 0; i < resIDs.size(); i++) {
             long resID = resIDs.get(i);
             dataBaseOperations.isDoneTemp(resID);
 
 
         }*/
 
-      DataBaseOperations dataBaseOperations1=new DataBaseOperations();
-     List<Reservation> list= dataBaseOperations1.searchReservation("21010610001");
-        System.out.println(list.get(0).getCustomer().getName());
+       /* DataBaseOperations dataBaseOperations1 = new DataBaseOperations();
+        List<Reservation> list = dataBaseOperations1.searchReservation("21010610001");
+        System.out.println(list.get(0).getCustomer().getName());*/
+        DataBaseOperations dataBaseOperations = new DataBaseOperations();
+        List<String> list = dataBaseOperations.getExistingYear();
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+        }
     }
+
 }
