@@ -16,6 +16,7 @@ import org.controlsfx.control.CheckComboBox;
 
 import java.net.URL;
 import java.sql.Time;
+import java.text.DateFormatSymbols;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -62,6 +63,16 @@ public class AdminScreenController implements Initializable {
     public Label lblConsoleRes;
     public CheckComboBox<Operation> comboOps;
     public TextField txtResSearch;
+    public ComboBox<String> comboStatsYear1;
+    public ComboBox<String> comboStatsMonth1;
+    public Label lblStats1;
+    public ComboBox<String> comboStatsYear2;
+    public ComboBox<String> comboStatsMonth2;
+    public Label lblStats3;
+    public ComboBox<String> comboStatsYear3;
+    public Label lblStats4;
+    public Label lblStats5;
+    public Label lblStats2;
 
     DataBaseOperations db = new DataBaseOperations();
     ObservableList<Barber> barbersData;
@@ -80,6 +91,7 @@ public class AdminScreenController implements Initializable {
         loadDataForOp();
         loadDataForCustomer(null);
         loadDataForRes(null);
+        loadDataForStats();
 
         //Accept only numbers for int
         txtBarberSalary.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -249,6 +261,17 @@ public class AdminScreenController implements Initializable {
         opPriceCol.setSortType(TableColumn.SortType.ASCENDING);
         operationsTable.getSortOrder().add(opPriceCol);
         operationsTable.sort();
+    }
+
+    private void loadDataForStats() {
+        List<String> monthsList = new LinkedList<>(Arrays.asList(new DateFormatSymbols().getMonths()));
+        monthsList.remove(monthsList.size() - 1);
+
+        comboStatsMonth1.getItems().addAll(monthsList);
+        comboStatsMonth2.getItems().addAll(monthsList);
+
+        comboStatsYear1.getItems().add("2020");////////////////////////////
+        comboStatsYear2.getItems().add("2020");
     }
 
     private void loadDataForCustomer(List<Customer> list) {
@@ -438,6 +461,19 @@ public class AdminScreenController implements Initializable {
 //            reservations.forEach(reservation -> System.out.println(reservation.getId()));
             loadDataForRes(reservations);
 
+        }
+    }
+
+    public void getFirst(ActionEvent event) {
+        if (comboStatsMonth1.getSelectionModel().getSelectedItem() != null && comboStatsYear1.getSelectionModel().getSelectedItem() != null) {
+            int index = comboStatsMonth1.getSelectionModel().getSelectedIndex() + 1;
+            System.out.println(comboStatsMonth1.getSelectionModel().getSelectedItem() + " " + comboStatsYear1.getSelectionModel().getSelectedItem() + " " + index);
+        }
+    }
+
+    public void getSecond(ActionEvent event) {
+        if (comboStatsMonth2.getSelectionModel().getSelectedItem() != null && comboStatsYear2.getSelectionModel().getSelectedItem() != null) {
+            System.out.println(comboStatsMonth2.getSelectionModel().getSelectedItem() + " " + comboStatsYear2.getSelectionModel().getSelectedItem());
         }
     }
 }
