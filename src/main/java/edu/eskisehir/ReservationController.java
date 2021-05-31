@@ -71,6 +71,7 @@ public class ReservationController implements Initializable {
     public Label lblSelectedServices;
     public Label lblServicesPrice;
     public ImageView logo;
+    public CheckBox isExportCard;
 
     int cid = MainController.cid;
     DataBaseOperations db = new DataBaseOperations();
@@ -254,9 +255,10 @@ public class ReservationController implements Initializable {
             long resID = db.bookReservation(resDate.getValue().toString(), comboTime.getValue(), comboBarbers.getValue().getId(), cid, opIDs);
 
             lblResID.setText("ResID : " + resID);
-            saveAsPng(event);
+            if (isExportCard.isSelected()){
+                saveAsPng(event);
+            }
             clearFields();
-
             loadDataForProfile();
 
             lblConsoleRes.setTextFill(Color.GREEN);
