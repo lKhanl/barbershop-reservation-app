@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 30 May 2021, 22:59:41
+-- Üretim Zamanı: 31 May 2021, 11:04:11
 -- Sunucu sürümü: 10.4.19-MariaDB
 -- PHP Sürümü: 8.0.6
 
@@ -39,6 +39,22 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`AdminID`, `UserName`, `Password`) VALUES
 (0, 'admin', 'admin');
+
+-- --------------------------------------------------------
+
+--
+-- Görünüm yapısı durumu `adminres`
+-- (Asıl görünüm için aşağıya bakın)
+--
+CREATE TABLE `adminres` (
+`ReservationID` bigint(20)
+,`ReservationDate` date
+,`isDone` enum('Waiting','Done','Canceled')
+,`BarberName` varchar(20)
+,`BarberSurname` varchar(20)
+,`CustomerName` varchar(20)
+,`CustomerSurname` varchar(20)
+);
 
 -- --------------------------------------------------------
 
@@ -684,7 +700,7 @@ INSERT INTO `customer` (`CustomerID`, `CustomerName`, `CustomerSurname`, `Email`
 (598, 'Ernesto', 'Williams', 'ernestowilliams@outlook.com', 'ernestowilliams3313'),
 (599, 'Darius', 'Weiss', 'dariusweiss@msn.com', 'dariusweiss3633'),
 (600, 'Boston', 'Simmons', 'bostonsimmons@outlook.com', 'bostonsimmons6154'),
-(601, 'a', 'a', 'a@a.com', 'a');
+(601, 'a', 'cccc', 'a@bbbb.com', 'a');
 
 -- --------------------------------------------------------
 
@@ -1543,6 +1559,15 @@ INSERT INTO `reservation` (`ReservationID`, `ReservationDate`, `ReservationTime`
 (21122819301, '2021-12-28', '19:30:00', 'Waiting', 3, 1, 426),
 (21123115307, '2021-12-31', '15:30:00', 'Waiting', 23, 7, 216),
 (21123116307, '2021-12-31', '16:30:00', 'Waiting', 5, 7, 412);
+
+-- --------------------------------------------------------
+
+--
+-- Görünüm yapısı `adminres`
+--
+DROP TABLE IF EXISTS `adminres`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `adminres`  AS SELECT `reservation`.`ReservationID` AS `ReservationID`, `reservation`.`ReservationDate` AS `ReservationDate`, `reservation`.`isDone` AS `isDone`, `barber`.`BarberName` AS `BarberName`, `barber`.`BarberSurname` AS `BarberSurname`, `customer`.`CustomerName` AS `CustomerName`, `customer`.`CustomerSurname` AS `CustomerSurname` FROM ((`reservation` join `barber` on(`barber`.`BarberID` = `reservation`.`BarberID`)) join `customer` on(`customer`.`CustomerID` = `reservation`.`CustomerID`)) ;
 
 --
 -- Dökümü yapılmış tablolar için indeksler
