@@ -405,9 +405,11 @@ public class AdminScreenController implements Initializable {
         }
     }
 
-    //TODO:Sadece operation değiştirmek istediğimde de boş diyor.
     public void updateOp(ActionEvent event) {
-        if (comboStatus.getSelectionModel().getSelectedItem() != null) {
+        if (comboOps.getCheckModel().getCheckedItems().size() == 0) {
+            lblConsoleRes.setTextFill(Color.RED);
+            lblConsoleRes.setText("You must select at least one operation!");
+        } else if (comboOps.getCheckModel().getCheckedItems() != null) {
             ObservableList<Operation> selectedOps = comboOps.getCheckModel().getCheckedItems();
             List<Operation> updated = new LinkedList<>();
             updated.addAll(selectedOps);
@@ -416,9 +418,6 @@ public class AdminScreenController implements Initializable {
             lblConsoleRes.setTextFill(Color.GREEN);
             lblConsoleRes.setText("Successfully, updated operations!");
             resTable.refresh();
-        } else if (comboStatus.getSelectionModel().getSelectedItem() == null) {
-            lblConsoleRes.setTextFill(Color.RED);
-            lblConsoleRes.setText("First, select a row or empty operations!");
         }
 
     }
