@@ -469,13 +469,11 @@ public class AdminScreenController implements Initializable {
     public void getMostSelectedOp(ActionEvent event) {
         if (comboStatsMonth1.getSelectionModel().getSelectedItem() != null && comboStatsYear1.getSelectionModel().getSelectedItem() != null) {
             int index = comboStatsMonth1.getSelectionModel().getSelectedIndex() + 1;
-            System.out.println(comboStatsYear1.getSelectionModel().getSelectedItem());
-            System.out.println(index);
             Operation op = db.mostSelectedOperation(comboStatsYear1.getSelectionModel().getSelectedItem(), index);
             if (op == null) {
                 lblStats1.setTextFill(Color.RED);
                 lblStats1.setText("There is no operation for this month!");
-            } else{
+            } else {
                 lblStats1.setTextFill(Color.BLACK);
                 lblStats1.setText(op.getName());
             }
@@ -486,7 +484,14 @@ public class AdminScreenController implements Initializable {
     public void getMostChosenBarber(ActionEvent event) {
         if (comboStatsMonth2.getSelectionModel().getSelectedItem() != null && comboStatsYear2.getSelectionModel().getSelectedItem() != null) {
             int index = comboStatsMonth2.getSelectionModel().getSelectedIndex() + 1;
-            System.out.println(comboStatsMonth2.getSelectionModel().getSelectedItem() + " " + comboStatsYear2.getSelectionModel().getSelectedItem());
+            Barber barber = db.mostSelectedBarber(comboStatsYear2.getSelectionModel().getSelectedItem(), index);
+            if (barber == null) {
+                lblStats2.setTextFill(Color.RED);
+                lblStats2.setText("asdasdasd");
+            } else {
+                lblStats2.setTextFill(Color.BLACK);
+                lblStats2.setText(barber.toString());
+            }
         }
     }
 

@@ -820,7 +820,7 @@ public class DataBaseOperations {
              Statement statement = connection.createStatement();) {
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
-                most = rs.getInt("OperationID");
+                most = rs.getInt("BarberID");
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
