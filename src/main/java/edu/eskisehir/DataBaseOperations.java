@@ -315,6 +315,23 @@ public class DataBaseOperations {
 
     }
 
+    public Operation getOperationByID(int operationID) {
+        String sql = "SELECT * FROM operation WHERE OperationID=" + "'" + operationID + "'";
+        Operation operation = null;
+
+        try (Connection connection = DBConnection.connect();
+             Statement statement = connection.createStatement();) {
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                operation = new Operation(rs.getInt("OperationID"), rs.getString("OperationName"), rs.getInt("Price"));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return operation;
+    }
+
     public List<Operation> getOperations() {
         List<Operation> operations = new LinkedList<>();
         String sql = "SELECT * FROM operation";
@@ -749,5 +766,26 @@ public class DataBaseOperations {
         return years;
     }
 
+    public int mostSelectedOperation(String year, String month) {
+        int most = -1;
+        String sql = "SELECT operation_selection.OperationID, COUNT(operation_selection.OperationID) AS freq FROM `reservation`" +
+                "INNER JOIN operation_selection ON operation_selection.ReservationID=reservation.ReservationID" +
+                "WHERE reservation.isDone='Done'" +
+                "AND YEAR(reservation.ReservationDate)=" + "'" + year + "'" +
+                "AND MONTH(reservation.ReservationDate)=" + "'" + month + "'" +
+                "GROUP BY operation_selection.OperationID ORDER BY freq DESC" +
+                "LIMIT 1";
+
+        try (Connection connection = DBConnection.connect();
+             Statement statement = connection.createStatement();) {
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                most = rs.getInt("OperationID");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return most;
+    }
 
 }
