@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -38,10 +39,6 @@ public class AdminScreenController implements Initializable {
     public TextField txtOpPrice;
     public TableColumn<Operation, String> opNameCol;
     public TableColumn<Operation, Integer> opPriceCol;
-    public Tab tabOp;
-    public Tab tabBarbers;
-    public Tab tabCustomers;
-    public Tab tabRes;
     public TableView<Customer> customersTable;
     public TableColumn<Customer, String> customerNameCol;
     public TableColumn<Customer, String> customerSurnameCol;
@@ -73,6 +70,7 @@ public class AdminScreenController implements Initializable {
     public Label lblStats4;
     public Label lblStats5;
     public Label lblStats2;
+    public ImageView clap;
 
     DataBaseOperations db = new DataBaseOperations();
     ObservableList<Barber> barbersData;
@@ -274,6 +272,11 @@ public class AdminScreenController implements Initializable {
         comboStatsYear1.getItems().addAll(years);
         comboStatsYear2.getItems().addAll(years);
         comboStatsYear3.getItems().addAll(years);
+
+        Time time = db.busiestTime();
+        lblStats3.setText(time.toString());
+
+        clap.setVisible(false);
     }
 
     private void loadDataForCustomer(List<Customer> list) {
@@ -471,9 +474,11 @@ public class AdminScreenController implements Initializable {
             int index = comboStatsMonth1.getSelectionModel().getSelectedIndex() + 1;
             Operation op = db.mostSelectedOperation(comboStatsYear1.getSelectionModel().getSelectedItem(), index);
             if (op == null) {
+                lblStats1.setStyle("-fx-font-size: 14");
                 lblStats1.setTextFill(Color.RED);
                 lblStats1.setText("There is no operation for this month!");
             } else {
+                lblStats1.setStyle("-fx-font-size: 18");
                 lblStats1.setTextFill(Color.BLACK);
                 lblStats1.setText(op.getName());
             }
@@ -486,9 +491,13 @@ public class AdminScreenController implements Initializable {
             int index = comboStatsMonth2.getSelectionModel().getSelectedIndex() + 1;
             Barber barber = db.mostSelectedBarber(comboStatsYear2.getSelectionModel().getSelectedItem(), index);
             if (barber == null) {
+                clap.setVisible(false);
+                lblStats2.setStyle("-fx-font-size: 14");
                 lblStats2.setTextFill(Color.RED);
                 lblStats2.setText("asdasdasd");
             } else {
+                clap.setVisible(true);
+                lblStats2.setStyle("-fx-font-size: 18");
                 lblStats2.setTextFill(Color.BLACK);
                 lblStats2.setText(barber.toString());
             }

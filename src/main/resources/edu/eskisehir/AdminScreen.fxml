@@ -19,7 +19,7 @@
     <children>
         <TabPane prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab fx:id="tabBarbers" text="Barbers">
+                <Tab text="Barbers">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="407.0" prefWidth="639.0">
                             <children>
@@ -52,7 +52,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab fx:id="tabOp" text="Operations">
+                <Tab text="Operations">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
@@ -88,7 +88,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab fx:id="tabCustomers" text="Customers">
+                <Tab text="Customers">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
@@ -114,7 +114,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab fx:id="tabRes" text="All Reservations">
+                <Tab text="All Reservations">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
@@ -141,8 +141,8 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <CheckComboBox fx:id="comboOps" layoutX="375.0" layoutY="405.0" prefHeight="30.0" prefWidth="150.0" styleClass="rounded" title="Operations" />
-                        <Button layoutX="546.0" layoutY="405.0" mnemonicParsing="false" onAction="#updateOp" styleClass="btnAdd" text="Update Operatoins">
+                        <CheckComboBox fx:id="comboOps" layoutX="375.0" layoutY="405.0" prefHeight="30.0" prefWidth="150.0" title="Operations" />
+                        <Button layoutX="546.0" layoutY="405.0" mnemonicParsing="false" onAction="#updateOp" styleClass="btnAdd" text="Update Operations">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -165,7 +165,7 @@
                         <ComboBox fx:id="comboStatsMonth1" layoutX="200.0" layoutY="55.0" onAction="#getMostSelectedOp" prefHeight="25.0" prefWidth="130.0" promptText="Select a month" />
                         <Label fx:id="lblStats1" layoutX="399.0" layoutY="53.0" prefHeight="30.0" prefWidth="240.0" AnchorPane.rightAnchor="50.0">
                            <font>
-                              <Font size="14.0" />
+                              <Font name="Comic Sans MS" size="18.0" />
                            </font>
                         </Label>
                         <ComboBox fx:id="comboStatsYear2" layoutX="25.0" layoutY="150.0" onAction="#getMostChosenBarber" prefHeight="25.0" prefWidth="110.0" promptText="Select a year" AnchorPane.leftAnchor="55.0" />
@@ -182,7 +182,7 @@
                         </Label>
                         <Label fx:id="lblStats3" layoutX="350.0" layoutY="214.0" prefHeight="30.0" prefWidth="240.0" AnchorPane.rightAnchor="50.0">
                            <font>
-                              <Font size="14.0" />
+                              <Font name="Comic Sans MS" size="18.0" />
                            </font>
                         </Label>
                         <ComboBox fx:id="comboStatsYear3" layoutX="55.0" layoutY="319.0" onAction="#getAverageMonthlyIncome" prefHeight="25.0" prefWidth="110.0" promptText="Select a year" AnchorPane.leftAnchor="55.0" />
@@ -193,7 +193,7 @@
                         </Label>
                         <Label fx:id="lblStats4" layoutX="410.0" layoutY="317.0" prefHeight="30.0" prefWidth="240.0" AnchorPane.rightAnchor="50.0">
                            <font>
-                              <Font size="14.0" />
+                              <Font name="Comic Sans MS" size="18.0" />
                            </font>
                         </Label>
                         <Separator layoutX="14.0" layoutY="90.0" prefHeight="3.0" prefWidth="660.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
@@ -207,14 +207,19 @@
                         </Label>
                         <Label fx:id="lblStats5" layoutX="350.0" layoutY="388.0" prefHeight="30.0" prefWidth="240.0" AnchorPane.rightAnchor="50.0">
                            <font>
-                              <Font size="14.0" />
+                              <Font name="Comic Sans MS" size="18.0" />
                            </font>
                         </Label>
                         <Label fx:id="lblStats2" layoutX="350.0" layoutY="148.0" prefHeight="30.0" prefWidth="240.0" AnchorPane.rightAnchor="50.0">
                            <font>
-                              <Font size="14.0" />
+                              <Font name="Comic Sans MS" size="18.0" />
                            </font>
                         </Label>
+                        <ImageView fx:id="clap" fitHeight="81.0" fitWidth="56.0" layoutX="568.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@media/clap.gif" />
+                           </image>
+                        </ImageView>
                      </children></AnchorPane>
               </content>
             </Tab>
