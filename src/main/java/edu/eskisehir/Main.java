@@ -9,7 +9,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -20,6 +19,8 @@ import java.util.Objects;
 public class Main extends Application {
 
     private static Scene scene;
+    private static MediaPlayer audio;
+    private static boolean isMute;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -41,25 +42,34 @@ public class Main extends Application {
         return fxmlLoader.load();
     }
 
-    public static Stage openNewStage(String fxml,Class C,String icon) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(C.getResource(fxml+".fxml"));
+    public static Stage openNewStage(String fxml, Class C, String icon) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(C.getResource(fxml + ".fxml"));
         Parent root = fxmlLoader.load();
         Stage newStage = new Stage();
         Scene newScene = new Scene(root);
-        if (!icon.equals("none")){
-            newStage.getIcons().add(new Image(Objects.requireNonNull(C.getResource("media/"+icon)).toString()));
+        if (!icon.equals("none")) {
+            newStage.getIcons().add(new Image(Objects.requireNonNull(C.getResource("media/" + icon)).toString()));
         }
         newStage.setScene(newScene);
         return newStage;
     }
 
-    public void play(){
-        URL path = getClass().getResource("audio/lobby.mp3");
+    public static void play() {
+        URL path = Main.class.getResource("audio/lobby.mp3");
         Media media = new Media(path.toString());
-        MediaPlayer audio = new MediaPlayer(media);
+        audio = new MediaPlayer(media);
         audio.setVolume(0.5);
 //        audio.setAutoPlay(true);
         audio.play();
+    }
+
+    public static void pauseAndPlay() {
+        isMute = !isMute;
+        if (isMute) {
+            audio.pause();
+        } else{
+            audio.play();
+        }
     }
 
     public static void main(String[] args) {

@@ -4,27 +4,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
-import org.controlsfx.control.IndexedCheckModel;
 
 import javax.imageio.ImageIO;
 
@@ -384,4 +378,7 @@ public class ReservationController implements Initializable {
         lblServicesPrice.setText(String.valueOf(totalPrice));
     }
 
+    public void pauseAndPlay(ActionEvent event) {
+        Main.pauseAndPlay();
+    }
 }

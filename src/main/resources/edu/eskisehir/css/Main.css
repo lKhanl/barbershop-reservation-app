@@ -69,14 +69,12 @@
     -fx-font-family: "Calibri Light";
 }
 
-/*#btnAdminLogin {*/
-/*    -fx-background-color: #A7D6AA;*/
-/*    -fx-border-width: 1px;*/
-/*    -fx-border-style: solid;*/
-/*    -fx-border-radius: 20px;*/
-/*    -fx-border-color: teal;*/
-/*}*/
+.PlayPause {
+    -fx-background-color: #9fdbda;
+    -fx-border-color: #75a9c7;
+    -fx-border-radius: 12;
+}
 
-/*#btnAdminLogin:hover {*/
-/*    -fx-background-color: #7adc81;*/
-/*}*/
+.PlayPause:hover {
+    -fx-background-color: #75a9c7;
+}

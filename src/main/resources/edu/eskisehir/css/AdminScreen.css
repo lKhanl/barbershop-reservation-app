@@ -108,3 +108,13 @@
 .combo-box .cell:selected {
     -fx-text-fill: #0b4d87;
 }
+
+.PlayPause{
+    -fx-background-color: #F8CDE8;
+    -fx-border-color: #DFB1E6;
+    -fx-border-radius: 10;
+}
+
+.PlayPause:hover{
+    -fx-background-color: #DFB1E6;
+}

@@ -48,6 +48,7 @@
                                         <Font size="14.0" />
                                     </font>
                                 </Button>
+                        <Button layoutX="614.0" layoutY="373.0" mnemonicParsing="false" onAction="#pauseAndPlay" styleClass="PlayPause" text="Play/Pause" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -84,6 +85,7 @@
                               <Image url="@media/op.png" />
                            </image>
                         </ImageView>
+                        <Button layoutX="612.0" layoutY="9.0" mnemonicParsing="false" onAction="#pauseAndPlay" styleClass="PlayPause" text="Play/Pause" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -99,7 +101,7 @@
                                         <TableColumn fx:id="customerEmailCol" prefWidth="300.0" resizable="false" text="Email" />
                                     </columns>
                                 </TableView>
-                                <Button fx:id="btnCustomerDelete" layoutX="616.0" layoutY="420.0" mnemonicParsing="false" onAction="#deleteCustomer" prefHeight="30.0" prefWidth="70.0" styleClass="btnDelete" text="DELETE">
+                                <Button fx:id="btnCustomerDelete" layoutX="616.0" layoutY="421.0" mnemonicParsing="false" onAction="#deleteCustomer" prefHeight="30.0" prefWidth="70.0" styleClass="btnDelete" text="DELETE">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
@@ -110,6 +112,7 @@
                                         <Font size="14.0" />
                                     </font>
                                 </Label>
+                        <Button layoutX="520.0" layoutY="423.0" mnemonicParsing="false" onAction="#pauseAndPlay" styleClass="PlayPause" text="Play/Pause" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -148,6 +151,7 @@
                            </font>
                         </Button>
                         <TextField fx:id="txtResSearch" layoutX="26.0" layoutY="330.0" onKeyTyped="#searchAnyForRes" prefHeight="30.0" prefWidth="200.0" promptText="Search for any..." />
+                        <Button layoutX="284.0" layoutY="407.0" mnemonicParsing="false" onAction="#pauseAndPlay" styleClass="PlayPause" text="Play/Pause" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -220,6 +224,7 @@
                               <Image url="@media/clap.gif" />
                            </image>
                         </ImageView>
+                        <Button layoutX="612.0" layoutY="423.0" mnemonicParsing="false" onAction="#pauseAndPlay" styleClass="PlayPause" text="Play/Pause" />
                      </children></AnchorPane>
               </content>
             </Tab>

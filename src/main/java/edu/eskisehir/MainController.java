@@ -89,4 +89,7 @@ public class MainController {
         stage.show();
     }
 
+    public void pauseAndPlay(ActionEvent event) {
+        Main.pauseAndPlay();
+    }
 }

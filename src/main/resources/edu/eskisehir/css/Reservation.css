@@ -109,3 +109,13 @@
 .table-view:focused {
     -fx-background-color: #A39892;
 }
+
+.PlayPause {
+    -fx-background-color: #d48c8c;
+    -fx-border-color: #9a4040;
+    -fx-border-radius: 12;
+}
+
+.PlayPause:hover {
+    -fx-background-color: #9a4040;
+}

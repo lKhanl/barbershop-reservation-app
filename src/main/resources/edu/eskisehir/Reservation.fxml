@@ -57,6 +57,7 @@
                            </font>
                         </Label>
                         <ImageView id="logo" fx:id="logo" fitHeight="305.0" fitWidth="329.0" layoutX="361.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button layoutX="617.0" layoutY="633.0" mnemonicParsing="false" onAction="#pauseAndPlay" styleClass="PlayPause" text="Play/Pause" />
                      </children></AnchorPane>
                     </content>
                 </Tab>
@@ -123,6 +124,7 @@
                                         </Label>
                                     </children>
                                 </Pane>
+                        <Button layoutX="626.0" layoutY="633.0" mnemonicParsing="false" onAction="#pauseAndPlay" styleClass="PlayPause" text="Play/Pause" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -221,6 +223,7 @@
                                         </Label>
                                     </children>
                                 </Pane>
+                        <Button layoutX="620.0" layoutY="633.0" mnemonicParsing="false" onAction="#pauseAndPlay" styleClass="PlayPause" text="Play/Pause" />
                             </children>
                         </AnchorPane>
                     </content>
