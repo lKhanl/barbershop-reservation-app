@@ -156,42 +156,42 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0">
                      <children>
-                        <Label layoutX="17.0" layoutY="24.0" prefHeight="30.0" prefWidth="340.0" text="Which operation is the most selected in a month?">
+                        <Label layoutX="53.0" layoutY="23.0" prefHeight="30.0" prefWidth="340.0" text="Which operation is the most selected in a month?" AnchorPane.leftAnchor="50.0">
                            <font>
                               <Font name="System Bold Italic" size="14.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="comboStatsYear1" layoutX="25.0" layoutY="55.0" onAction="#getMostSelectedOp" prefHeight="25.0" prefWidth="110.0" promptText="Select a year" />
-                        <ComboBox fx:id="comboStatsMonth1" layoutX="164.0" layoutY="55.0" onAction="#getMostSelectedOp" prefHeight="25.0" prefWidth="130.0" promptText="Select a month" />
-                        <Label fx:id="lblStats1" layoutX="350.0" layoutY="53.0" prefHeight="30.0" prefWidth="240.0">
+                        <ComboBox fx:id="comboStatsYear1" layoutX="52.0" layoutY="55.0" onAction="#getMostSelectedOp" prefHeight="25.0" prefWidth="110.0" promptText="Select a year" AnchorPane.leftAnchor="55.0" />
+                        <ComboBox fx:id="comboStatsMonth1" layoutX="200.0" layoutY="55.0" onAction="#getMostSelectedOp" prefHeight="25.0" prefWidth="130.0" promptText="Select a month" />
+                        <Label fx:id="lblStats1" layoutX="399.0" layoutY="53.0" prefHeight="30.0" prefWidth="240.0" AnchorPane.rightAnchor="50.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="comboStatsYear2" layoutX="25.0" layoutY="150.0" onAction="#getMostChosenBarber" prefHeight="25.0" prefWidth="110.0" promptText="Select a year" />
-                        <ComboBox fx:id="comboStatsMonth2" layoutX="164.0" layoutY="151.0" onAction="#getMostChosenBarber" prefWidth="130.0" promptText="Select a month" />
-                        <Label layoutX="17.0" layoutY="114.0" prefHeight="30.0" prefWidth="340.0" text="Which barber is the most chosen in a month?">
+                        <ComboBox fx:id="comboStatsYear2" layoutX="25.0" layoutY="150.0" onAction="#getMostChosenBarber" prefHeight="25.0" prefWidth="110.0" promptText="Select a year" AnchorPane.leftAnchor="55.0" />
+                        <ComboBox fx:id="comboStatsMonth2" layoutX="200.0" layoutY="150.0" onAction="#getMostChosenBarber" prefWidth="130.0" promptText="Select a month" />
+                        <Label layoutX="17.0" layoutY="114.0" prefHeight="30.0" prefWidth="340.0" text="Which barber is the most chosen in a month?" AnchorPane.leftAnchor="50.0">
                            <font>
                               <Font name="System Bold Italic" size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="17.0" layoutY="214.0" prefHeight="30.0" prefWidth="340.0" text="What time interval is the busiest?">
+                        <Label layoutX="17.0" layoutY="214.0" prefHeight="30.0" prefWidth="340.0" text="What time interval is the busiest?" AnchorPane.leftAnchor="50.0">
                            <font>
                               <Font name="System Bold Italic" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblStats3" layoutX="350.0" layoutY="214.0" prefHeight="30.0" prefWidth="240.0">
+                        <Label fx:id="lblStats3" layoutX="350.0" layoutY="214.0" prefHeight="30.0" prefWidth="240.0" AnchorPane.rightAnchor="50.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="comboStatsYear3" layoutX="25.0" layoutY="316.0" onAction="#getAverageMonthlyIncome" prefHeight="25.0" prefWidth="110.0" promptText="Select a year" />
-                        <Label layoutX="17.0" layoutY="285.0" prefHeight="30.0" prefWidth="340.0" text="What is the average monthly income in a year?">
+                        <ComboBox fx:id="comboStatsYear3" layoutX="55.0" layoutY="319.0" onAction="#getAverageMonthlyIncome" prefHeight="25.0" prefWidth="110.0" promptText="Select a year" AnchorPane.leftAnchor="55.0" />
+                        <Label layoutX="17.0" layoutY="285.0" prefHeight="30.0" prefWidth="340.0" text="What is the average monthly income in a year?" AnchorPane.leftAnchor="50.0">
                            <font>
                               <Font name="System Bold Italic" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblStats4" layoutX="350.0" layoutY="314.0" prefHeight="30.0" prefWidth="240.0">
+                        <Label fx:id="lblStats4" layoutX="410.0" layoutY="317.0" prefHeight="30.0" prefWidth="240.0" AnchorPane.rightAnchor="50.0">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -200,17 +200,17 @@
                         <Separator layoutX="14.0" layoutY="190.0" prefHeight="2.0" prefWidth="664.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
                         <Separator layoutX="14.0" layoutY="259.0" prefHeight="0.0" prefWidth="662.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
                         <Separator layoutX="8.0" layoutY="357.0" prefHeight="0.0" prefWidth="659.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0" />
-                        <Label layoutX="17.0" layoutY="388.0" prefHeight="30.0" prefWidth="340.0" text="Who is the most visited customer?">
+                        <Label layoutX="17.0" layoutY="388.0" prefHeight="30.0" prefWidth="340.0" text="Who is the most visited customer?" AnchorPane.leftAnchor="50.0">
                            <font>
                               <Font name="System Bold Italic" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblStats5" layoutX="350.0" layoutY="388.0" prefHeight="30.0" prefWidth="240.0">
+                        <Label fx:id="lblStats5" layoutX="350.0" layoutY="388.0" prefHeight="30.0" prefWidth="240.0" AnchorPane.rightAnchor="50.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblStats2" layoutX="350.0" layoutY="148.0" prefHeight="30.0" prefWidth="240.0">
+                        <Label fx:id="lblStats2" layoutX="350.0" layoutY="148.0" prefHeight="30.0" prefWidth="240.0" AnchorPane.rightAnchor="50.0">
                            <font>
                               <Font size="14.0" />
                            </font>
