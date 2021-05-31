@@ -276,6 +276,8 @@ public class AdminScreenController implements Initializable {
         Time time = db.busiestTime();
         lblStats3.setText(time.toString());
 
+        lblStats5.setText(db.mostVisitedCustomer().toString());
+
         clap.setVisible(false);
     }
 
