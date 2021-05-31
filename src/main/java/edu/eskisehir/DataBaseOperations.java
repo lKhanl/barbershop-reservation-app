@@ -766,7 +766,7 @@ public class DataBaseOperations {
         return years;
     }
 
-    public int mostSelectedOperation(String year, String month) {
+    public Operation mostSelectedOperation(String year, String month) {
         int most = -1;
         String sql = "SELECT operation_selection.OperationID, COUNT(operation_selection.OperationID) AS freq FROM `reservation`" +
                 "INNER JOIN operation_selection ON operation_selection.ReservationID=reservation.ReservationID" +
@@ -785,7 +785,7 @@ public class DataBaseOperations {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return most;
+       return getOperationByID(most);
     }
 
 }
