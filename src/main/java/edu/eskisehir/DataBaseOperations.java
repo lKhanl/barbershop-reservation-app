@@ -698,7 +698,8 @@ public class DataBaseOperations {
 
 
         try (Connection connection = DBConnection.connect();
-             Statement statement = connection.createStatement()) {
+             Statement statement = connection.createStatement();
+             Statement statement2 = connection.createStatement()) {
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
                 int cid=rs.getInt("CustomerID");
@@ -717,7 +718,7 @@ public class DataBaseOperations {
                 String sql2 = "SELECT operation.Price,operation.OperationID,operation.OperationName FROM `operation_selection` " +
                         "INNER JOIN operation ON operation_selection.OperationID=operation.OperationID WHERE ReservationID=" + "'" + rid + "'";
                 List<Operation> ops=new LinkedList<>();
-                ResultSet rs2=statement.executeQuery(sql2);
+                ResultSet rs2=statement2.executeQuery(sql2);
                 while (rs2.next()){
                     Operation operation=new Operation(rs2.getInt("OperationID"),rs2.getString("OperationName"),rs2.getInt("Price"));
                     ops.add(operation);

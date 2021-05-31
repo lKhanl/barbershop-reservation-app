@@ -422,13 +422,12 @@ public class AdminScreenController implements Initializable {
 
     }
 
-    //TODO: time cost ve ops gelmiyor
     public void searchAnyForRes(KeyEvent keyEvent) {
         if (txtResSearch.getText().equals("")) {
             keyEvent.consume();
         } else {
             List<Reservation> reservations = db.searchReservation(txtResSearch.getText());
-            reservations.forEach(reservation -> System.out.println(reservation.getId()));
+//            reservations.forEach(reservation -> System.out.println(reservation.getId()));
             loadDataForRes(reservations);
 
         }
