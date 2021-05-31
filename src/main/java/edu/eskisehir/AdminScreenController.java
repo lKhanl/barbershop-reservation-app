@@ -505,5 +505,7 @@ public class AdminScreenController implements Initializable {
     }
 
     public void getAverageMonthlyIncome(ActionEvent event) {
+        double income = db.averageMonthlyIncome(comboStatsYear3.getSelectionModel().getSelectedItem());
+        lblStats4.setText(String.valueOf(income));
     }
 }
