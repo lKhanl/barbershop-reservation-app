@@ -270,8 +270,10 @@ public class AdminScreenController implements Initializable {
         comboStatsMonth1.getItems().addAll(monthsList);
         comboStatsMonth2.getItems().addAll(monthsList);
 
-        comboStatsYear1.getItems().add("2020");////////////////////////////
-        comboStatsYear2.getItems().add("2020");
+        List<String> years = db.getExistingYear();
+        comboStatsYear1.getItems().addAll(years);
+        comboStatsYear2.getItems().addAll(years);
+        comboStatsYear3.getItems().addAll(years);
     }
 
     private void loadDataForCustomer(List<Customer> list) {
@@ -464,16 +466,20 @@ public class AdminScreenController implements Initializable {
         }
     }
 
-    public void getFirst(ActionEvent event) {
+    public void getMostSelectedOp(ActionEvent event) {
         if (comboStatsMonth1.getSelectionModel().getSelectedItem() != null && comboStatsYear1.getSelectionModel().getSelectedItem() != null) {
             int index = comboStatsMonth1.getSelectionModel().getSelectedIndex() + 1;
             System.out.println(comboStatsMonth1.getSelectionModel().getSelectedItem() + " " + comboStatsYear1.getSelectionModel().getSelectedItem() + " " + index);
         }
     }
 
-    public void getSecond(ActionEvent event) {
+    public void getMostChosenBarber(ActionEvent event) {
         if (comboStatsMonth2.getSelectionModel().getSelectedItem() != null && comboStatsYear2.getSelectionModel().getSelectedItem() != null) {
+            int index = comboStatsMonth2.getSelectionModel().getSelectedIndex() + 1;
             System.out.println(comboStatsMonth2.getSelectionModel().getSelectedItem() + " " + comboStatsYear2.getSelectionModel().getSelectedItem());
         }
+    }
+
+    public void getAverageMonthlyIncome(ActionEvent event) {
     }
 }

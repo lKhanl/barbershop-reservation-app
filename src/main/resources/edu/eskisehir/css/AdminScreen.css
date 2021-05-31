@@ -91,3 +91,20 @@
 .table-view:focused {
     -fx-background-color: #6f9e7d;
 }
+
+.combo-box-popup .list-view .list-cell {
+    -fx-background-color: #DEEAE3;
+}
+
+.combo-box-popup .list-view .list-cell:filled:hover {
+    -fx-background-color: #C8D3CC;
+    -fx-text-fill: -fx-text-inner-color;
+}
+
+.combo-box-base {
+    -fx-background-color: white, white, white, white;
+    -fx-background-radius: 20;
+}
+.combo-box .cell:selected {
+    -fx-text-fill: #0b4d87;
+}
