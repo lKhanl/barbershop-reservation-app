@@ -246,6 +246,24 @@ public class DataBaseOperations {
         return busyTimes;
     }
 
+    public Barber getBarberByID(int barberID){
+        String sql = "SELECT * FROM barber WHERE BarberId=" + "'" + barberID + "'";
+        Barber barber = null;
+
+        try (Connection connection = DBConnection.connect();
+             Statement statement = connection.createStatement();) {
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                barber = new Barber(rs.getInt("BarberID"),rs.getString("BarberName"),
+                        rs.getString("BarberSurname"),rs.getInt("Salary"));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return barber;
+    }
+
     public void deleteBarber(int barberID) {
         String sql = "DELETE FROM barber WHERE BarberID=?";
         try (Connection connection = DBConnection.connect();
@@ -770,7 +788,7 @@ public class DataBaseOperations {
         int most = -1;
         String sql = "SELECT operation_selection.OperationID, COUNT(operation_selection.OperationID) AS freq FROM `reservation`" +
                 "INNER JOIN operation_selection ON operation_selection.ReservationID=reservation.ReservationID " +
-                "WHERE reservation.isDone='Done'"+
+                "WHERE reservation.isDone='Done'" +
                 "AND YEAR(reservation.ReservationDate)= " + "'" + year + "' " +
                 "AND MONTH(reservation.ReservationDate)= " + "'" + month + "' " +
                 "GROUP BY operation_selection.OperationID ORDER BY freq DESC " +
@@ -785,7 +803,29 @@ public class DataBaseOperations {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-       return getOperationByID(most);
+        return getOperationByID(most);
+    }
+
+    public Barber mostSelectedBarber(String year, int month) {
+        int most = -1;
+        String sql = "SELECT barber.BarberID, COUNT(barber.BarberID) AS freq FROM reservation " +
+                "INNER JOIN barber ON barber.BarberID=reservation.BarberID " +
+                "WHERE reservation.isDone='Done'" +
+                "AND YEAR(reservation.ReservationDate)= " + "'" + year + "' " +
+                "AND MONTH(reservation.ReservationDate)= " + "'" + month + "' " +
+                "GROUP BY barber.BarberID ORDER BY freq DESC " +
+                "LIMIT 1";
+
+        try (Connection connection = DBConnection.connect();
+             Statement statement = connection.createStatement();) {
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                most = rs.getInt("OperationID");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return getBarberByID(most);
     }
 
 }
