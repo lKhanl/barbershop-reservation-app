@@ -471,7 +471,7 @@ public class AdminScreenController implements Initializable {
             int index = comboStatsMonth1.getSelectionModel().getSelectedIndex() + 1;
             System.out.println(comboStatsYear1.getSelectionModel().getSelectedItem());
             System.out.println(index);
-            Operation op = db.mostSelectedOperation(comboStatsYear1.getSelectionModel().getSelectedItem(), String.valueOf(index));
+            Operation op = db.mostSelectedOperation(comboStatsYear1.getSelectionModel().getSelectedItem(), index);
             lblStats1.setText(op.getName());
         }
     }

@@ -117,10 +117,8 @@ public class deneme {
         List<Reservation> list = dataBaseOperations1.searchReservation("21010610001");
         System.out.println(list.get(0).getCustomer().getName());*/
         DataBaseOperations dataBaseOperations = new DataBaseOperations();
-        List<String> list = dataBaseOperations.getExistingYear();
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
-        }
+        System.out.println(dataBaseOperations.getOperationByID(5).getName());
+
     }
 
 }

@@ -766,14 +766,14 @@ public class DataBaseOperations {
         return years;
     }
 
-    public Operation mostSelectedOperation(String year, String month) {
+    public Operation mostSelectedOperation(String year, int month) {
         int most = -1;
         String sql = "SELECT operation_selection.OperationID, COUNT(operation_selection.OperationID) AS freq FROM `reservation`" +
-                "INNER JOIN operation_selection ON operation_selection.ReservationID=reservation.ReservationID" +
-                "WHERE reservation.isDone='Done'" +
-                "AND YEAR(reservation.ReservationDate)=" + "'" + year + "'" +
-                "AND MONTH(reservation.ReservationDate)=" + "'" + month + "'" +
-                "GROUP BY operation_selection.OperationID ORDER BY freq DESC" +
+                "INNER JOIN operation_selection ON operation_selection.ReservationID=reservation.ReservationID " +
+                "WHERE reservation.isDone='Done'"+
+                "AND YEAR(reservation.ReservationDate)= " + "'" + year + "' " +
+                "AND MONTH(reservation.ReservationDate)= " + "'" + month + "' " +
+                "GROUP BY operation_selection.OperationID ORDER BY freq DESC " +
                 "LIMIT 1";
 
         try (Connection connection = DBConnection.connect();
