@@ -1,5 +1,8 @@
-package edu.eskisehir;
+package edu.eskisehir.controllers;
 
+import edu.eskisehir.*;
+import edu.eskisehir.db.DataBaseOperations;
+import edu.eskisehir.entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

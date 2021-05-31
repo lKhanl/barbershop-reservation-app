@@ -9,8 +9,11 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 /**
@@ -38,17 +41,18 @@ public class Main extends Application {
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml + ".fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Paths.get("src/main/resources/edu/eskisehir/fxml/" + fxml + ".fxml").toUri().toURL());
         return fxmlLoader.load();
     }
 
-    public static Stage openNewStage(String fxml, Class C, String icon) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(C.getResource(fxml + ".fxml"));
+    public static Stage openNewStage(String fxml, String icon) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Paths.get("src/main/resources/edu/eskisehir/fxml/" + fxml + ".fxml").toUri().toURL());
         Parent root = fxmlLoader.load();
         Stage newStage = new Stage();
         Scene newScene = new Scene(root);
         if (!icon.equals("none")) {
-            newStage.getIcons().add(new Image(Objects.requireNonNull(C.getResource("media/" + icon)).toString()));
+            Image img = new Image(new FileInputStream("src/main/resources/edu/eskisehir/media/" + icon));
+            newStage.getIcons().add(img);
         }
         newStage.setScene(newScene);
         return newStage;
@@ -67,7 +71,7 @@ public class Main extends Application {
         isMute = !isMute;
         if (isMute) {
             audio.pause();
-        } else{
+        } else {
             audio.play();
         }
     }

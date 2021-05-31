@@ -1,5 +1,11 @@
-package edu.eskisehir;
+package edu.eskisehir.controllers;
 
+import edu.eskisehir.*;
+import edu.eskisehir.db.DataBaseOperations;
+import edu.eskisehir.entity.Attribute;
+import edu.eskisehir.entity.Barber;
+import edu.eskisehir.entity.Operation;
+import edu.eskisehir.entity.Reservation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -25,6 +31,8 @@ import javax.imageio.ImageIO;
 
 import java.awt.image.RenderedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
@@ -132,7 +140,11 @@ public class ReservationController implements Initializable {
 
         comboServices.getItems().addAll(ops);
 
-        logo.setImage(new Image(Objects.requireNonNull(getClass().getResource("media/logo.jpg")).toExternalForm()));
+        try {
+            logo.setImage(new Image(new FileInputStream("src/main/resources/edu/eskisehir/media/logo.jpg")));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setComboBoxesStyle() {

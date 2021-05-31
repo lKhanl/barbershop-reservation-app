@@ -1,4 +1,4 @@
-package edu.eskisehir;
+package edu.eskisehir.entity;
 
 import java.sql.Date;
 import java.sql.Time;

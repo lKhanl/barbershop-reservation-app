@@ -1,13 +1,12 @@
-package edu.eskisehir;
+package edu.eskisehir.db;
 
-import javax.swing.plaf.synth.SynthRadioButtonMenuItemUI;
+import edu.eskisehir.entity.*;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.Month;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Properties;
 
 public class DataBaseOperations {
 

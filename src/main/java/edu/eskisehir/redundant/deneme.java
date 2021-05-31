@@ -1,13 +1,6 @@
-package edu.eskisehir;
+package edu.eskisehir.redundant;
 
-import java.sql.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import edu.eskisehir.db.DataBaseOperations;
 
 @Deprecated
 public class deneme {

@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckComboBox?>
 
-<AnchorPane prefHeight="710.0" prefWidth="710.0" stylesheets="@css/Reservation.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eskisehir.ReservationController">
+<AnchorPane prefHeight="710.0" prefWidth="710.0" stylesheets="@../css/Reservation.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eskisehir.controllers.ReservationController">
     <children>
         <TabPane prefHeight="710.0" prefWidth="710.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>

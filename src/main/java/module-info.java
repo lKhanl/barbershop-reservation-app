@@ -11,4 +11,12 @@ module edu.eskisehir {
 
     opens edu.eskisehir to javafx.fxml;
     exports edu.eskisehir;
+    exports edu.eskisehir.redundant;
+    opens edu.eskisehir.redundant to javafx.fxml;
+    exports edu.eskisehir.controllers;
+    opens edu.eskisehir.controllers to javafx.fxml;
+    exports edu.eskisehir.entity;
+    opens edu.eskisehir.entity to javafx.fxml;
+    exports edu.eskisehir.db;
+    opens edu.eskisehir.db to javafx.fxml;
 }

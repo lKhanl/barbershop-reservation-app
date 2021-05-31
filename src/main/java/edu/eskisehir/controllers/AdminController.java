@@ -1,13 +1,11 @@
-package edu.eskisehir;
+package edu.eskisehir.controllers;
 
+import edu.eskisehir.db.DataBaseOperations;
+import edu.eskisehir.Main;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -35,7 +33,7 @@ public class AdminController {
             adminStg.close();
             ((Stage)adminStg.getOwner()).close();
 
-            Stage stage = Main.openNewStage("AdminScreen", AdminScreenController.class,"admin.png");
+            Stage stage = Main.openNewStage("AdminScreen","admin.png");
             stage.setTitle("Admin Screen");
             stage.setResizable(false);
             stage.show();

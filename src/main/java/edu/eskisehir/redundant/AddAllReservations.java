@@ -1,10 +1,10 @@
-package edu.eskisehir;
+package edu.eskisehir.redundant;
+
+import edu.eskisehir.db.DataBaseOperations;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.sql.Date;
-import java.sql.Time;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;

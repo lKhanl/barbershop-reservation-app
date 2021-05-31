@@ -1,5 +1,8 @@
-package edu.eskisehir;
+package edu.eskisehir.controllers;
 
+import edu.eskisehir.entity.Customer;
+import edu.eskisehir.db.DataBaseOperations;
+import edu.eskisehir.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -14,7 +17,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.util.Objects;
+import java.nio.file.Paths;
 
 public class MainController {
     public AnchorPane mainPane;
@@ -46,12 +49,12 @@ public class MainController {
 
             cid = customer.getId();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(ReservationController.class.getResource("Reservation.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Paths.get("src/main/resources/edu/eskisehir/fxml/Reservation.fxml").toUri().toURL());
             Parent root = fxmlLoader.load();
             Stage newStage = new Stage();
             Scene newScene = new Scene(root);
             newStage.setScene(newScene);
-            newStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("media/res.jpg")).toString()));
+            newStage.getIcons().add(new Image(Paths.get("src/main/resources/edu/eskisehir/media/res.jpg").toUri().toString()));
             newStage.setTitle("Welcome " + customer.getName() + " " + customer.getSurname());
             newStage.setResizable(false);
 
@@ -68,7 +71,7 @@ public class MainController {
 
     //Open new frame without closing old
     public void openRegisterLogin(MouseEvent mouseEvent) throws IOException {
-        Stage stage = Main.openNewStage("Register", MainController.class, "welcome.png");
+        Stage stage = Main.openNewStage("Register", "welcome.png");
         //
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(((Node) mouseEvent.getSource()).getScene().getWindow());
@@ -79,7 +82,7 @@ public class MainController {
     }
 
     public void openAdminLogin(ActionEvent event) throws IOException {
-        Stage stage = Main.openNewStage("Admin", MainController.class, "admin.png");
+        Stage stage = Main.openNewStage("Admin", "admin.png");
         //
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(((Node) event.getSource()).getScene().getWindow());

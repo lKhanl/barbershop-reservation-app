@@ -1,4 +1,4 @@
-package edu.eskisehir;
+package edu.eskisehir.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

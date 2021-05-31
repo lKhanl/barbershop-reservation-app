@@ -1,4 +1,4 @@
-package edu.eskisehir;
+package edu.eskisehir.redundant;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;

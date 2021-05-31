@@ -1,4 +1,6 @@
-package edu.eskisehir;
+package edu.eskisehir.redundant;
+
+import edu.eskisehir.db.DataBaseOperations;
 
 import java.io.IOException;
 import java.nio.file.Files;

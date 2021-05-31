@@ -1,4 +1,4 @@
-package edu.eskisehir;
+package edu.eskisehir.redundant;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

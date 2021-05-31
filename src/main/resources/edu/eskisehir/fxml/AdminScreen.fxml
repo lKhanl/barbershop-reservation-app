@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckComboBox?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@css/AdminScreen.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eskisehir.AdminScreenController">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/AdminScreen.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eskisehir.controllers.AdminScreenController">
     <children>
         <TabPane prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -82,7 +82,7 @@
                                 </Label>
                         <ImageView fitHeight="294.0" fitWidth="323.0" layoutX="433.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@media/op.png" />
+                              <Image url="@../media/op.png" />
                            </image>
                         </ImageView>
                         <Button layoutX="612.0" layoutY="9.0" mnemonicParsing="false" onAction="#pauseAndPlay" styleClass="PlayPause" text="Play/Pause" />
@@ -221,7 +221,7 @@
                         </Label>
                         <ImageView fx:id="clap" fitHeight="81.0" fitWidth="56.0" layoutX="568.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@media/clap.gif" />
+                              <Image url="@../media/clap.gif" />
                            </image>
                         </ImageView>
                         <Button layoutX="612.0" layoutY="423.0" mnemonicParsing="false" onAction="#pauseAndPlay" styleClass="PlayPause" text="Play/Pause" />

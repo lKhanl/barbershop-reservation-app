@@ -1,4 +1,4 @@
-package edu.eskisehir;
+package edu.eskisehir.redundant;
 
 
 import java.io.IOException;

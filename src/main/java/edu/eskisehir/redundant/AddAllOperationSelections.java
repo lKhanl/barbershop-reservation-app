@@ -1,13 +1,11 @@
-package edu.eskisehir;
+package edu.eskisehir.redundant;
 
-import java.io.File;
+import edu.eskisehir.db.DataBaseOperations;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package edu.eskisehir;
+package edu.eskisehir.entity;
 
 public class Operation {
     private int id;
