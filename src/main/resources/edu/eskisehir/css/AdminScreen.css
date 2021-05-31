@@ -76,9 +76,21 @@
 }
 
 .table-row-cell:odd {
-    -fx-background-color: "#DEEAE3";
+    -fx-background-color: #DEEAE3;
 }
 
 .table-row-cell:even {
-    -fx-background-color: "#C8D3CC";
+    -fx-background-color: #C8D3CC;
+}
+
+.table-view {
+    -selected-color: #508964;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: -selected-color;
+}
+
+.table-view:focused {
+    -fx-background-color: #6f9e7d;
 }
