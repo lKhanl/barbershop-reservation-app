@@ -4,6 +4,7 @@ import javax.swing.plaf.synth.SynthRadioButtonMenuItemUI;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -95,10 +96,11 @@ public class DataBaseOperations {
             }
 
         } catch (SQLException e) {
-            System.out.println("Çekme işlemi başarılı.");
+            System.out.println("Çekme işlemi başarısız.");
             e.printStackTrace();
         }
-        System.out.println("Çekme işlemi başarısız.");
+        System.out.println("Çekme işlemi başarılı.");
+
         return list;
     }
 
@@ -849,8 +851,9 @@ public class DataBaseOperations {
 
     }
 
-    public int yearIncome(String year) {
-        int income = 0;
+    public double averageMonthlyIncome(String year) {
+        int currentMonth=LocalDate.now().getMonth().getValue();
+        double income = 0;
         String sql = "SELECT SUM(TotalPrice) AS 'income' FROM `reservation` WHERE isDone='Done' AND YEAR(ReservationDate)=" + "'" + year + "'";
 
         try (Connection connection = DBConnection.connect();
@@ -862,6 +865,6 @@ public class DataBaseOperations {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return income;
+        return income/currentMonth;
     }
 }

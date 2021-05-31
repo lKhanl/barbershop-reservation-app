@@ -116,8 +116,8 @@ public class deneme {
        /* DataBaseOperations dataBaseOperations1 = new DataBaseOperations();
         List<Reservation> list = dataBaseOperations1.searchReservation("21010610001");
         System.out.println(list.get(0).getCustomer().getName());*/
-        DataBaseOperations dataBaseOperations = new DataBaseOperations();
-        System.out.println(dataBaseOperations.getOperationByID(5).getName());
+        DataBaseOperations dataBaseOperations1 = new DataBaseOperations();
+        System.out.println(dataBaseOperations1.averageMonthlyIncome("2021"));
 
     }
 
