@@ -778,8 +778,7 @@ public class DataBaseOperations {
                 "WHERE reservation.isDone='Done'" +
                 "AND YEAR(reservation.ReservationDate)= " + "'" + year + "' " +
                 "AND MONTH(reservation.ReservationDate)= " + "'" + month + "' " +
-                "GROUP BY operation_selection.OperationID ORDER BY freq DESC " +
-                "LIMIT 1";
+                "GROUP BY operation_selection.OperationID ORDER BY freq DESC ";
 
         try (Connection connection = DBConnection.connect();
              Statement statement = connection.createStatement();) {
@@ -800,8 +799,8 @@ public class DataBaseOperations {
                 "WHERE reservation.isDone='Done'" +
                 "AND YEAR(reservation.ReservationDate)= " + "'" + year + "' " +
                 "AND MONTH(reservation.ReservationDate)= " + "'" + month + "' " +
-                "GROUP BY barber.BarberID ORDER BY freq DESC " +
-                "LIMIT 1";
+                "GROUP BY barber.BarberID ORDER BY freq DESC ";
+
 
         try (Connection connection = DBConnection.connect();
              Statement statement = connection.createStatement();) {
@@ -817,6 +816,7 @@ public class DataBaseOperations {
 
     public Time busiestTime() {
         List<Time> times = new LinkedList<>();
+        List<String> freqs = new LinkedList<>();
 
         String sql = "SELECT reservation.ReservationTime, " +
                 "COUNT(reservation.ReservationTime) AS freq FROM reservation " +
@@ -828,10 +828,13 @@ public class DataBaseOperations {
 
             while (rs.next()) {
                 times.add(rs.getTime("ReservationTime"));
+                freqs.add(rs.getString("freq"));
             }
-            if (times.contains(times.get(0))) {
+            if (freqs.stream()
+                    .distinct()
+                    .count() <= 1)
                 return null;
-            }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

@@ -290,7 +290,7 @@ public class AdminScreenController implements Initializable {
 
         Time time = db.busiestTime();
         if (time == null) {
-            lblStats3.setText("");
+            lblStats3.setText("time");
         } else
             lblStats3.setText(time.toString());
 
