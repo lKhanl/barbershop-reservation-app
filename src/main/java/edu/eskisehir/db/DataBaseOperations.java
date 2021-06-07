@@ -819,14 +819,17 @@ public class DataBaseOperations {
         String sql = "SELECT reservation.ReservationTime, " +
                 "COUNT(reservation.ReservationTime) AS freq FROM reservation " +
                 "WHERE reservation.isDone='Done' " +
-                "GROUP BY reservation.ReservationTime ORDER BY freq DESC " +
-                "LIMIT 1";
+                "GROUP BY reservation.ReservationTime ORDER BY freq DESC ";
         try (Connection connection = DBConnection.connect();
              Statement statement = connection.createStatement();) {
             ResultSet rs = statement.executeQuery(sql);
+            if (rs.next()) {
+                return null;
+            }
             while (rs.next()) {
                 time = rs.getTime("ReservationTime");
             }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
