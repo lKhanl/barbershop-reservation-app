@@ -253,7 +253,7 @@ public class DataBaseOperations {
         Date dateSql = Date.valueOf(date);
 
         List<Time> busyTimes = new LinkedList<>();
-        String sql = "SELECT ReservationTime FROM reservation WHERE ReservationDate=" + "'" + dateSql + "'" + " AND BarberID=" + "'" + barberID + "'" + "AND isDone='0'";
+        String sql = "SELECT ReservationTime FROM reservation WHERE ReservationDate=" + "'" + dateSql + "'" + " AND BarberID=" + "'" + barberID + "'" + "AND isDone='Waiting'";
 
         try (Connection connection = DBConnection.connect();
              Statement stmt = connection.createStatement()) {
