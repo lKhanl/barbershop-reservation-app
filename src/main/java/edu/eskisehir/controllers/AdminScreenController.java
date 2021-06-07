@@ -6,6 +6,7 @@ import edu.eskisehir.entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -237,15 +238,15 @@ public class AdminScreenController implements Initializable {
                 }
                 LocalTime localDate = LocalTime.now();
                 String current = localDate.getHour() + ":" + localDate.getMinute() + ":" + localDate.getSecond();
-                if (LocalDate.now().compareTo(newSelection.getDate().toLocalDate()) > 0) {
-                    comboStatus.getItems().clear();
-                    comboStatus.getItems().addAll("Done", "Canceled");
-                } else if (Time.valueOf(current).compareTo(newSelection.getTime()) < 0) {
-                    comboStatus.getItems().clear();
+                comboStatus.getItems().clear();
+                if (LocalDate.now().compareTo(newSelection.getDate().toLocalDate()) == 0 && Time.valueOf(current).compareTo(newSelection.getTime()) < 0) {
+//                    System.out.println("Bugün ama gelecek");
+                    comboStatus.getItems().addAll("Waiting", "Canceled");
+                } else if (LocalDate.now().compareTo(newSelection.getDate().toLocalDate()) < 0) {
+//                    System.out.println("gelecek");
                     comboStatus.getItems().addAll("Waiting", "Canceled");
                 } else {
-                    comboStatus.getItems().clear();
-                    comboStatus.getItems().addAll("Done", "Waiting", "Canceled");
+                    comboStatus.getItems().addAll("Done", "Canceled");
                 }
             }
         });
@@ -521,7 +522,7 @@ public class AdminScreenController implements Initializable {
                 clap.setVisible(false);
                 lblStats2.setStyle("-fx-font-size: 14");
                 lblStats2.setTextFill(Color.RED);
-                lblStats2.setText("asdasdasd");
+                lblStats2.setText("There is no most chosen barber!");
             } else {
                 clap.setVisible(true);
                 lblStats2.setStyle("-fx-font-size: 18");
@@ -539,5 +540,9 @@ public class AdminScreenController implements Initializable {
     public void pauseAndPlay(ActionEvent event) {
         Main.pauseAndPlay();
 
+    }
+
+    public void changedTab(Event event) {
+        loadDataForRes(null);
     }
 }
