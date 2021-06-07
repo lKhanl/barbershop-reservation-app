@@ -42,6 +42,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("ALL")
 public class ReservationController implements Initializable {
 
     public Pane card;
@@ -224,7 +225,11 @@ public class ReservationController implements Initializable {
     public void save(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image(Objects.requireNonNull(this.getClass().getResource("media/error.png")).toString()));
+        try {
+            stage.getIcons().add(new Image(new FileInputStream("src/main/resources/edu/eskisehir/media/error.png")));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         alert.setTitle("Warning!");
         alert.setHeaderText("Do you really want to save?");
 
@@ -267,11 +272,12 @@ public class ReservationController implements Initializable {
             long resID = db.bookReservation(resDate.getValue().toString(), comboTime.getValue(), comboBarbers.getValue().getId(), cid, opIDs);
 
             lblResID.setText("ResID : " + resID);
-            if (isExportCard.isSelected()){
+            if (isExportCard.isSelected()) {
                 saveAsPng(event);
             }
-            clearFields();
-            loadDataForProfile();
+            clearFieldsForResCard();
+            resetResTab();
+            loadDataForRes();
 
             lblConsoleRes.setTextFill(Color.GREEN);
             lblConsoleRes.setText("Successful!");
@@ -280,6 +286,14 @@ public class ReservationController implements Initializable {
             lblConsoleRes.setText("Some fields are empty!");
         }
 
+    }
+
+    private void resetResTab(){
+        comboBarbers.getItems().clear();
+        resDate.getEditor().clear();
+        comboTime.getItems().clear();
+        comboOp.getItems().clear();
+        isExportCard.setSelected(false);
     }
 
     public void saveAsPng(ActionEvent event) {
@@ -341,7 +355,7 @@ public class ReservationController implements Initializable {
         }
     }
 
-    private void clearFields() {
+    private void clearFieldsForResCard() {
         lblResID.setText("");
         lblConsoleRes.setText("");
         lblSelectedOp.setText("");

@@ -33,8 +33,8 @@ public class MainController {
     static int cid;
 
     public void login(ActionEvent event) throws IOException {
-        txtEmail.setText("drakedavenport@live.com");
-        txtPass.setText("drakedavenport0004");
+//        txtEmail.setText("drakedavenport@live.com");
+//        txtPass.setText("drakedavenport0004");
 
         Customer customer = db.logIn(txtEmail.getText(), txtPass.getText());
 

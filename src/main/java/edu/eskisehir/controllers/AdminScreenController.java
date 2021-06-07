@@ -18,12 +18,15 @@ import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import org.controlsfx.control.CheckComboBox;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.sql.Time;
 import java.text.DateFormatSymbols;
 import java.time.LocalDate;
 import java.util.*;
 
+@SuppressWarnings("ALL")
 public class AdminScreenController implements Initializable {
     public TableView<Barber> barbersTable;
     public TableColumn<Barber, String> barberNameCol;
@@ -140,6 +143,7 @@ public class AdminScreenController implements Initializable {
         });
 
         barbersTable.setEditable(true);
+        barbersTable.setPlaceholder(new Label("There is no barber to show!"));
     }
 
     private void editableColsForOp() {
@@ -164,6 +168,7 @@ public class AdminScreenController implements Initializable {
             lblConsoleOp.setText("Updated!");
         });
         operationsTable.setEditable(true);
+        operationsTable.setPlaceholder(new Label("There is no op to show, please add some ops!"));
 
     }
 
@@ -200,6 +205,8 @@ public class AdminScreenController implements Initializable {
         });
 
         customersTable.setEditable(true);
+        customersTable.setPlaceholder(new Label("There is no customer to show!"));
+
     }
 
     private void editableColsForAllRes() {
@@ -240,6 +247,8 @@ public class AdminScreenController implements Initializable {
                 });*/
             }
         });
+        resTable.setPlaceholder(new Label("There is no reservation to show!"));
+
     }
 
     private void loadDataForBarber() {
@@ -277,9 +286,16 @@ public class AdminScreenController implements Initializable {
         comboStatsYear3.getItems().addAll(years);
 
         Time time = db.busiestTime();
-        lblStats3.setText(time.toString());
+        if (time == null) {
+            lblStats3.setText("");
+        } else
+            lblStats3.setText(time.toString());
 
-        lblStats5.setText(db.mostVisitedCustomer().toString());
+        Customer customer = db.mostVisitedCustomer();
+        if (customer == null) {
+            lblStats5.setText("");
+        } else
+            lblStats5.setText(db.mostVisitedCustomer().toString());
 
         clap.setVisible(false);
     }
@@ -393,7 +409,11 @@ public class AdminScreenController implements Initializable {
     private Optional<ButtonType> showAlert(String obj) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image(Objects.requireNonNull(this.getClass().getResource("media/error.png")).toString()));
+        try {
+            stage.getIcons().add(new Image(new FileInputStream("src/main/resources/edu/eskisehir/media/error.png")));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         alert.setTitle("Warning!");
         alert.setHeaderText("Do you really want to delete?");
         alert.setContentText("All reservations belongs to the " + obj + " you selected will be removed!");

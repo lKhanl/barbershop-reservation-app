@@ -170,11 +170,6 @@
                                                 <Font size="14.0" />
                                             </font>
                                         </Button>
-                                        <Label fx:id="lblConsoleRes" layoutX="40.0" layoutY="227.0" prefHeight="30.0" prefWidth="370.0" textFill="#f84040">
-                                            <font>
-                                                <Font size="14.0" />
-                                            </font>
-                                        </Label>
                               <CheckBox fx:id="isExportCard" layoutX="126.0" layoutY="234.0" mnemonicParsing="false" text="I want to export Reservation Card" />
                                     </children>
                                 </Pane>
@@ -226,6 +221,11 @@
                                     </children>
                                 </Pane>
                         <Button layoutX="620.0" layoutY="633.0" mnemonicParsing="false" onAction="#pauseAndPlay" styleClass="PlayPause" text="Play/Pause" />
+                                  <Label fx:id="lblConsoleRes" layoutX="22.0" layoutY="627.0" prefHeight="30.0" prefWidth="199.0" textFill="#f84040">
+                                      <font>
+                                          <Font size="14.0" />
+                                      </font>
+                                  </Label>
                             </children>
                         </AnchorPane>
                     </content>

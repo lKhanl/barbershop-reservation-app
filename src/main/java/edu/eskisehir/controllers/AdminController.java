@@ -19,8 +19,8 @@ public class AdminController {
     public void login(ActionEvent event) throws IOException {
         DataBaseOperations db = new DataBaseOperations();
 
-        txtUserName.setText("admin");
-        txtPassword.setText("admin");
+//        txtUserName.setText("admin");
+//        txtPassword.setText("admin");
 
         String adminUserName = txtUserName.getText();
         String adminPass = txtPassword.getText();
