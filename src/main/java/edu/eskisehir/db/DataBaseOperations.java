@@ -885,7 +885,10 @@ public class DataBaseOperations {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return income / currentMonth;
+        if (Integer.parseInt(year) < LocalDate.now().getYear())
+            return income / 12;
+        else
+            return income / currentMonth;
     }
 
     public Customer mostVisitedCustomer() {

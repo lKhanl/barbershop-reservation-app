@@ -24,6 +24,7 @@ import java.net.URL;
 import java.sql.Time;
 import java.text.DateFormatSymbols;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
 
 @SuppressWarnings("ALL")
@@ -234,17 +235,18 @@ public class AdminScreenController implements Initializable {
                         }
                     }
                 }
-
+                LocalTime localDate = LocalTime.now();
+                String current = localDate.getHour() + ":" + localDate.getMinute() + ":" + localDate.getSecond();
                 if (LocalDate.now().compareTo(newSelection.getDate().toLocalDate()) > 0) {
                     comboStatus.getItems().clear();
                     comboStatus.getItems().addAll("Done", "Canceled");
+                } else if (Time.valueOf(current).compareTo(newSelection.getTime()) < 0) {
+                    comboStatus.getItems().clear();
+                    comboStatus.getItems().addAll("Waiting", "Canceled");
                 } else {
                     comboStatus.getItems().clear();
                     comboStatus.getItems().addAll("Done", "Waiting", "Canceled");
                 }
-                /*comboOps.getCheckModel().getCheckedItems().forEach(e -> {
-                    System.out.println(e.getId());
-                });*/
             }
         });
         resTable.setPlaceholder(new Label("There is no reservation to show!"));

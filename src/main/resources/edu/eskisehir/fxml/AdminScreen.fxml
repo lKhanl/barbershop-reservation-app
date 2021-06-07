@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<?import org.controlsfx.control.CheckComboBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.controlsfx.control.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/AdminScreen.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eskisehir.controllers.AdminScreenController">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/AdminScreen.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eskisehir.controllers.AdminScreenController">
     <children>
         <TabPane prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -124,8 +115,8 @@
                                 <TableView fx:id="resTable" layoutX="14.0" layoutY="14.0" prefHeight="303.0" prefWidth="671.0">
                                     <columns>
                                         <TableColumn fx:id="resStatusCol" prefWidth="77.0" resizable="false" text="Status" />
-                                        <TableColumn fx:id="resIDCol" prefWidth="82.0" resizable="false" text="ResID" />
-                                        <TableColumn fx:id="resBarberCol" prefWidth="119.0" resizable="false" text="Barber" />
+                                        <TableColumn fx:id="resIDCol" prefWidth="87.0" resizable="false" text="ResID" />
+                                        <TableColumn fx:id="resBarberCol" prefWidth="114.0" resizable="false" text="Barber" />
                                         <TableColumn fx:id="resCustomerCol" prefWidth="119.0" resizable="false" text="Customer" />
                                         <TableColumn fx:id="resDateCol" prefWidth="75.0" resizable="false" text="Date" />
                                         <TableColumn fx:id="resTimeCol" prefWidth="54.0" resizable="false" text="Time" />
