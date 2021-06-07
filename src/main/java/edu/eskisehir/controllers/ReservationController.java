@@ -1,6 +1,6 @@
 package edu.eskisehir.controllers;
 
-import com.mysql.cj.util.TimeUtil;
+
 import edu.eskisehir.*;
 import edu.eskisehir.db.DataBaseOperations;
 import edu.eskisehir.entity.Attribute;
@@ -283,6 +283,7 @@ public class ReservationController implements Initializable {
 
             lblConsoleRes.setTextFill(Color.GREEN);
             lblConsoleRes.setText("Successful!");
+            lblSelectedDate.setText("");
         } else {
             lblConsoleRes.setTextFill(Color.RED);
             lblConsoleRes.setText("Some fields are empty!");
@@ -316,6 +317,7 @@ public class ReservationController implements Initializable {
 
     public void loadTime(ActionEvent event) {
         if (!(comboBarbers.getValue() == null || resDate.getValue() == null)) {
+            comboTime.getItems().clear();
             List<Time> avTime = new LinkedList<>();
             List<Time> busyTimes = db.getBusyTimes(comboBarbers.getValue().getId(), resDate.getValue().toString());
             avTime.addAll(allTimes);
@@ -369,8 +371,8 @@ public class ReservationController implements Initializable {
         lblConsoleRes.setText("");
         lblSelectedOp.setText("");
         lblSelectedTime.setText("");
-        lblSelectedDate.setText("");
         lblSelectedBarber.setText("");
+        lblSelectedPrice.setText("");
 
     }
 
