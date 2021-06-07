@@ -1,5 +1,6 @@
 package edu.eskisehir.controllers;
 
+import com.mysql.cj.util.TimeUtil;
 import edu.eskisehir.*;
 import edu.eskisehir.db.DataBaseOperations;
 import edu.eskisehir.entity.Attribute;
@@ -38,6 +39,7 @@ import java.net.URL;
 import java.sql.Time;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -316,9 +318,16 @@ public class ReservationController implements Initializable {
         if (!(comboBarbers.getValue() == null || resDate.getValue() == null)) {
             List<Time> avTime = new LinkedList<>();
             List<Time> busyTimes = db.getBusyTimes(comboBarbers.getValue().getId(), resDate.getValue().toString());
-
             avTime.addAll(allTimes);
-            avTime.removeAll(busyTimes);
+
+            if (resDate.getValue().toString().equals(LocalDate.now().toString())) {
+                LocalTime localTime = LocalTime.now();
+                String currentTime = localTime.getHour() + ":" + localTime.getMinute() + ":" + localTime.getSecond();
+                avTime.removeIf(time -> (time.compareTo(Time.valueOf(currentTime)) < 0));
+
+            } else {
+                avTime.removeAll(busyTimes);
+            }
             comboTime.getItems().addAll(avTime);
 
         }

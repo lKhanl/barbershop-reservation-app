@@ -2,6 +2,11 @@ package edu.eskisehir.redundant;
 
 import edu.eskisehir.db.DataBaseOperations;
 
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
+
 @Deprecated
 public class deneme {
     public static void main(String[] args) {
@@ -109,8 +114,19 @@ public class deneme {
        /* DataBaseOperations dataBaseOperations1 = new DataBaseOperations();
         List<Reservation> list = dataBaseOperations1.searchReservation("21010610001");
         System.out.println(list.get(0).getCustomer().getName());*/
-        DataBaseOperations dataBaseOperations1 = new DataBaseOperations();
-        System.out.println(dataBaseOperations1.averageMonthlyIncome("2021"));
+    /*    DataBaseOperations dataBaseOperations1 = new DataBaseOperations();
+        System.out.println(dataBaseOperations1.averageMonthlyIncome("2021"));*/
+        LocalTime localDate = LocalTime.now();
+        String current = localDate.getHour() + ":" + localDate.getMinute() + ":" + localDate.getSecond();
+        List<String> temp = new java.util.ArrayList<>(List.of("08:00:00", "08:30:00", "09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
+                "12:30:00", "13:00:00", "13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00", "17:30:00",
+                "18:00:00", "18:30:00", "19:00:00", "19:30:00", "20:00:00"));
+
+        temp.removeIf(time -> (Time.valueOf(time).compareTo(Time.valueOf(current)) < 0));
+
+        for (int i = 0; i < temp.size(); i++) {
+            System.out.println(temp.get(i));
+        }
 
     }
 
