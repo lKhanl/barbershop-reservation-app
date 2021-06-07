@@ -62,7 +62,7 @@ public class Main extends Application {
         URL path = Main.class.getResource("audio/lobby.mp3");
         Media media = new Media(path.toString());
         audio = new MediaPlayer(media);
-        audio.setVolume(0.5);
+        audio.setVolume(0.1);
 //        audio.setAutoPlay(true);
         audio.play();
     }
