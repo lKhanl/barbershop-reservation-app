@@ -5,6 +5,7 @@ import edu.eskisehir.entity.*;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -815,7 +816,8 @@ public class DataBaseOperations {
     }
 
     public Time busiestTime() {
-        Time time = null;
+        List<Time> times = new LinkedList<>();
+
         String sql = "SELECT reservation.ReservationTime, " +
                 "COUNT(reservation.ReservationTime) AS freq FROM reservation " +
                 "WHERE reservation.isDone='Done' " +
@@ -823,17 +825,17 @@ public class DataBaseOperations {
         try (Connection connection = DBConnection.connect();
              Statement statement = connection.createStatement();) {
             ResultSet rs = statement.executeQuery(sql);
-            if (rs.next()) {
+
+            while (rs.next()) {
+                times.add(rs.getTime("ReservationTime"));
+            }
+            if (times.contains(times.get(0))) {
                 return null;
             }
-            while (rs.next()) {
-                time = rs.getTime("ReservationTime");
-            }
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return time;
+        return times.get(0);
 
     }
 
