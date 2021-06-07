@@ -553,50 +553,13 @@ public class DataBaseOperations {
     }
 
     public void updateIsDone(long reservationID, String isDone) {
-        Date todaySql = Date.valueOf(LocalDate.now().toString());
-        Time todayTime = Time.valueOf(LocalTime.now());
-
-        String getDateSql = "SELECT ReservationDate FROM reservation WHERE ReservationID=" + reservationID;
-        String getTimeSql = "SELECT ReservationTime FROM reservation WHERE ReservationID=" + reservationID;
         String updateIsDoneSql = "UPDATE reservation SET isDone=? WHERE ReservationID=  " + reservationID;
-        Date date = null;
-        Time time = null;
 
         try (Connection connection = DBConnection.connect();
              PreparedStatement updateIsDoneStatement = connection.prepareStatement(updateIsDoneSql);
         ) {
-
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(getDateSql);
-
-            Statement statement1 = connection.createStatement();
-            ResultSet resultSet1 = statement1.executeQuery(getTimeSql);
-
-
-            while (resultSet.next()) {
-                date = resultSet.getDate("ReservationDate");
-            }
-
-            while (resultSet1.next()) {
-                time = resultSet1.getTime("ReservationTime");
-            }
-
-            if (todaySql.compareTo(date) > 0 && (isDone.equals("Done") || isDone.equals("Canceled"))) {//geçmiş
-                updateIsDoneStatement.setString(1, isDone);
-                updateIsDoneStatement.executeUpdate();
-            } else if (todaySql.compareTo(date) < 0 && (isDone.equals("Done") || isDone.equals("Canceled"))) { //gelecek
-                System.out.println("Adamın tarihi gelmedi");
-            } else if (todaySql.compareTo(date) == 0) {
-                if (todayTime.compareTo(time) > 0) { //zaman geçti
-                    updateIsDoneStatement.setString(1, isDone);
-                    updateIsDoneStatement.executeUpdate();
-                } else if (todayTime.compareTo(time) < 0) { //zaman geçmedi
-                    System.out.println("Adamın tarihi gelmedi");
-                }
-            } else {
-                System.out.println("Geçersiz");
-            }
-
+            updateIsDoneStatement.setString(1, isDone);
+            updateIsDoneStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
