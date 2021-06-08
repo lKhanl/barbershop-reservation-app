@@ -8,8 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -62,8 +62,8 @@ public class Main extends Application {
         URL path = Main.class.getResource("audio/lobby.mp3");
         Media media = new Media(path.toString());
         audio = new MediaPlayer(media);
+        audio.setOnEndOfMedia(() -> audio.seek(Duration.ZERO));
         audio.setVolume(0.1);
-//        audio.setAutoPlay(true);
         audio.play();
     }
 
