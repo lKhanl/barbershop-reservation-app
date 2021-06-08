@@ -5,6 +5,7 @@ import edu.eskisehir.Main;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -23,8 +24,10 @@ public class AdminController {
     }
 
     public void enterLogin(KeyEvent keyEvent) {
-        Node node = (Node) keyEvent.getSource();
-        abstractLogin(node);
+        if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+            Node node = (Node) keyEvent.getSource();
+            abstractLogin(node);
+        }
     }
 
     private void abstractLogin(Node nodee) {
