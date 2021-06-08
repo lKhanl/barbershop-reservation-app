@@ -68,8 +68,8 @@
                             <children>
                                 <TableView fx:id="tableResHistory" layoutX="14.0" layoutY="51.0" prefHeight="293.0" prefWidth="682.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="51.0">
                                     <columns>
-                                        <TableColumn fx:id="colStatus" minWidth="20.0" prefWidth="53.0" resizable="false" text="Status" />
-                                        <TableColumn fx:id="colResID" minWidth="20.0" prefWidth="82.0" resizable="false" text="ResID" />
+                                        <TableColumn fx:id="colStatus" minWidth="20.0" prefWidth="77.0" resizable="false" text="Status" />
+                                        <TableColumn fx:id="colResID" minWidth="20.0" prefWidth="87.0" resizable="false" text="ResID" />
                                         <TableColumn fx:id="colDate" minWidth="20.0" prefWidth="75.0" resizable="false" sortType="DESCENDING" text="Date" />
                                         <TableColumn fx:id="colTime" minWidth="20.0" prefWidth="54.0" resizable="false" text="Time" />
                                         <TableColumn fx:id="colCost" minWidth="20.0" prefWidth="32.0" resizable="false" sortType="DESCENDING" text="Cost" />
