@@ -1,10 +1,12 @@
 package edu.eskisehir.redundant;
 
+import edu.eskisehir.db.DBConnection;
 import edu.eskisehir.db.DataBaseOperations;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +15,7 @@ import java.util.stream.Stream;
 @Deprecated
 public class AddAllReservations {
     public static void main(String[] args) {
-        DataBaseOperations dataBaseOperations= new DataBaseOperations();
+        DataBaseOperations dataBaseOperations = new DataBaseOperations();
 
         String dateFileName = "dates.txt";
         String timesFileName = "times.txt";
@@ -39,9 +41,7 @@ public class AddAllReservations {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (int i = 0; i < dates.size(); i++) {
-            System.out.println(dates.get(i));
-        }
+
         /** take times*/
         try (Stream<String> stream = Files.lines(Paths.get(timesFileName))) {
             times = stream
@@ -76,8 +76,10 @@ public class AddAllReservations {
 
 
         for (int i = 0; i < dates.size(); i++) {
-        // dataBaseOperations.bookReservation(Date.valueOf(dates.get(i)), Time.valueOf(times.get(i)),Integer.parseInt(barbers.get(i)),Integer.parseInt(customers.get(i)));
+        //dataBaseOperations.book(dates.get(i), Time.valueOf(times.get(i)), Integer.parseInt(barbers.get(i)), Integer.parseInt(customers.get(i)));
         }
 
+
     }
+
 }

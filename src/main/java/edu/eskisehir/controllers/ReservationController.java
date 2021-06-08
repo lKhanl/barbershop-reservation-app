@@ -101,15 +101,7 @@ public class ReservationController implements Initializable {
 
     private void loadDataForProfile() {
         List<Reservation> reservations = db.fillResHistory(cid);
-        for (Reservation reservation : reservations) {
-            if (reservation.getIsDone().equals("-1")) {
-                reservation.setIsDone("Cancel");
-            } else if (reservation.getIsDone().equals("0")) {
-                reservation.setIsDone("Waiting");
-            } else {
-                reservation.setIsDone("Done");
-            }
-        }
+
         resData = FXCollections.observableArrayList(reservations);
         tableResHistory.setItems(resData);
 

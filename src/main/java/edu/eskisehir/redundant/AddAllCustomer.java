@@ -70,7 +70,7 @@ public class AddAllCustomer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 600; i++) {
             dataBaseOperations.addCustomer(names.get(i),surnames.get(i),mails.get(i),passwords.get(i));
         }
     }

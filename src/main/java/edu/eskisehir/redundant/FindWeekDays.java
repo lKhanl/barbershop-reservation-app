@@ -22,7 +22,7 @@ import java.util.stream.Stream;
 public class FindWeekDays {
     public static void main(String[] args) {
 
-      /* List<String> list = new LinkedList<>();
+       List<String> list = new LinkedList<>();
         List<String> weekdays= new LinkedList<>();
 
         try (Stream<String> stream = Files.lines(Paths.get("temp.txt"))) {
@@ -41,7 +41,6 @@ public class FindWeekDays {
             switch (selectedDay) {
                 case SATURDAY:
                 case SUNDAY:
-
                     break;
                 default:
                     weekdays.add(list.get(i));
@@ -53,11 +52,11 @@ public class FindWeekDays {
 
         for (int i = 0; i < weekdays.size(); i++) {
             System.out.println(weekdays.get(i));
-        }*/
+        }
 
-        /** Random hours*/
+      /*  *//** Random hours*//*
         
-      /*  String[] times={"08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30",
+        String[] times={"08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30",
                 "13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30",
                 "19:00","19:30","20:00",};
         
@@ -65,14 +64,14 @@ public class FindWeekDays {
 
 
 
-        for (int i = 0; i < 1595; i++) {
+        for (int i = 0; i < 5000; i++) {
             Collections.shuffle(timesList);
             System.out.println(timesList.get(0));
-        }*/
-
-        for (int i = 0; i < 200; i++) {
-            System.out.println((int) (Math.random()*7+1));
         }
+*/
+      /*  for (int i = 0; i < 200; i++) {
+            System.out.println((int) (Math.random()*7+1));
+        }*/
 
     }
 }

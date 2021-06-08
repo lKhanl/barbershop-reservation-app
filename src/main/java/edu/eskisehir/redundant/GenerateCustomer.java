@@ -71,7 +71,7 @@ public class GenerateCustomer {
         ArrayList<String> mailEnds = new ArrayList<>();
         mailEnds.add("outlook.com");
         mailEnds.add("gmail.com");
-        mailEnds.add("yahoo.com.");
+        mailEnds.add("yahoo.com");
         mailEnds.add("msn.com");
         mailEnds.add("windowslive.com");
         mailEnds.add("live.com");

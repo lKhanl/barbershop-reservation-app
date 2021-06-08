@@ -2,61 +2,80 @@ package edu.eskisehir.redundant;
 
 import edu.eskisehir.db.DBConnection;
 import edu.eskisehir.db.DataBaseOperations;
+import edu.eskisehir.entity.Reservation;
 
 import javax.xml.transform.Result;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 @Deprecated
 public class deneme {
     public static void main(String[] args) {
-        /** Update isDone and totalPrice*/
-        /* DataBaseOperations dataBaseOperations=new DataBaseOperations();
+        /** Update isDone*/
+    /*    DataBaseOperations dataBaseOperations = new DataBaseOperations();
 
+        List<String> values = new LinkedList<>();
+        List<Reservation> list = dataBaseOperations.adminResList();
+        for (int i = 0; i < list.size(); i++) {
 
-    List<Long> resIDs= dataBaseOperations.getAllResIDs();
-        for (int i = 0; i < resIDs.size(); i++) {
-            List<Integer> random= new java.util.ArrayList<>(List.of(1, -1));
-            Collections.shuffle(random);
-            dataBaseOperations.updateIsDone(resIDs.get(i),String.valueOf(random.get(0)));
+            Date date = Date.valueOf("2021-06-14");
+            Time time = Time.valueOf("16:00:00");
+            values.clear();
+            if (list.get(i).getDate().compareTo(date) < 0) {//komple geçmiş
+                values.add("Done");
+                values.add("Canceled");
+                Collections.shuffle(values);
+                dataBaseOperations.updateIsDone(list.get(i).getId(), values.get(0));
+            } else if (date.compareTo(list.get(i).getDate()) == 0 && time.compareTo(list.get(i).getTime()) < 0) {//bugün ama gelecel
+                values.add("Waiting");
+                values.add("Canceled");
+                dataBaseOperations.updateIsDone(list.get(i).getId(), values.get(0));
+            } else if (date.compareTo(list.get(i).getDate()) == 0 && time.compareTo(list.get(i).getTime()) > 0) {//bugün ama geçmiş
+                values.add("Done");
+                values.add("Canceled");
+                dataBaseOperations.updateIsDone(list.get(i).getId(), values.get(0));
+            } else if (list.get(i).getDate().compareTo(date) > 0) { //komple gelecek
+                values.add("Waiting");
+                values.add("Canceled");
+                dataBaseOperations.updateIsDone(list.get(i).getId(), values.get(0));
+            } else//s*çtın...elle düzelt
+                System.out.println(list.get(i).getId());
+
         }
+*/
+
+        /** Update totalPrice*/
+     /*   try (Connection connection = DBConnection.connect();
+             Statement statement = connection.createStatement();
+        ) {
+
+            ResultSet resultSet = statement.executeQuery("SELECT ReservationID FROM reservation");
+
+            while (resultSet.next()) {
+                long resID = resultSet.getLong("ReservationID");
+                updateTotalPrice(resID, connection);
+            }
 
 
-
-       java.util.Date date2= new java.util.Date("2021-05-10");
-        System.out.println(date2);
-
-
-        dataBaseOperations.updateIsDone(21080909301L,LocalDate.now().toString());
-
-     try(  Connection connection= DBConnection.connect();
-             Statement statement=connection.createStatement();
-       ) {
-
-          ResultSet resultSet= statement.executeQuery("SELECT ReservationID FROM reservation");
-
-          while (resultSet.next()){
-              long resID=resultSet.getLong("ReservationID");
-              updateTotalPrice(resID,connection);
-          }
-
-
-       } catch (SQLException throwables) {
-           throwables.printStackTrace();
-       }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }*/
 
 
     }
-    public static void updateTotalPrice(long reservationID,Connection connection) {
+
+    public static void updateTotalPrice(long reservationID, Connection connection) {
         String getOpIDsSQL = "SELECT OperationID FROM operation_selection WHERE ReservationID=" + reservationID;
         String totalPriceSQL = "UPDATE reservation SET TotalPrice=? WHERE ReservationID= " + reservationID;
         String getPriceSQL;
         try (
-             PreparedStatement totalPriceStatement = connection.prepareStatement(totalPriceSQL);
-             Statement getOpIDs = connection.createStatement();
-             Statement getPrice = connection.createStatement();
+                PreparedStatement totalPriceStatement = connection.prepareStatement(totalPriceSQL);
+                Statement getOpIDs = connection.createStatement();
+                Statement getPrice = connection.createStatement();
         ) {
 
 
@@ -79,11 +98,11 @@ public class deneme {
             totalPriceStatement.executeUpdate();
 
         } catch (SQLException throwables) {
-            System.out.println("Ekleme işlemi başarısız.");
-            System.out.println(throwables.getMessage());
+            //System.out.println("Ekleme işlemi başarısız.");
+         //   System.out.println(throwables.getMessage());
         }
-        System.out.println("Ekleme işlemi başarılı.");
-*/
+       // System.out.println("Ekleme işlemi başarılı.");
+
 
         /** Busy times*/
     /*    DataBaseOperations dataBaseOperations = new DataBaseOperations();
@@ -131,14 +150,14 @@ public class deneme {
         }*/
 
 
-        try (Connection connection = DBConnection.connect();
+        /*try (Connection connection = DBConnection.connect();
              Statement statement = connection.createStatement()) {
             ResultSet rs = statement.executeQuery("SELECT  * FROM deneme");
             System.out.println(rs.next());
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }
+        }*/
 
     }
 
