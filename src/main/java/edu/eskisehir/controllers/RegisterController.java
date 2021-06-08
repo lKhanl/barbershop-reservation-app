@@ -4,6 +4,8 @@ import edu.eskisehir.db.DataBaseOperations;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -26,6 +28,18 @@ public class RegisterController {
     private final DataBaseOperations db = new DataBaseOperations();
 
     public void register(ActionEvent actionEvent) {
+        Node node = (Node) actionEvent.getSource();
+        abstractRegister(node);
+    }
+
+    public void enterRegister(KeyEvent keyEvent) {
+        if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+            Node node = (Node) keyEvent.getSource();
+            abstractRegister(node);
+        }
+    }
+
+    private void abstractRegister(Node nodee) {
         Pattern p = Pattern.compile("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
         Matcher m = p.matcher(txtEmail.getText());
         if (!m.find()) {
@@ -49,7 +63,7 @@ public class RegisterController {
                 alert.setHeaderText("Register is done!");
                 alert.setTitle("Done");
                 alert.show();
-                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                Stage stage = (Stage) (nodee).getScene().getWindow();
                 stage.close();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

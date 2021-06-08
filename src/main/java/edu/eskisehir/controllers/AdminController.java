@@ -5,6 +5,7 @@ import edu.eskisehir.Main;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -16,24 +17,35 @@ public class AdminController {
     public Button btnLogin;
     public AnchorPane mainPane;
 
-    public void login(ActionEvent event) throws IOException {
-        DataBaseOperations db = new DataBaseOperations();
+    public void login(ActionEvent event) {
+        Node node = (Node) event.getSource();
+        abstractLogin(node);
+    }
 
-//        txtUserName.setText("admin");
-//        txtPassword.setText("admin");
+    public void enterLogin(KeyEvent keyEvent) {
+        Node node = (Node) keyEvent.getSource();
+        abstractLogin(node);
+    }
+
+    private void abstractLogin(Node nodee) {
+        DataBaseOperations db = new DataBaseOperations();
 
         String adminUserName = txtUserName.getText();
         String adminPass = txtPassword.getText();
 
-        System.out.println(adminUserName + " " + adminPass);
 
         if (db.checkAdmin(adminUserName, adminPass)) {
 
-            Stage adminStg = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Stage adminStg = (Stage) (nodee).getScene().getWindow();
             adminStg.close();
-            ((Stage)adminStg.getOwner()).close();
+            ((Stage) adminStg.getOwner()).close();
 
-            Stage stage = Main.openNewStage("AdminScreen","admin.png");
+            Stage stage = null;
+            try {
+                stage = Main.openNewStage("AdminScreen", "admin.png");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             stage.setTitle("Admin Screen");
             stage.setResizable(false);
             stage.show();
