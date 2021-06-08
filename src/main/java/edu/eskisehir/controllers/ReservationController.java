@@ -116,6 +116,7 @@ public class ReservationController implements Initializable {
         colDate.setSortType(TableColumn.SortType.ASCENDING);
         tableResHistory.getSortOrder().add(colDate);
         tableResHistory.sort();
+        tableResHistory.setPlaceholder(new Label("There is no reservation to show!"));
     }
 
     private void loadDataForRes() {
@@ -291,7 +292,7 @@ public class ReservationController implements Initializable {
 
     }
 
-    private void resetResTab(){
+    private void resetResTab() {
         comboBarbers.getItems().clear();
         resDate.getEditor().clear();
         comboTime.getItems().clear();
@@ -326,10 +327,8 @@ public class ReservationController implements Initializable {
                 LocalTime localTime = LocalTime.now();
                 String currentTime = localTime.getHour() + ":" + localTime.getMinute() + ":" + localTime.getSecond();
                 avTime.removeIf(time -> (time.compareTo(Time.valueOf(currentTime)) < 0));
-
-            } else {
-                avTime.removeAll(busyTimes);
             }
+            avTime.removeAll(busyTimes);
             comboTime.getItems().addAll(avTime);
 
         }
