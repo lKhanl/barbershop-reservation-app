@@ -2,6 +2,9 @@ package edu.eskisehir.db;
 
 import edu.eskisehir.entity.*;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -11,7 +14,7 @@ import java.util.List;
 
 public class DataBaseOperations {
 
-    public Customer logIn(String email, String password) {
+    public Customer logIn(String email) {
         Customer customer = null;
         String sql = "SELECT * FROM customer WHERE Email=" + "'" + email + "'";
 
@@ -79,7 +82,7 @@ public class DataBaseOperations {
             customerStatement.setString(1, customerName);
             customerStatement.setString(2, customerSurname);
             customerStatement.setString(3, email);
-            customerStatement.setString(4, password);
+            customerStatement.setString(4, getMd5(password));
             customerStatement.executeUpdate();
         }
     }
@@ -883,5 +886,20 @@ public class DataBaseOperations {
         }
 
         return getCustomerByID(most);
+    }
+
+    public String getMd5(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(input.getBytes());
+            BigInteger no = new BigInteger(1, messageDigest);
+            String hashtext = no.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

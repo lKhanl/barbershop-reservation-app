@@ -75,11 +75,11 @@ public class MainController {
     }
 
     private void abstractLogin(Node nodee)   {
-        Customer customer = db.logIn(txtEmail.getText(), txtPass.getText());
+        Customer customer = db.logIn(txtEmail.getText());
 
         if (customer == null) {
             lblConsole.setText("Email is not registered");
-        } else if (!customer.getPassword().equals(txtPass.getText())) {
+        } else if (!customer.getPassword().equals(db.getMd5(txtPass.getText()))) {
             lblConsole.setText("Password is not matched");
         } else {
             Node node = nodee;
