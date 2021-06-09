@@ -17,7 +17,7 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/AdminScreen.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.eskisehir.controllers.AdminScreenController">
     <children>
-        <TabPane prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane fx:id="tabPane" prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Barbers">
                     <content>
@@ -117,7 +117,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab onSelectionChanged="#changedTab" text="All Reservations">
+                <Tab text="All Reservations">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
@@ -139,7 +139,7 @@
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Label fx:id="lblConsoleRes" layoutX="36.0" layoutY="405.0" prefHeight="30.0" prefWidth="324.0">
+                        <Label fx:id="lblConsoleRes" layoutX="26.0" layoutY="405.0" prefHeight="30.0" prefWidth="254.0">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -150,8 +150,14 @@
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <TextField fx:id="txtResSearch" layoutX="26.0" layoutY="330.0" onKeyTyped="#searchAnyForRes" prefHeight="30.0" prefWidth="200.0" promptText="Search for any..." />
+                        <TextField fx:id="txtResSearch" layoutX="26.0" layoutY="330.0" onKeyPressed="#searchForRes" prefHeight="30.0" prefWidth="200.0" promptText="Search for any..." />
                         <Button layoutX="284.0" layoutY="407.0" mnemonicParsing="false" onAction="#pauseAndPlay" styleClass="PlayPause" text="Play/Pause" />
+                        <Button layoutX="240.0" layoutY="333.0" mnemonicParsing="false" onAction="#refresh" styleClass="btnAdd" text="Refresh" />
+                        <Label fx:id="lblResCount" layoutX="26.0" layoutY="375.0" prefHeight="30.0" prefWidth="333.0">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
                             </children>
                         </AnchorPane>
                     </content>

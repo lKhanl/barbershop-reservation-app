@@ -3,6 +3,8 @@ package edu.eskisehir.controllers;
 import edu.eskisehir.*;
 import edu.eskisehir.db.DataBaseOperations;
 import edu.eskisehir.entity.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -79,6 +82,8 @@ public class AdminScreenController implements Initializable {
     public Label lblStats5;
     public Label lblStats2;
     public ImageView clap;
+    public TabPane tabPane;
+    public Label lblResCount;
 
     DataBaseOperations db = new DataBaseOperations();
     ObservableList<Barber> barbersData;
@@ -94,10 +99,10 @@ public class AdminScreenController implements Initializable {
         editableColsForAllRes();
 
         loadDataForBarber();
-        loadDataForOp();
-        loadDataForCustomer(null);
-        loadDataForRes(null);
-        loadDataForStats();
+//        loadDataForOp();
+//        loadDataForCustomer(null);
+//        loadDataForRes(null);
+//        loadDataForStats();
 
         //Accept only numbers for int
         txtBarberSalary.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -105,9 +110,33 @@ public class AdminScreenController implements Initializable {
                 txtBarberSalary.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
+
         txtOpPrice.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 txtOpPrice.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+
+        tabPane.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> ov, Number oldValue, Number newValue) {
+                switch (newValue.intValue()) {
+                    case 0:
+                        loadDataForBarber();
+                        break;
+                    case 1:
+                        loadDataForOp();
+                        break;
+                    case 2:
+                        loadDataForCustomer(null);
+                        break;
+                    case 3:
+                        loadDataForRes(null);
+                        break;
+                    case 4:
+                        loadDataForStats();
+                        break;
+                }
             }
         });
     }
@@ -330,10 +359,7 @@ public class AdminScreenController implements Initializable {
             temp.addAll(list);
             resTable.setItems(temp);
         }
-        resDateCol.setSortType(TableColumn.SortType.ASCENDING);
-        resTable.getSortOrder().add(resDateCol);
-        resTable.sort();
-
+        lblResCount.setText("There are " + resTable.getItems().size() + " reservation in the table!");
     }
 
     public void addBarber(ActionEvent event) {
@@ -486,17 +512,6 @@ public class AdminScreenController implements Initializable {
 
     }
 
-    public void searchAnyForRes(KeyEvent keyEvent) {
-        if (txtResSearch.getText().equals("")) {
-            keyEvent.consume();
-        } else {
-            List<Reservation> reservations = db.searchReservation(txtResSearch.getText());
-//            reservations.forEach(reservation -> System.out.println(reservation.getId()));
-            loadDataForRes(reservations);
-
-        }
-    }
-
     public void getMostSelectedOp(ActionEvent event) {
         if (comboStatsMonth1.getSelectionModel().getSelectedItem() != null && comboStatsYear1.getSelectionModel().getSelectedItem() != null) {
             int index = comboStatsMonth1.getSelectionModel().getSelectedIndex() + 1;
@@ -542,7 +557,17 @@ public class AdminScreenController implements Initializable {
 
     }
 
-    public void changedTab(Event event) {
+    public void refresh(ActionEvent event) {
+        txtResSearch.setText("");
         loadDataForRes(null);
+    }
+
+    public void searchForRes(KeyEvent keyEvent) {
+        if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+            List<Reservation> reservations = db.searchReservation(txtResSearch.getText());
+////            reservations.forEach(reservation -> System.out.println(reservation.getId()));
+            loadDataForRes(reservations);
+        }
+
     }
 }

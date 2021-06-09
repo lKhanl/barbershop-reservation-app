@@ -23,7 +23,7 @@ public class DBConnection {
             e.printStackTrace();
         }
 
-        System.out.println("Connected to database");
+//        System.out.println("Connected to database");
 
         return connection;
     }

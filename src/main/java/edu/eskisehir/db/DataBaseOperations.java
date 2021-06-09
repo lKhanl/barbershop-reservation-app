@@ -67,10 +67,10 @@ public class DataBaseOperations {
             totalPriceStatement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("Update işlemi başarısız.");
+//            System.out.println("Update işlemi başarısız.");
             System.out.println(e.getMessage());
         }
-        System.out.println("Update işlemi başarılı.");
+//        System.out.println("Update işlemi başarılı.");
     }
 
     public void addCustomer(String customerName, String customerSurname, String email, String password) throws SQLException {
@@ -99,10 +99,10 @@ public class DataBaseOperations {
             }
 
         } catch (SQLException e) {
-            System.out.println("Çekme işlemi başarısız.");
+//            System.out.println("Çekme işlemi başarısız.");
             e.printStackTrace();
         }
-        System.out.println("Çekme işlemi başarılı.");
+//        System.out.println("Çekme işlemi başarılı.");
 
         return list;
     }
@@ -162,10 +162,10 @@ public class DataBaseOperations {
             deleteStatement.setInt(1, customerID);
             deleteStatement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Silme işlemi başarısız.");
+//            System.out.println("Silme işlemi başarısız.");
             e.printStackTrace();
         }
-        System.out.println("Silme işlemi başarılı." + customerID);
+//        System.out.println("Silme işlemi başarılı." + customerID);
 
     }
 
@@ -191,10 +191,10 @@ public class DataBaseOperations {
             }
 
         } catch (SQLException e) {
-            System.out.println("Ekleme işlemi başarısız.");
+//            System.out.println("Ekleme işlemi başarısız.");
             e.printStackTrace();
         }
-        System.out.println("Ekleme işlemi başarılı.");
+//        System.out.println("Ekleme işlemi başarılı.");
         return barberID;
     }
 
@@ -299,10 +299,10 @@ public class DataBaseOperations {
             deleteStatement.setInt(1, barberID);
             deleteStatement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Silme işlemi başarısız.");
+//            System.out.println("Silme işlemi başarısız.");
             e.printStackTrace();
         }
-        System.out.println("Silme işlemi başarılı." + barberID);
+//        System.out.println("Silme işlemi başarılı." + barberID);
 
     }
 
@@ -352,10 +352,10 @@ public class DataBaseOperations {
 
 
         } catch (SQLException e) {
-            System.out.println("Ekleme işlemi başarısız.");
+//            System.out.println("Ekleme işlemi başarısız.");
             e.printStackTrace();
         }
-        System.out.println("Ekleme işlemi başarılı.");
+//        System.out.println("Ekleme işlemi başarılı.");
         return operationID;
 
     }
@@ -389,10 +389,10 @@ public class DataBaseOperations {
             }
 
         } catch (SQLException e) {
-            System.out.println("Çekme işlemi başarısız.");
+//            System.out.println("Çekme işlemi başarısız.");
             e.printStackTrace();
         }
-        System.out.println("Çekme işlemi başarılı.");
+//        System.out.println("Çekme işlemi başarılı.");
         return operations;
     }
 
@@ -404,10 +404,10 @@ public class DataBaseOperations {
             deleteStatement.setInt(1, operationID);
             deleteStatement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Silme işlemi başarısız.");
+//            System.out.println("Silme işlemi başarısız.");
             e.printStackTrace();
         }
-        System.out.println("Silme işlemi başarılı." + operationID);
+//        System.out.println("Silme işlemi başarılı." + operationID);
     }
 
     public void updateOperation(Attribute attName, String value, int id) {
@@ -426,10 +426,10 @@ public class DataBaseOperations {
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Update işlemi başarısız.");
+//            System.out.println("Update işlemi başarısız.");
             e.printStackTrace();
         }
-        System.out.println("Update işlemi başarılı.");
+//        System.out.println("Update işlemi başarılı.");
     }
 
     public void updateCustomersOperations(long resID, List<Operation> newOperations) {
@@ -487,10 +487,10 @@ public class DataBaseOperations {
 
 
         } catch (SQLException e) {
-            System.out.println("Ekleme işlemi başarısız.");
+//            System.out.println("Ekleme işlemi başarısız.");
             System.out.println(e.getMessage());
         }
-        System.out.println("Ekleme işlemi başarılı.");
+//        System.out.println("Ekleme işlemi başarılı.");
 
     }
 
@@ -532,10 +532,10 @@ public class DataBaseOperations {
             updateTotalPrice(resID);
 
         } catch (SQLException e) {
-            System.out.println("Rezervation işlemi başarısız.");
+//            System.out.println("Rezervation işlemi başarısız.");
             System.out.println(e.getMessage());
         }
-        System.out.println("Rezervation işlemi başarılı.");
+//        System.out.println("Rezervation işlemi başarılı.");
         return resID;
     }
 
@@ -550,9 +550,9 @@ public class DataBaseOperations {
             }
 
         } catch (SQLException throwables) {
-            System.out.println("Çekme işlemi başarısız");
+//            System.out.println("Çekme işlemi başarısız");
         }
-        System.out.println("Çekme işlemi başarılı");
+//        System.out.println("Çekme işlemi başarılı");
         return resIDs;
     }
 
@@ -567,9 +567,9 @@ public class DataBaseOperations {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Update işlemi başarısız.");
+//            System.out.println("Update işlemi başarısız.");
         }
-        System.out.println("Update işlemi başarılı.");
+//        System.out.println("Update işlemi başarılı.");
     }
 
     public List<Reservation> adminResList() {
@@ -708,10 +708,10 @@ public class DataBaseOperations {
             }
 
         } catch (SQLException e) {
-            System.out.println("Search işlemi başarısız.");
+//            System.out.println("Search işlemi başarısız.");
             e.printStackTrace();
         }
-        System.out.println("Search işlemi başarılı.");
+//        System.out.println("Search işlemi başarılı.");
         return list;
     }
 
