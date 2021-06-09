@@ -3,10 +3,7 @@ package edu.eskisehir.controllers;
 
 import edu.eskisehir.*;
 import edu.eskisehir.db.DataBaseOperations;
-import edu.eskisehir.entity.Attribute;
-import edu.eskisehir.entity.Barber;
-import edu.eskisehir.entity.Operation;
-import edu.eskisehir.entity.Reservation;
+import edu.eskisehir.entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -92,6 +89,11 @@ public class ReservationController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setCols();
+
+        Customer customer = db.getCustomerByID(cid);
+        txtName.setText(customer.getName());
+        txtSurname.setText(customer.getSurname());
+        txtEmail.setText(customer.getEmail());
 
         setComboBoxesStyle();
         loadDataForProfile();

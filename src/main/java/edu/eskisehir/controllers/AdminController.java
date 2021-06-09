@@ -5,11 +5,13 @@ import edu.eskisehir.Main;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 
 public class AdminController {
@@ -41,17 +43,19 @@ public class AdminController {
 
             Stage adminStg = (Stage) (nodee).getScene().getWindow();
             adminStg.close();
-            ((Stage) adminStg.getOwner()).close();
 
-            Stage stage = null;
+            Stage stage = ((Stage) adminStg.getOwner());
+            stage.setTitle("Admin Screen");
+            Image img = null;
+
             try {
-                stage = Main.openNewStage("AdminScreen", "admin.png");
+                Main.setRoot("AdminScreen");
+                img = new Image(new FileInputStream("src/main/resources/edu/eskisehir/media/admin.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            stage.setTitle("Admin Screen");
-            stage.setResizable(false);
-            stage.show();
+            stage.getIcons().clear();
+            stage.getIcons().add(img);
 
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

@@ -4,10 +4,7 @@ import edu.eskisehir.entity.Customer;
 import edu.eskisehir.db.DataBaseOperations;
 import edu.eskisehir.Main;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -19,8 +16,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.net.MalformedURLException;
-import java.nio.file.Paths;
 
 public class MainController {
     public AnchorPane mainPane;
@@ -35,7 +30,7 @@ public class MainController {
     DataBaseOperations db = new DataBaseOperations();
     static int cid;
 
-    public void login(ActionEvent event){
+    public void login(ActionEvent event) {
         Node node = (Node) event.getSource();
         abstractLogin(node);
     }
@@ -74,7 +69,7 @@ public class MainController {
         }
     }
 
-    private void abstractLogin(Node nodee)   {
+    private void abstractLogin(Node nodee) {
         Customer customer = db.logIn(txtEmail.getText());
 
         if (customer == null) {
@@ -82,38 +77,21 @@ public class MainController {
         } else if (!customer.getPassword().equals(db.getMd5(txtPass.getText()))) {
             lblConsole.setText("Password is not matched");
         } else {
-            Node node = nodee;
-            Stage stage = (Stage) node.getScene().getWindow();
-            stage.close();
-
+            Stage stage = (Stage) nodee.getScene().getWindow();
+            Image img = null;
             cid = customer.getId();
-
-            FXMLLoader fxmlLoader = null;
             try {
-                fxmlLoader = new FXMLLoader(Paths.get("src/main/resources/edu/eskisehir/fxml/Reservation.fxml").toUri().toURL());
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-            Parent root = null;
-            try {
-                root = fxmlLoader.load();
+                Main.setRoot("Reservation");
+                img = new Image(new FileInputStream("src/main/resources/edu/eskisehir/media/res.jpg"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Stage newStage = new Stage();
-            Scene newScene = new Scene(root);
-            newStage.setScene(newScene);
-            newStage.getIcons().add(new Image(Paths.get("src/main/resources/edu/eskisehir/media/res.jpg").toUri().toString()));
-            newStage.setTitle("Welcome " + customer.getName() + " " + customer.getSurname());
-            newStage.setResizable(false);
+            stage.getIcons().clear();
+            stage.getIcons().add(img);
+            stage.setTitle("Welcome " + customer.getName() + " " + customer.getSurname());
+            stage.setWidth(710);
+            stage.setHeight(710);
 
-            ReservationController ctrl = fxmlLoader.getController();
-            ctrl.txtName.setText(customer.getName());
-            ctrl.txtSurname.setText(customer.getSurname());
-            ctrl.txtEmail.setText(customer.getEmail());
-
-            newStage.show();
         }
-
     }
 }
