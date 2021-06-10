@@ -271,6 +271,12 @@ public class ReservationController implements Initializable {
             lblResID.setText("ResID : " + resID);
             if (isExportCard.isSelected()) {
                 saveAsPng(event);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Info!");
+                alert.setHeaderText("Reservation is Done, Please don't forget your resID!");
+                alert.setContentText("ResID : " + resID);
+                alert.show();
             }
             clearFieldsForResCard();
             resetResTab();

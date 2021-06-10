@@ -141,6 +141,7 @@ public class DataBaseOperations {
                 sql = "UPDATE customer SET Email=? WHERE CustomerID=?";
                 break;
             case PASSWORD:
+                value = getMd5(value);
                 sql = "UPDATE customer SET Password=? WHERE CustomerID=?";
 
         }
