@@ -89,8 +89,8 @@ public class MainController {
             stage.getIcons().clear();
             stage.getIcons().add(img);
             stage.setTitle("Welcome " + customer.getName() + " " + customer.getSurname());
-            stage.setWidth(710);
-            stage.setHeight(710);
+            stage.setWidth(725);
+            stage.setHeight(750);
 
         }
     }
