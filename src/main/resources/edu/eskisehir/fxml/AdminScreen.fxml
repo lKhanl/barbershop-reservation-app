@@ -106,7 +106,7 @@
                                         <Font size="14.0" />
                                     </font>
                                 </Button>
-                                <TextField fx:id="txtCustomerSearch" layoutX="23.0" layoutY="420.0" onKeyTyped="#searchAnyForCustomers" prefHeight="30.0" prefWidth="200.0" promptText="Search for any ..." />
+                                <TextField fx:id="txtCustomerSearch" layoutX="23.0" layoutY="420.0" onKeyPressed="#searchAnyForCustomers" prefHeight="30.0" prefWidth="200.0" promptText="Search for any ..." />
                                 <Label fx:id="lblConsoleCustomer" layoutX="235.0" layoutY="420.0" prefHeight="30.0" prefWidth="266.0">
                                     <font>
                                         <Font size="14.0" />
