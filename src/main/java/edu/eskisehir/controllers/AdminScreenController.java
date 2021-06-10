@@ -8,7 +8,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -471,9 +470,7 @@ public class AdminScreenController implements Initializable {
     }
 
     public void searchAnyForCustomers(KeyEvent keyEvent) {
-        if (txtCustomerSearch.getText().equals("")) {
-            keyEvent.consume();
-        } else {
+        if (keyEvent.getCode().equals(KeyCode.ENTER)) {
             loadDataForCustomer(db.searchCustomer(txtCustomerSearch.getText()));
         }
     }
