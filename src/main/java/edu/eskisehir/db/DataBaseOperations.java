@@ -434,40 +434,23 @@ public class DataBaseOperations {
     }
 
     public void updateCustomersOperations(long resID, List<Operation> newOperations) {
-        List<Integer> IDs = new LinkedList();
+        List<Integer> IDs = new LinkedList<>();
         for (Operation newOperation : newOperations) {
             IDs.add(newOperation.getId());
         }
 
         try (Connection connection = DBConnection.connect();
              Statement statement = connection.createStatement()) {
-            String sql = "SELECT OperationID from operation_selection WHERE ReservationID=  " + resID;
+            String sql = "SELECT OperationID,SelectionID from operation_selection WHERE ReservationID=  " + resID;
             ResultSet rs = statement.executeQuery(sql);
-            List<Integer> operations = new LinkedList<>();
             while (rs.next()) {
-                operations.add(rs.getInt("OperationID"));
+                deleteOperationSelection(rs.getLong("SelectionID"));
             }
-
-            if (IDs.size() - operations.size() > 0) {
-                IDs.removeAll(operations);
-                for (int i = 0; i < IDs.size(); i++) {
-                    fillOperationSelection(resID, IDs.get(i));
-                }
-            } else {
-                operations.removeAll(IDs);
-
-                for (int i = 0; i < operations.size(); i++) {
-                    String sql2 = "SELECT SelectionID FROM operation_selection WHERE ReservationID=" + "'" + resID +
-                            "'" + " AND OperationID=" + "'" + operations.get(i) + "'";
-                    ResultSet rs2 = statement.executeQuery(sql2);
-                    while (rs2.next()) {
-                        deleteOperationSelection(rs2.getLong("SelectionID"));
-                    }
-                }
+            for (Integer id : IDs) {
+                fillOperationSelection(resID, id);
             }
 
             updateTotalPrice(resID);
-
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

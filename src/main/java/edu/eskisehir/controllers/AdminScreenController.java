@@ -495,7 +495,7 @@ public class AdminScreenController implements Initializable {
     public void updateOp(ActionEvent event) {
         if (comboOps.getCheckModel().getCheckedItems().size() == 0) {
             lblConsoleRes.setTextFill(Color.RED);
-            lblConsoleRes.setText("You must select at least one operation!");
+            lblConsoleRes.setText("You must select at least one!");
         } else if (comboOps.getCheckModel().getCheckedItems() != null) {
             ObservableList<Operation> selectedOps = comboOps.getCheckModel().getCheckedItems();
             List<Operation> updated = new LinkedList<>();
