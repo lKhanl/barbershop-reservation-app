@@ -252,6 +252,9 @@ public class AdminScreenController implements Initializable {
         resTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
 
+                for (int i = 0; i < comboOps.getItems().size(); i++) {
+                    comboOps.getCheckModel().clearCheck(i);
+                }
                 comboOps.getItems().clear();
                 comboOps.setTitle("Operations");
                 List<Operation> selectedOps = newSelection.getOps();
@@ -308,9 +311,14 @@ public class AdminScreenController implements Initializable {
         List<String> monthsList = new LinkedList<>(Arrays.asList(new DateFormatSymbols().getMonths()));
         monthsList.remove(monthsList.size() - 1);
 
+        comboStatsMonth1.getItems().clear();
+        comboStatsMonth2.getItems().clear();
         comboStatsMonth1.getItems().addAll(monthsList);
         comboStatsMonth2.getItems().addAll(monthsList);
 
+        comboStatsYear1.getItems().clear();
+        comboStatsYear2.getItems().clear();
+        comboStatsYear3.getItems().clear();
         List<String> years = db.getExistingYear();
         comboStatsYear1.getItems().addAll(years);
         comboStatsYear2.getItems().addAll(years);
