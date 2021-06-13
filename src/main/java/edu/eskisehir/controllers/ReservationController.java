@@ -419,4 +419,9 @@ public class ReservationController implements Initializable {
     public void pauseAndPlay(ActionEvent event) {
         Main.pauseAndPlay();
     }
+
+    public void refresh(ActionEvent event) {
+        loadDataForProfile();
+        tableResHistory.refresh();
+    }
 }

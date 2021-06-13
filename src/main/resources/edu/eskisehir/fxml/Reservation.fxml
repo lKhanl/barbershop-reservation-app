@@ -126,6 +126,7 @@
                                     </children>
                                 </Pane>
                         <Button layoutX="626.0" layoutY="633.0" mnemonicParsing="false" onAction="#pauseAndPlay" styleClass="PlayPause" text="Play/Pause" />
+                        <Button layoutX="635.0" layoutY="357.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
                             </children>
                         </AnchorPane>
                     </content>
