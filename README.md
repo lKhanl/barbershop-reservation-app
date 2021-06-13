@@ -1,4 +1,3 @@
-# DB
 ## HOW TO RUN
 
 Step 1: Start Xampp Control Panel and start Apache and MySQL server. \
