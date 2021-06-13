@@ -703,7 +703,8 @@ public class DataBaseOperations {
         List<Reservation> list = new LinkedList<>();
         String sql = "SELECT * FROM adminres WHERE ReservationID LIKE '%" + name + "%'" +
                 " OR BarberName LIKE '%" + name + "%' OR BarberSurname LIKE '%" + name + "%' OR CustomerName LIKE '%" +
-                name + "%' OR CustomerSurname LIKE '%" + name + "%' OR isDone LIKE '%" + name + "%'";
+                name + "%' OR CustomerSurname LIKE '%" + name + "%' OR isDone LIKE '%" + name + "%' OR ReservationDate LIKE'%" +
+                name + "%'";
 
 
         try (Connection connection = DBConnection.connect();
