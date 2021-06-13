@@ -2,10 +2,10 @@
 -- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 13, 2021 at 02:53 AM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 8.0.3
+-- Anamakine: 127.0.0.1
+-- Üretim Zamanı: 13 Haz 2021, 08:22:15
+-- Sunucu sürümü: 10.4.19-MariaDB
+-- PHP Sürümü: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `barbershop`
+-- Veritabanı: `barbershop`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Tablo için tablo yapısı `admin`
 --
 
 CREATE TABLE `admin` (
@@ -34,7 +34,7 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `admin`
+-- Tablo döküm verisi `admin`
 --
 
 INSERT INTO `admin` (`AdminID`, `UserName`, `Password`) VALUES
@@ -43,8 +43,8 @@ INSERT INTO `admin` (`AdminID`, `UserName`, `Password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `adminres`
--- (See below for the actual view)
+-- Görünüm yapısı durumu `adminres`
+-- (Asıl görünüm için aşağıya bakın)
 --
 CREATE TABLE `adminres` (
 `ReservationID` bigint(20)
@@ -65,7 +65,7 @@ CREATE TABLE `adminres` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `barber`
+-- Tablo için tablo yapısı `barber`
 --
 
 CREATE TABLE `barber` (
@@ -76,7 +76,7 @@ CREATE TABLE `barber` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `barber`
+-- Tablo döküm verisi `barber`
 --
 
 INSERT INTO `barber` (`BarberID`, `BarberName`, `BarberSurname`, `Salary`) VALUES
@@ -89,7 +89,7 @@ INSERT INTO `barber` (`BarberID`, `BarberName`, `BarberSurname`, `Salary`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
+-- Tablo için tablo yapısı `customer`
 --
 
 CREATE TABLE `customer` (
@@ -101,7 +101,7 @@ CREATE TABLE `customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `customer`
+-- Tablo döküm verisi `customer`
 --
 
 INSERT INTO `customer` (`CustomerID`, `CustomerName`, `CustomerSurname`, `Email`, `Password`) VALUES
@@ -705,12 +705,13 @@ INSERT INTO `customer` (`CustomerID`, `CustomerName`, `CustomerSurname`, `Email`
 (597, 'Darren', 'Nash', 'darrennash@live.com', 'd8948154a9d25869dc6a2d8d5d144498'),
 (598, 'Aydan', 'Fletcher', 'aydanfletcher@windowslive.com', '9785dc7bb0419d7e4b37f7df2513828c'),
 (599, 'Deven', 'Booker', 'devenbooker@outlook.com', 'cba8b2f97de913730d8e3f77a9827e8b'),
-(600, 'Demetrius', 'Floyd', 'demetriusfloyd@gmail.com', 'e4278950b63d216dd208fb7146ec592c');
+(600, 'Demetrius', 'Floyd', 'demetriusfloyd@gmail.com', 'e4278950b63d216dd208fb7146ec592c'),
+(601, 'a', 'a', 'a@a.com', '0cc175b9c0f1b6a831c399e269772661');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `operation`
+-- Tablo için tablo yapısı `operation`
 --
 
 CREATE TABLE `operation` (
@@ -720,7 +721,7 @@ CREATE TABLE `operation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `operation`
+-- Tablo döküm verisi `operation`
 --
 
 INSERT INTO `operation` (`OperationID`, `OperationName`, `Price`) VALUES
@@ -735,7 +736,7 @@ INSERT INTO `operation` (`OperationID`, `OperationName`, `Price`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `operation_selection`
+-- Tablo için tablo yapısı `operation_selection`
 --
 
 CREATE TABLE `operation_selection` (
@@ -745,7 +746,7 @@ CREATE TABLE `operation_selection` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `operation_selection`
+-- Tablo döküm verisi `operation_selection`
 --
 
 INSERT INTO `operation_selection` (`SelectionID`, `ReservationID`, `OperationID`) VALUES
@@ -1274,10 +1275,10 @@ INSERT INTO `operation_selection` (`SelectionID`, `ReservationID`, `OperationID`
 (200224153052, 20022415305, 2),
 (200224153055, 20022415305, 5),
 (200224180011, 20022418001, 1),
-(200224180012, 20022418001, 2),
 (200224180013, 20022418001, 3),
 (200224180014, 20022418001, 4),
 (200224180015, 20022418001, 5),
+(200224180016, 20022418001, 6),
 (200224180017, 20022418001, 7),
 (200225090054, 20022509005, 4),
 (200225100014, 20022510001, 4),
@@ -1644,10 +1645,10 @@ INSERT INTO `operation_selection` (`SelectionID`, `ReservationID`, `OperationID`
 (200331153012, 20033115301, 2),
 (200331153017, 20033115301, 7),
 (200331160011, 20033116001, 1),
-(200331160012, 20033116001, 2),
 (200331160013, 20033116001, 3),
 (200331160014, 20033116001, 4),
 (200331160015, 20033116001, 5),
+(200331160016, 20033116001, 6),
 (200331160017, 20033116001, 7),
 (200331170046, 20033117004, 6),
 (200331170051, 20033117005, 1),
@@ -1697,10 +1698,10 @@ INSERT INTO `operation_selection` (`SelectionID`, `ReservationID`, `OperationID`
 (200406090013, 20040609001, 3),
 (200406090015, 20040609001, 5),
 (200406100011, 20040610001, 1),
-(200406100012, 20040610001, 2),
 (200406100013, 20040610001, 3),
 (200406100014, 20040610001, 4),
 (200406100015, 20040610001, 5),
+(200406100016, 20040610001, 6),
 (200406100017, 20040610001, 7),
 (200406140057, 20040614005, 7),
 (200406170034, 20040617003, 4),
@@ -1765,7 +1766,7 @@ INSERT INTO `operation_selection` (`SelectionID`, `ReservationID`, `OperationID`
 (200410093043, 20041009304, 3),
 (200410100023, 20041010002, 3),
 (200410113011, 20041011301, 1),
-(200410113012, 20041011301, 2),
+(200410113013, 20041011301, 3),
 (200410113017, 20041011301, 7),
 (200410123047, 20041012304, 7),
 (200410140042, 20041014004, 2),
@@ -2287,8 +2288,7 @@ INSERT INTO `operation_selection` (`SelectionID`, `ReservationID`, `OperationID`
 (200608083037, 20060808303, 7),
 (200608090052, 20060809005, 2),
 (200608100011, 20060810001, 1),
-(200608100012, 20060810001, 2),
-(200608100013, 20060810001, 3),
+(200608100017, 20060810001, 7),
 (200608100022, 20060810002, 2),
 (200608100025, 20060810002, 5),
 (200608100035, 20060810003, 5),
@@ -2411,9 +2411,9 @@ INSERT INTO `operation_selection` (`SelectionID`, `ReservationID`, `OperationID`
 (200622110023, 20062211002, 3),
 (200622123052, 20062212305, 2),
 (200622123055, 20062212305, 5),
-(200622130052, 20062213005, 2);
+(200622130052, 20062213005, 2),
+(200622143011, 20062214301, 1);
 INSERT INTO `operation_selection` (`SelectionID`, `ReservationID`, `OperationID`) VALUES
-(200622143011, 20062214301, 1),
 (200622143035, 20062214303, 5),
 (200622183052, 20062218305, 2),
 (200622193012, 20062219301, 2),
@@ -2661,9 +2661,8 @@ INSERT INTO `operation_selection` (`SelectionID`, `ReservationID`, `OperationID`
 (200715163042, 20071516304, 2),
 (200715163046, 20071516304, 6),
 (200715200011, 20071520001, 1),
-(200715200012, 20071520001, 2),
-(200715200014, 20071520001, 4),
-(200715200015, 20071520001, 5),
+(200715200013, 20071520001, 3),
+(200715200017, 20071520001, 7),
 (200716080051, 20071608005, 1),
 (200716080057, 20071608005, 7),
 (200716113015, 20071611301, 5),
@@ -4075,10 +4074,10 @@ INSERT INTO `operation_selection` (`SelectionID`, `ReservationID`, `OperationID`
 (201216193047, 20121619304, 7),
 (201216200024, 20121620002, 4),
 (201217080033, 20121708003, 3),
-(201217083046, 20121708304, 6);
-INSERT INTO `operation_selection` (`SelectionID`, `ReservationID`, `OperationID`) VALUES
+(201217083046, 20121708304, 6),
 (201217093035, 20121709303, 5),
-(201217100051, 20121710005, 1),
+(201217100051, 20121710005, 1);
+INSERT INTO `operation_selection` (`SelectionID`, `ReservationID`, `OperationID`) VALUES
 (201217100055, 20121710005, 5),
 (201217100056, 20121710005, 6),
 (201217103031, 20121710303, 1),
@@ -5739,10 +5738,10 @@ INSERT INTO `operation_selection` (`SelectionID`, `ReservationID`, `OperationID`
 (210614130025, 21061413002, 5),
 (210614130026, 21061413002, 6),
 (210614130027, 21061413002, 7),
-(210614130033, 21061413003, 3);
-INSERT INTO `operation_selection` (`SelectionID`, `ReservationID`, `OperationID`) VALUES
+(210614130033, 21061413003, 3),
 (210614130037, 21061413003, 7),
-(210614143043, 21061414304, 3),
+(210614143043, 21061414304, 3);
+INSERT INTO `operation_selection` (`SelectionID`, `ReservationID`, `OperationID`) VALUES
 (210614143047, 21061414304, 7),
 (210614160047, 21061416004, 7),
 (210614160054, 21061416005, 4),
@@ -7403,10 +7402,10 @@ INSERT INTO `operation_selection` (`SelectionID`, `ReservationID`, `OperationID`
 (211203163054, 21120316305, 4),
 (211203190023, 21120319002, 3),
 (211203193011, 21120319301, 1),
-(211203193014, 21120319301, 4);
-INSERT INTO `operation_selection` (`SelectionID`, `ReservationID`, `OperationID`) VALUES
+(211203193014, 21120319301, 4),
 (211206090025, 21120609002, 5),
-(211206093043, 21120609304, 3),
+(211206093043, 21120609304, 3);
+INSERT INTO `operation_selection` (`SelectionID`, `ReservationID`, `OperationID`) VALUES
 (211206103053, 21120610305, 3),
 (211206110051, 21120611005, 1),
 (211206140053, 21120614005, 3),
@@ -7650,7 +7649,7 @@ INSERT INTO `operation_selection` (`SelectionID`, `ReservationID`, `OperationID`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reservation`
+-- Tablo için tablo yapısı `reservation`
 --
 
 CREATE TABLE `reservation` (
@@ -7664,7 +7663,7 @@ CREATE TABLE `reservation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `reservation`
+-- Tablo döküm verisi `reservation`
 --
 
 INSERT INTO `reservation` (`ReservationID`, `ReservationDate`, `ReservationTime`, `isDone`, `TotalPrice`, `BarberID`, `CustomerID`) VALUES
@@ -8049,7 +8048,7 @@ INSERT INTO `reservation` (`ReservationID`, `ReservationDate`, `ReservationTime`
 (20022410303, '2020-02-24', '10:30:00', 'Canceled', 10, 3, 556),
 (20022412301, '2020-02-24', '12:30:00', 'Done', 8, 1, 69),
 (20022415305, '2020-02-24', '15:30:00', 'Canceled', 30, 5, 257),
-(20022418001, '2020-02-24', '18:00:00', 'Done', 98, 1, 545),
+(20022418001, '2020-02-24', '18:00:00', 'Done', 91, 1, 545),
 (20022509005, '2020-02-25', '09:00:00', 'Canceled', 10, 5, 519),
 (20022510001, '2020-02-25', '10:00:00', 'Done', 10, 1, 216),
 (20022510301, '2020-02-25', '10:30:00', 'Done', 12, 1, 550),
@@ -8315,7 +8314,7 @@ INSERT INTO `reservation` (`ReservationID`, `ReservationDate`, `ReservationTime`
 (20033113003, '2020-03-31', '13:00:00', 'Canceled', 15, 3, 183),
 (20033115003, '2020-03-31', '15:00:00', 'Done', 12, 3, 494),
 (20033115301, '2020-03-31', '15:30:00', 'Done', 62, 1, 493),
-(20033116001, '2020-03-31', '16:00:00', 'Done', 98, 1, 129),
+(20033116001, '2020-03-31', '16:00:00', 'Done', 91, 1, 129),
 (20033117004, '2020-03-31', '17:00:00', 'Done', 5, 4, 5),
 (20033117005, '2020-03-31', '17:00:00', 'Canceled', 15, 5, 369),
 (20033118002, '2020-03-31', '18:00:00', 'Canceled', 3, 2, 226),
@@ -8352,7 +8351,7 @@ INSERT INTO `reservation` (`ReservationID`, `ReservationDate`, `ReservationTime`
 (20040320005, '2020-04-03', '20:00:00', 'Done', 12, 5, 364),
 (20040608003, '2020-04-06', '08:00:00', 'Canceled', 10, 3, 332),
 (20040609001, '2020-04-06', '09:00:00', 'Done', 11, 1, 474),
-(20040610001, '2020-04-06', '10:00:00', 'Canceled', 98, 1, 193),
+(20040610001, '2020-04-06', '10:00:00', 'Canceled', 91, 1, 193),
 (20040614005, '2020-04-06', '14:00:00', 'Done', 50, 5, 183),
 (20040617003, '2020-04-06', '17:00:00', 'Canceled', 10, 3, 155),
 (20040618001, '2020-04-06', '18:00:00', 'Canceled', 10, 1, 555),
@@ -8395,7 +8394,7 @@ INSERT INTO `reservation` (`ReservationID`, `ReservationDate`, `ReservationTime`
 (20041009004, '2020-04-10', '09:00:00', 'Done', 50, 4, 467),
 (20041009304, '2020-04-10', '09:30:00', 'Done', 8, 4, 284),
 (20041010002, '2020-04-10', '10:00:00', 'Canceled', 8, 2, 212),
-(20041011301, '2020-04-10', '11:30:00', 'Done', 77, 1, 540),
+(20041011301, '2020-04-10', '11:30:00', 'Done', 73, 1, 540),
 (20041012304, '2020-04-10', '12:30:00', 'Done', 50, 4, 211),
 (20041014004, '2020-04-10', '14:00:00', 'Canceled', 65, 4, 227),
 (20041015003, '2020-04-10', '15:00:00', 'Canceled', 53, 3, 234),
@@ -8769,7 +8768,7 @@ INSERT INTO `reservation` (`ReservationID`, `ReservationDate`, `ReservationTime`
 (20060519003, '2020-06-05', '19:00:00', 'Done', 5, 3, 78),
 (20060808303, '2020-06-08', '08:30:00', 'Canceled', 62, 3, 500),
 (20060809005, '2020-06-08', '09:00:00', 'Done', 12, 5, 499),
-(20060810001, '2020-06-08', '10:00:00', 'Canceled', 35, 1, 192),
+(20060810001, '2020-06-08', '10:00:00', 'Canceled', 65, 1, 192),
 (20060810002, '2020-06-08', '10:00:00', 'Done', 15, 2, 475),
 (20060810003, '2020-06-08', '10:00:00', 'Canceled', 3, 3, 130),
 (20060810304, '2020-06-08', '10:30:00', 'Done', 50, 4, 21),
@@ -9043,7 +9042,7 @@ INSERT INTO `reservation` (`ReservationID`, `ReservationDate`, `ReservationTime`
 (20071515001, '2020-07-15', '15:00:00', 'Done', 3, 1, 454),
 (20071516302, '2020-07-15', '16:30:00', 'Done', 27, 2, 592),
 (20071516304, '2020-07-15', '16:30:00', 'Done', 17, 4, 23),
-(20071520001, '2020-07-15', '20:00:00', 'Done', 40, 1, 499),
+(20071520001, '2020-07-15', '20:00:00', 'Done', 73, 1, 499),
 (20071608005, '2020-07-16', '08:00:00', 'Canceled', 65, 5, 319),
 (20071611301, '2020-07-16', '11:30:00', 'Canceled', 3, 1, 66),
 (20071612304, '2020-07-16', '12:30:00', 'Done', 70, 4, 386),
@@ -11269,13 +11268,13 @@ INSERT INTO `reservation` (`ReservationID`, `ReservationDate`, `ReservationTime`
 (21061119004, '2021-06-11', '19:00:00', 'Done', 5, 4, 573),
 (21061119301, '2021-06-11', '19:30:00', 'Done', 23, 1, 243),
 (21061120002, '2021-06-11', '20:00:00', 'Canceled', 5, 2, 468),
-(21061408002, '2021-06-14', '08:00:00', 'Done', 10, 2, 531),
-(21061408301, '2021-06-14', '08:30:00', 'Done', 50, 1, 337),
-(21061409301, '2021-06-14', '09:30:00', 'Done', 5, 1, 514),
-(21061412001, '2021-06-14', '12:00:00', 'Done', 10, 1, 433),
-(21061413002, '2021-06-14', '13:00:00', 'Done', 66, 2, 370),
-(21061413003, '2021-06-14', '13:00:00', 'Done', 58, 3, 91),
-(21061414304, '2021-06-14', '14:30:00', 'Done', 58, 4, 523),
+(21061408002, '2021-06-14', '08:00:00', 'Waiting', 10, 2, 531),
+(21061408301, '2021-06-14', '08:30:00', 'Waiting', 50, 1, 337),
+(21061409301, '2021-06-14', '09:30:00', 'Waiting', 5, 1, 514),
+(21061412001, '2021-06-14', '12:00:00', 'Waiting', 10, 1, 433),
+(21061413002, '2021-06-14', '13:00:00', 'Waiting', 66, 2, 370),
+(21061413003, '2021-06-14', '13:00:00', 'Waiting', 58, 3, 91),
+(21061414304, '2021-06-14', '14:30:00', 'Waiting', 58, 4, 523),
 (21061416004, '2021-06-14', '16:00:00', 'Waiting', 50, 4, 154),
 (21061416005, '2021-06-14', '16:00:00', 'Waiting', 60, 5, 465),
 (21061508302, '2021-06-15', '08:30:00', 'Waiting', 65, 2, 334),
@@ -12654,24 +12653,24 @@ INSERT INTO `reservation` (`ReservationID`, `ReservationDate`, `ReservationTime`
 -- --------------------------------------------------------
 
 --
--- Structure for view `adminres`
+-- Görünüm yapısı `adminres`
 --
 DROP TABLE IF EXISTS `adminres`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `adminres`  AS SELECT `reservation`.`ReservationID` AS `ReservationID`, `reservation`.`ReservationDate` AS `ReservationDate`, `reservation`.`ReservationTime` AS `ReservationTime`, `reservation`.`TotalPrice` AS `TotalPrice`, `reservation`.`isDone` AS `isDone`, `barber`.`BarberID` AS `BarberID`, `barber`.`BarberName` AS `BarberName`, `barber`.`BarberSurname` AS `BarberSurname`, `barber`.`Salary` AS `Salary`, `customer`.`CustomerID` AS `CustomerID`, `customer`.`CustomerName` AS `CustomerName`, `customer`.`CustomerSurname` AS `CustomerSurname`, `customer`.`Email` AS `Email` FROM ((`reservation` join `barber` on(`barber`.`BarberID` = `reservation`.`BarberID`)) join `customer` on(`customer`.`CustomerID` = `reservation`.`CustomerID`)) ;
 
 --
--- Indexes for dumped tables
+-- Dökümü yapılmış tablolar için indeksler
 --
 
 --
--- Indexes for table `admin`
+-- Tablo için indeksler `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`AdminID`);
 
 --
--- Indexes for table `barber`
+-- Tablo için indeksler `barber`
 --
 ALTER TABLE `barber`
   ADD PRIMARY KEY (`BarberID`),
@@ -12679,7 +12678,7 @@ ALTER TABLE `barber`
   ADD KEY `BarberSurname` (`BarberSurname`);
 
 --
--- Indexes for table `customer`
+-- Tablo için indeksler `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`CustomerID`),
@@ -12688,14 +12687,14 @@ ALTER TABLE `customer`
   ADD KEY `CustomerSurname` (`CustomerSurname`);
 
 --
--- Indexes for table `operation`
+-- Tablo için indeksler `operation`
 --
 ALTER TABLE `operation`
   ADD PRIMARY KEY (`OperationID`),
   ADD UNIQUE KEY `OperationName` (`OperationName`);
 
 --
--- Indexes for table `operation_selection`
+-- Tablo için indeksler `operation_selection`
 --
 ALTER TABLE `operation_selection`
   ADD PRIMARY KEY (`SelectionID`),
@@ -12703,49 +12702,50 @@ ALTER TABLE `operation_selection`
   ADD KEY `ReservationID` (`ReservationID`);
 
 --
--- Indexes for table `reservation`
+-- Tablo için indeksler `reservation`
 --
 ALTER TABLE `reservation`
   ADD PRIMARY KEY (`ReservationID`) USING BTREE,
   ADD KEY `BarberID` (`BarberID`),
   ADD KEY `CustomerID` (`CustomerID`),
-  ADD KEY `isDone` (`isDone`);
+  ADD KEY `isDone` (`isDone`),
+  ADD KEY `ReservationDate` (`ReservationDate`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Dökümü yapılmış tablolar için AUTO_INCREMENT değeri
 --
 
 --
--- AUTO_INCREMENT for table `barber`
+-- Tablo için AUTO_INCREMENT değeri `barber`
 --
 ALTER TABLE `barber`
   MODIFY `BarberID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `customer`
+-- Tablo için AUTO_INCREMENT değeri `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=601;
+  MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=602;
 
 --
--- AUTO_INCREMENT for table `operation`
+-- Tablo için AUTO_INCREMENT değeri `operation`
 --
 ALTER TABLE `operation`
   MODIFY `OperationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- Constraints for dumped tables
+-- Dökümü yapılmış tablolar için kısıtlamalar
 --
 
 --
--- Constraints for table `operation_selection`
+-- Tablo kısıtlamaları `operation_selection`
 --
 ALTER TABLE `operation_selection`
   ADD CONSTRAINT `operation_selection_ibfk_4` FOREIGN KEY (`OperationID`) REFERENCES `operation` (`OperationID`) ON DELETE CASCADE,
   ADD CONSTRAINT `operation_selection_ibfk_5` FOREIGN KEY (`ReservationID`) REFERENCES `reservation` (`ReservationID`) ON DELETE CASCADE;
 
 --
--- Constraints for table `reservation`
+-- Tablo kısıtlamaları `reservation`
 --
 ALTER TABLE `reservation`
   ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`BarberID`) REFERENCES `barber` (`BarberID`) ON DELETE CASCADE,
